@@ -1,9 +1,5 @@
-const LandingPage = () => {
-  return (
-    <div>
-      <h1>Landing Page</h1>
-    </div>
-  );
+const Home = () => {
+  return <>SBIM START</>;
 };
 
-export default LandingPage;
+export default Home;
