@@ -11,6 +11,9 @@ dependencies:
   '@react-three/fiber':
     specifier: ^8.16.6
     version: 8.16.6(react-dom@18.3.1)(react@18.3.1)(three@0.164.1)
+  '@storybook/addon-themes':
+    specifier: ^8.1.6
+    version: 8.1.6
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -23,6 +26,9 @@ dependencies:
   next:
     specifier: 14.2.3
     version: 14.2.3(@babel/core@7.24.6)(react-dom@18.3.1)(react@18.3.1)
+  next-themes:
+    specifier: ^0.3.0
+    version: 0.3.0(react-dom@18.3.1)(react@18.3.1)
   react:
     specifier: ^18
     version: 18.3.1
@@ -52,6 +58,9 @@ devDependencies:
   '@storybook/addon-onboarding':
     specifier: ^8.1.5
     version: 8.1.5(react@18.3.1)
+  '@storybook/addon-viewport':
+    specifier: ^8.1.6
+    version: 8.1.6
   '@storybook/blocks':
     specifier: ^8.1.5
     version: 8.1.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(prettier@3.2.5)(react-dom@18.3.1)(react@18.3.1)
@@ -2934,12 +2943,24 @@ packages:
       ts-dedent: 2.2.0
     dev: true
 
+  /@storybook/addon-themes@8.1.6:
+    resolution: {integrity: sha512-h0IwK1fIHBWBAfxWmbXoISutHWRSlQwXb7BGEAsnZ9oQ4xA0REjtpqM6o5IkDFYQtDw0YHUvmBzyHSphA9boww==}
+    dependencies:
+      ts-dedent: 2.2.0
+    dev: false
+
   /@storybook/addon-toolbars@8.1.5:
     resolution: {integrity: sha512-UxEtb4ii0FORqUuPgLycPQ0MQ4Bq2YWBft6yT00xMjUuwkld27BlrvnpaBlx+disgWwOKGKVd02f/4dbZr2s1g==}
     dev: true
 
   /@storybook/addon-viewport@8.1.5:
     resolution: {integrity: sha512-kHaYdaAiv7107GSi4TsS1wEDN4I7cdYWSaCBBSvJlvvYvULKFVMkhsDJlSioskICx6OchkIKY5LJgLZ72fxdVA==}
+    dependencies:
+      memoizerific: 1.11.3
+    dev: true
+
+  /@storybook/addon-viewport@8.1.6:
+    resolution: {integrity: sha512-4EpEkJW1fPqlHIqG7OQtnAaHh9DPj7k+guXpzWjVwHfF6AE0fXIg7Yx6iVDGPyKkRaagPw6nL8DOr2U8YwK4rQ==}
     dependencies:
       memoizerific: 1.11.3
     dev: true
@@ -9361,6 +9382,16 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
+  /next-themes@0.3.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
   /next@14.2.3(@babel/core@7.24.6)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-dowFkFTR8v79NPJO4QsBUtxv0g9BrS/phluVpMAt2ku7H+cbcBJlopXjkWlwxrk/xGqMemr7JkGPGemPrLLX7A==}
     engines: {node: '>=18.17.0'}
@@ -11717,7 +11748,6 @@ packages:
   /ts-dedent@2.2.0:
     resolution: {integrity: sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==}
     engines: {node: '>=6.10'}
-    dev: true
 
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
