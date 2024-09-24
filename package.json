@@ -13,7 +13,9 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-slot": "^1.0.2",
+    "@react-three/drei": "^9.112.0",
     "@react-three/fiber": "^8.16.6",
     "@storybook/addon-themes": "^8.1.6",
     "class-variance-authority": "^0.7.0",
@@ -25,7 +27,9 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "three": "^0.164.1"
+    "three": "^0.164.1",
+    "vaul": "^0.9.4",
+    "zustand": "5.0.0-rc.2"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.1.5",
@@ -43,6 +47,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/three": "^0.168.0",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
