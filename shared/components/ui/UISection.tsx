@@ -1,4 +1,4 @@
-import ModalProvider from '@/shared/provider/ModalProvider';
+import ModalProvider from '@/shared/components/providers/ModalProvider';
 
 const UISection = ({ children }: { children: React.ReactNode }) => {
   return (

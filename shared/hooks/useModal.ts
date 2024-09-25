@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type ModalType = 'Intro';
+export type ModalType = 'Intro' | 'Guest';
 
 export interface ModalProps {
   data?: null; // temp

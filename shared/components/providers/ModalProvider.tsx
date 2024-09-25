@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import IntroduceModal from '@/shared/components/modals/IntroduceModal';
+import GuestModal from '@/shared/components/modals/GuestModal';
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -14,7 +15,12 @@ const ModalProvider = () => {
     return null;
   }
 
-  return <IntroduceModal />;
+  return (
+    <>
+      <IntroduceModal />
+      <GuestModal />
+    </>
+  );
 };
 
 export default ModalProvider;
