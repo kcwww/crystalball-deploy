@@ -95,3 +95,7 @@ html::-webkit-scrollbar {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.previous:hover {
+  @apply text-yellow-300;
+}

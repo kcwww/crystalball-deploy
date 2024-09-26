@@ -12,6 +12,7 @@ const Glass = () => {
       position={position}
       castShadow={true}
       receiveShadow={true}
+      name="glass"
     >
       <meshStandardMaterial
         transparent={true}

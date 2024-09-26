@@ -9,6 +9,7 @@ import Glass from './Glass';
 import Decorations from './Decorations';
 import Snowflake from './Snowflake';
 import Ground from './Ground';
+import Raycaster from './Raycaster';
 
 const SnowGlobeCanvas = () => {
   return (
@@ -25,9 +26,14 @@ const SnowGlobeCanvas = () => {
         flat
         linear
         shadows={true}
-        camera={{ position: [20, 2, 0], fov: 100 }}
+        camera={{ position: [16, 0, 0], fov: 100 }}
       >
-        <OrbitControls target={[0, 0, 0]} enablePan={false} />
+        <OrbitControls
+          target={[0, 0, 0]}
+          enablePan={false}
+          enableZoom={false}
+          maxPolarAngle={(Math.PI / 2 / 9) * 8}
+        />
         <ambientLight intensity={1} color={'#ffffff'} />
         <directionalLight
           position={[10, 20, 10]}
@@ -43,6 +49,7 @@ const SnowGlobeCanvas = () => {
           shadow-camera-top={15}
           shadow-camera-bottom={-15}
         />
+        <Raycaster />
         <Glass />
         {Array.from({ length: 100 }, (_, i) => (
           <Snowflake key={i} />
