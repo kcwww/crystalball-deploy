@@ -101,7 +101,7 @@ html::-webkit-scrollbar {
 }
 
 .message-close {
-  @apply outline-none transition-colors hover:text-red-500;
+  @apply transition-colors hover:text-red-500;
 }
 
 .previous:hover {

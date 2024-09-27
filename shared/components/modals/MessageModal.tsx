@@ -28,6 +28,7 @@ const MessageModal = () => {
       <DialogContent
         className="no-scrollbar message"
         style={{ backgroundColor: letterColor }}
+        onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogHeader className="flex flex-col items-center justify-center gap-4">
           <DialogTitle>{sender}</DialogTitle>

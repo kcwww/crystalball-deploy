@@ -21,7 +21,10 @@ const IntroduceModal = () => {
 
   return (
     <Dialog open={isOpen}>
-      <DialogContent className="no-scrollbar">
+      <DialogContent
+        className="no-scrollbar"
+        onOpenAutoFocus={(e) => e.preventDefault()}
+      >
         <DialogHeader className="flex flex-col items-center justify-center">
           <DialogTitle>🎅스노우볼 속 내 마음🎅</DialogTitle>
           <DialogDescription>

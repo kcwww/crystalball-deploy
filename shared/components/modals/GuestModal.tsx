@@ -21,7 +21,10 @@ const GuestModal = () => {
 
   return (
     <Dialog open={isOpen}>
-      <DialogContent className="no-scrollbar">
+      <DialogContent
+        className="no-scrollbar"
+        onOpenAutoFocus={(e) => e.preventDefault()}
+      >
         <DialogHeader className="flex flex-col items-center justify-center gap-4">
           <DialogTitle>게스트 로그인</DialogTitle>
           <div>
