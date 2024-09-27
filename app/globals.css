@@ -85,7 +85,7 @@ html::-webkit-scrollbar {
 
 /* 스크롤바 숨기기 */
 .no-scrollbar {
-  max-height: 75svh;
+  max-height: 85svh;
   overflow: scroll;
   scrollbar-width: none; /* Firefox */
 
@@ -94,6 +94,14 @@ html::-webkit-scrollbar {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.message {
+  @apply border-none opacity-65;
+}
+
+.message-close {
+  @apply transition-colors hover:text-red-500;
 }
 
 .previous:hover {

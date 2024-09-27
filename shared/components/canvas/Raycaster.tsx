@@ -3,10 +3,14 @@ import { Vector3 } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
 
 import usePrev from '@/shared/hooks/usePrev';
+import useModal from '@/shared/hooks/useModal';
+
+import { MessageType } from './Decoration';
 
 const Raycaster = () => {
   const { camera, pointer, raycaster, scene, gl } = useThree();
   const { view, isZoom, onIn, onZoom, onZoomOut } = usePrev();
+  const { onOpen } = useModal();
 
   const isClickedRef = useRef(false); // 유리 클릭한 시점 , 뒤로가기 버튼 누른 시점 === true // 카메라 업 다운 차이 기록
   const isAnimating = useRef(false); // 유리 클릭한 시점 , 뒤로가기 버튼 누른 시점 === true // 카메라 업 다운 차이 기록
@@ -61,10 +65,22 @@ const Raycaster = () => {
       }
 
       const selectedDeco = intersects.find(
-        (intersect) => intersect.object.name === 'decoration'
+        (intersect) => intersect.object.userData.message
       );
+
       if (selectedDeco) {
-        console.log(selectedDeco.object.name);
+        const { message, sender, letterColor, messageID, sendAt } =
+          selectedDeco.object.userData;
+
+        onOpen('Message', {
+          data: {
+            message,
+            sender,
+            letterColor,
+            messageID,
+            sendAt,
+          } as MessageType,
+        });
       }
     };
 

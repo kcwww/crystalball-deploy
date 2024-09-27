@@ -1,9 +1,10 @@
 import { create } from 'zustand';
+import { MessageType } from '@/shared/components/canvas/Decoration';
 
-export type ModalType = 'Intro' | 'Guest';
+export type ModalType = 'Intro' | 'Guest' | 'Message';
 
 export interface ModalProps {
-  data?: null; // temp
+  data?: MessageType;
 }
 
 interface ModalStore {

@@ -108,6 +108,7 @@ interface DecoProps {
   letterID: number;
   isOpened: boolean;
   messageID: number;
+  sendAt: string;
 }
 
 const DecoSet = (deco: Group<Object3DEventMap>) => {
@@ -115,6 +116,14 @@ const DecoSet = (deco: Group<Object3DEventMap>) => {
   newModel.position.set(0, 1.2, 0);
   newModel.scale.set(0.1, 0.1, 0.1);
   deco.add(newModel);
+};
+
+export type MessageType = {
+  message: string;
+  sender: string;
+  letterColor: string;
+  messageID: number;
+  sendAt: string;
 };
 
 const Decoration = ({
@@ -127,6 +136,7 @@ const Decoration = ({
   letterID,
   isOpened,
   messageID,
+  sendAt,
 }: DecoProps) => {
   const deco = useGLTF(DECO[id].fileName).scene.clone();
   const target = { x: 8, z: 0 };
@@ -143,9 +153,9 @@ const Decoration = ({
     if (child instanceof Mesh) {
       child.userData.message = message;
       child.userData.sender = sender;
-      child.userData.color = color;
       child.userData.letterColor = MSG_COLOR[letterID].color;
       child.userData.messageID = messageID;
+      child.userData.sendAt = sendAt;
       child.castShadow = false;
       if (child.name === 'Main') {
         child.material = makeColorChangedMaterial(child, color);

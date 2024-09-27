@@ -2,7 +2,7 @@ import { Vector3 } from 'three';
 
 import Emoji from '@/shared/components/canvas/Emoji';
 import Decoration from '@/shared/components/canvas/Decoration';
-import { messageLists } from './dummy';
+import { messageLists, Message } from './dummy';
 
 const getDecoPosition = (n: number): Vector3 => {
   const positions = [
@@ -41,23 +41,6 @@ const getDecoPosition = (n: number): Vector3 => {
   return new Vector3(positions[n][0], 0, positions[n][1]);
 };
 
-type Message = {
-  content: string;
-  created: string;
-  decoration_color: string;
-  decoration_id: number;
-  id: number;
-  is_deleted: boolean;
-  letter_id: number;
-  location: number;
-  opened: string | null;
-  sender: string;
-  snowball_id: number;
-  user_id: number;
-  sentiment: 'positive' | 'neutral' | 'negative';
-  confidence: number;
-};
-
 const Decorations = () => {
   const radius = 7;
   const center = new Vector3(0, radius / 2, 0);
@@ -75,6 +58,7 @@ const Decorations = () => {
       letterID={message.letter_id ?? 0}
       messageID={message.id}
       isOpened={message.opened !== null}
+      sendAt={message.sendAt}
     />
   ));
 
