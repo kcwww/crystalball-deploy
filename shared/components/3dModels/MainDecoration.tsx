@@ -3,27 +3,10 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import {
-  Mesh,
-  Group,
-  Vector3,
-  Material,
-  MeshBasicMaterial,
-  MeshStandardMaterial,
-} from 'three';
+import { Mesh, Group, Vector3 } from 'three';
 
-const makeColorChangedMaterial = (mesh: Mesh, color: string) => {
-  const newMaterial = (mesh.material as Material).clone() as Material;
-
-  if (
-    newMaterial instanceof MeshBasicMaterial ||
-    newMaterial instanceof MeshStandardMaterial
-  ) {
-    newMaterial.color.set(color);
-  }
-
-  return newMaterial;
-};
+import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
+import { MAIN_DECORATION } from '@/shared/constants/3dModel';
 
 const fallingModel = (
   modelRef: Group,
@@ -50,7 +33,7 @@ const fallingModel = (
 };
 
 const MainDecoration = () => {
-  const deco = useGLTF('/assets/sprites/bcduck.glb').scene.clone() as Group;
+  const deco = useGLTF(MAIN_DECORATION.DUCK).scene.clone() as Group;
   const speedRef = useRef<Vector3>(new Vector3(0, 0, 0));
   const isStoppedRef = useRef<boolean>(false);
 

@@ -3,10 +3,16 @@ import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { Group, Mesh, Vector3 } from 'three';
 
+import { Sentiment, SENTIMENT } from '@/shared/constants/3dModel';
+import {
+  rotateAnimate,
+  visibleInRange,
+} from '@/shared/components/3dModels/utils/model';
+
 interface SnowProps {
   centerPosition: Vector3;
   rangeRadius: number;
-  sentiment: 'positive' | 'neutral' | 'negative';
+  sentiment: Sentiment;
   confidence: number;
 }
 
@@ -39,35 +45,6 @@ const fallingAnimate = (
   target.position.y -= speed;
 };
 
-const rotateAnimate = (target: Mesh, speed: number) => {
-  target.rotation.y += speed;
-};
-
-const visibleInRange = (
-  target: Mesh,
-  centerPosition: Vector3,
-  radius: number
-) => {
-  target.visible =
-    target.position.distanceTo(centerPosition) > radius ? false : true;
-};
-
-export const SENTIMENT_MODEL = [
-  { name: '선물상자', fileName: '/assets/models/ribbonBox.glb' },
-  {
-    name: '긍정',
-    fileName: '/assets/flakes/heart.glb',
-  },
-  {
-    name: '보통',
-    fileName: '/assets/flakes/star.glb',
-  },
-  {
-    name: '부정',
-    fileName: '/assets/flakes/water.glb',
-  },
-];
-
 const Emoji = ({
   centerPosition,
   rangeRadius,
@@ -75,14 +52,13 @@ const Emoji = ({
   confidence,
 }: SnowProps) => {
   const snowRef = useRef<Mesh>(null);
-  const index = sentiment === 'positive' ? 1 : sentiment === 'neutral' ? 2 : 3;
-  const snow = useGLTF(SENTIMENT_MODEL[index].fileName).scene.clone();
+  const flake = useGLTF(SENTIMENT[sentiment]).scene.clone();
   const scale = 0.3 + confidence / 200; // min 0.3 max 0.8
 
-  randomizePosition(snow, centerPosition, rangeRadius);
+  randomizePosition(flake, centerPosition, rangeRadius);
 
-  snow.scale.set(scale, scale, scale);
-  snow.rotation.y = Math.random();
+  flake.scale.set(scale, scale, scale);
+  flake.rotation.y = Math.random();
 
   useFrame((_, delta) => {
     const snow = snowRef.current;
@@ -94,7 +70,7 @@ const Emoji = ({
     }
   });
 
-  return <primitive object={snow} ref={snowRef} />;
+  return <primitive object={flake} ref={snowRef} />;
 };
 
 export default Emoji;

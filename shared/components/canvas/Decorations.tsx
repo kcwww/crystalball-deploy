@@ -1,50 +1,16 @@
 import { Vector3 } from 'three';
 
-import Emoji from '@/shared/components/canvas/Emoji';
-import Decoration from '@/shared/components/canvas/Decoration';
-import { messageLists, Message } from './dummy';
+import Emoji from '@/shared/components/3dModels/Emoji';
+import Decoration from '@/shared/components/3dModels/Decoration';
+import { getDecoPosition } from '@/shared/components/canvas/utils/canvas';
+import { RADIUS } from '@/shared/constants/canvas';
 
-const getDecoPosition = (n: number): Vector3 => {
-  const positions = [
-    [0, 0],
-    [1.5, -0.5],
-    [0.5, 1.5],
-    [-1.5, 0.5],
-    [-0.5, -1.5],
-    [1.5, 0.5], // 5
-    [-0.5, 1.5],
-    [-1.5, -0.5],
-    [0.5, -1.5],
-    [1.5, -1.5],
-    [1.5, 1.5], // 10
-    [-1.5, 1.5],
-    [-1.5, -1.5],
-    [2.5, -0.5],
-    [0.5, 2.5],
-    [-2.5, 0.5], // 15
-    [-0.5, -2.5],
-    [2.5, 0.5],
-    [-0.5, 2.5],
-    [-2.5, -0.5],
-    [0.5, -2.5], // 20
-    [2.5, -1.5],
-    [1.5, 2.5],
-    [-2.5, 1.5],
-    [-1.5, -2.5],
-    [2.5, 1.5], // 25
-    [-1.5, 2.5],
-    [-2.5, -1.5],
-    [1.5, -2.5],
-    [-2.5, -2.5],
-    [-2.5, 2.5],
-  ];
-  return new Vector3(positions[n][0], 0, positions[n][1]);
-};
+import { MessageResponse } from '@/shared/types/message';
+import { messageLists } from './dummy';
 
 const Decorations = () => {
-  const radius = 7;
-  const center = new Vector3(0, radius / 2, 0);
-  const messageList: Message[] = messageLists;
+  const center = new Vector3(0, RADIUS / 2, 0);
+  const messageList: MessageResponse[] = messageLists;
 
   const decos = messageList.map((message, index) => (
     <Decoration
@@ -66,7 +32,7 @@ const Decorations = () => {
     <Emoji
       key={index}
       centerPosition={center}
-      rangeRadius={radius}
+      rangeRadius={RADIUS}
       sentiment={message.sentiment}
       confidence={message.confidence}
     />

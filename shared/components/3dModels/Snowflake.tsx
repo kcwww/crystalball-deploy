@@ -3,20 +3,14 @@ import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { Mesh, Vector3 } from 'three';
 
-import { Material, MeshBasicMaterial, MeshStandardMaterial } from 'three';
+import { RADIUS } from '@/shared/constants/canvas';
 
-const makeColorChangedMaterial = (mesh: Mesh, color: string) => {
-  const newMaterial = (mesh.material as Material).clone() as Material;
-
-  if (
-    newMaterial instanceof MeshBasicMaterial ||
-    newMaterial instanceof MeshStandardMaterial
-  ) {
-    newMaterial.color.set(color);
-  }
-
-  return newMaterial;
-};
+import {
+  makeColorChangedMaterial,
+  rotateAnimate,
+  visibleInRange,
+} from '@/shared/components/3dModels/utils/model';
+import { SNOW_FLAKE } from '@/shared/constants/3dModel';
 
 const randomizePosition = (
   target: Mesh,
@@ -44,40 +38,25 @@ const fallingAnimate = (
   target.position.y -= speed;
 };
 
-const rotateAnimate = (target: Mesh, speed: number) => {
-  target.rotation.y += speed;
-};
-
-const visibleInRange = (
-  target: Mesh,
-  centerPosition: Vector3,
-  radius: number
-) => {
-  target.visible =
-    target.position.distanceTo(centerPosition) > radius ? false : true;
-};
-
 const snowcolor = ['#99c9fd', '#a5bbd3', '#f1faff'];
 
 const Snowflake = () => {
   const snowRef = useRef<Mesh>(null);
-  const rangeRadius = 7;
-  const center = new Vector3(0, rangeRadius / 2, 0);
-  const radius = 0.2 + Math.random() * 0.5;
+  const center = new Vector3(0, RADIUS / 2, 0);
+  const scale = 0.2 + Math.random() * 0.5;
   const modelIndex = Math.floor(Math.random() * 3);
+  const snowflakes = Object.values(SNOW_FLAKE);
 
   const position = new Vector3(
-    center.x - rangeRadius + Math.random() * rangeRadius * 2,
-    center.y + rangeRadius + Math.random() * rangeRadius * 2,
-    center.z - rangeRadius + Math.random() * rangeRadius * 2
+    center.x - RADIUS + Math.random() * RADIUS * 2,
+    center.y + RADIUS + Math.random() * RADIUS * 2,
+    center.z - RADIUS + Math.random() * RADIUS * 2
   );
 
-  const snow = useGLTF(
-    `/assets/flakes/snowFlake0${modelIndex + 1}.glb`
-  ).scene.clone();
+  const snow = useGLTF(snowflakes[modelIndex]).scene.clone();
 
   snow.position.set(position.x, position.y, position.z);
-  snow.scale.set(radius, radius, radius);
+  snow.scale.set(scale, scale, scale);
   snow.rotation.y = Math.random();
   snow.traverse((obj) => {
     if (obj instanceof Mesh) {
@@ -92,9 +71,9 @@ const Snowflake = () => {
     const snow = snowRef.current;
     const speed = 1 * delta;
     if (snow) {
-      fallingAnimate(snow, speed, center, rangeRadius);
+      fallingAnimate(snow, speed, center, RADIUS);
       rotateAnimate(snow, speed);
-      visibleInRange(snow, center, rangeRadius - 1);
+      visibleInRange(snow, center, RADIUS - 1);
     }
   });
 

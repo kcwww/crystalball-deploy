@@ -2,6 +2,7 @@
 
 import { Mesh, MeshStandardMaterial, CanvasTexture } from 'three';
 import { useGLTF } from '@react-three/drei';
+import { BOTTOM } from '@/shared/constants/3dModel';
 
 const makeCanvasTexture = ({
   width,
@@ -48,7 +49,7 @@ const makeCanvasTexture = ({
 };
 
 const Bottom = () => {
-  const bottom = useGLTF('/assets/bottoms/bottom1.glb').scene.clone();
+  const bottom = useGLTF(BOTTOM.ONE).scene.clone();
 
   const nameTag = bottom.getObjectByName('nameTag') as Mesh | undefined;
 
@@ -58,7 +59,7 @@ const Bottom = () => {
       width: 1024,
       height: 1024,
       positionY: 1024 / 8,
-      font: 'Bold 6.25rem KingSejongInstitute, sans-serit',
+      font: 'bold 100px Arial',
       fontColor: 'black',
       bgColor: 'white',
     });

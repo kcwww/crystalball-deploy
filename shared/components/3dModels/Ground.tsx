@@ -1,7 +1,8 @@
 import { useGLTF } from '@react-three/drei';
+import { GROUND } from '@/shared/constants/3dModel';
 
 const Ground = () => {
-  const ground = useGLTF('/assets/grounds/winter.glb').scene.clone();
+  const ground = useGLTF(GROUND.WINTER).scene.clone();
 
   ground.scale.set(20, 20, 20);
   ground.position.set(0, -5, 0);

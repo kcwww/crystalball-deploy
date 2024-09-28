@@ -9,13 +9,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+} from '@/shared/components/ui/dialog';
+import { Button } from '@/shared/components/ui/button';
+import MODAL_TYPE from '@/shared/constants/modal';
 
 const GuestModal = () => {
   const { isOpen, onClose, type } = useModal();
 
-  if (!isOpen || type !== 'Guest') {
+  if (!isOpen || type !== MODAL_TYPE.GUEST) {
     return null;
   }
 

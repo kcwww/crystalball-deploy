@@ -9,13 +9,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+} from '@/shared/components/ui/dialog';
+import { Button } from '@/shared/components/ui/button';
+import MODAL_TYPE from '@/shared/constants/modal';
 
 const IntroduceModal = () => {
   const { isOpen, onClose, type } = useModal();
 
-  if (!isOpen || type !== 'Intro') {
+  if (!isOpen || type !== MODAL_TYPE.INTRODUCE) {
     return null;
   }
 

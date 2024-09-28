@@ -2,14 +2,16 @@
 
 import { Canvas } from '@react-three/fiber';
 import Bottom from '@/shared/components/3dModels/Bottom';
+
 import { OrbitControls } from '@react-three/drei';
-import Base from './Base';
-import MainDecoration from './MainDecoration';
-import Glass from './Glass';
-import Decorations from './Decorations';
-import Snowflake from './Snowflake';
-import Ground from './Ground';
-import Raycaster from './Raycaster';
+import Base from '@/shared/components/3dModels/Base';
+import MainDecoration from '@/shared/components/3dModels/MainDecoration';
+import Glass from '@/shared/components/3dModels/Glass';
+import Snowflake from '@/shared/components/3dModels/Snowflake';
+import Ground from '@/shared/components/3dModels/Ground';
+
+import Raycaster from '@/shared/components/canvas/Raycaster';
+import Decorations from '@/shared/components/canvas/Decorations';
 
 const SnowGlobeCanvas = () => {
   return (
