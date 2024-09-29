@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={cn(inter.className, 'min-h-dvh bg-primary')}>
+      <body className={cn(inter.className, 'min-h-svh bg-primary')}>
         {children}
       </body>
     </html>

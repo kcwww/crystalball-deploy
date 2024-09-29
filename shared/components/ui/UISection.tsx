@@ -4,7 +4,7 @@ const UISection = ({ children }: { children: React.ReactNode }) => {
   return (
     <section
       style={{
-        minHeight: '100dvh',
+        minHeight: '100svh',
         zIndex: 1,
         position: 'relative',
         width: '100%',

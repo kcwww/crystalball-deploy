@@ -18,7 +18,7 @@ const SnowGlobeCanvas = () => {
     <section
       style={{
         width: '100%',
-        height: '100dvh',
+        height: '100svh',
         position: 'fixed',
         top: 0,
         left: 0,
