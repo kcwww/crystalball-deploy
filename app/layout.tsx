@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 import { cn } from '@/lib/utils';
+import { connectToMongoDB } from '@/shared/database/mongodb/config';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,6 +17,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  connectToMongoDB();
+
   return (
     <html lang="ko">
       <body className={cn(inter.className, 'min-h-svh bg-primary')}>
