@@ -9,8 +9,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/shared/components/ui/drawer';
-import { Button } from '@/shared/components/ui/button';
+} from '@/components/ui/drawer';
+import { Button } from '@/components/ui/button';
 import useModal from '@/shared/hooks/useModal';
 
 const IntroButtonSection = () => {

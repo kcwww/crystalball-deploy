@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 import { CircleArrowLeft } from 'lucide-react';
-import { Button } from '@/shared/components/ui/button';
+import { Button } from '@/components/ui/button';
 import usePrev from '@/shared/hooks/usePrev';
 
 const PreviousButton = () => {

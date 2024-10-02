@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogFooter,
   DialogClose,
-} from '@/shared/components/ui/dialog';
+} from '@/components/ui/dialog';
 import useModal from '@/shared/hooks/useModal';
 import MODAL_TYPE from '@/shared/constants/modal';
 

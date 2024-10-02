@@ -9,8 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from '@/shared/components/ui/dialog';
-import { Button } from '@/shared/components/ui/button';
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import MODAL_TYPE from '@/shared/constants/modal';
 
 const GuestModal = () => {

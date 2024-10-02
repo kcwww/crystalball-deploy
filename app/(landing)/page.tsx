@@ -1,3 +1,5 @@
+import React from 'react';
+
 import SnowGlobeCanvas from '@/shared/components/canvas/SnowGlobeCanvas';
 import UISection from '@/shared/components/ui/UISection';
 import Header from '@/app/(landing)/_components/Header';
