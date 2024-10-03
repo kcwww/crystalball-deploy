@@ -34,17 +34,25 @@ const IntroButtonSection = () => {
           </DrawerHeader>
           <div className="flex w-full flex-col items-center justify-center gap-4">
             <Button
+              onClick={() => signIn('naver')}
+              className="w-1/2"
+              variant="outline"
+            >
+              네이버로 로그인
+            </Button>
+            <Button
+              onClick={() => signIn('kakao')}
+              className="w-1/2"
+              variant="outline"
+            >
+              카카오로 로그인
+            </Button>
+            <Button
               onClick={() => signIn('google')}
               className="w-1/2"
               variant="outline"
             >
               구글로 로그인
-            </Button>
-            <Button className="w-1/2" variant="outline">
-              네이버로 로그인
-            </Button>
-            <Button className="w-1/2" variant="outline">
-              카카오로 로그인
             </Button>
             <Button
               onClick={() => onOpen('Guest')}
