@@ -1,5 +1,7 @@
 'use client';
 
+import { signIn } from 'next-auth/react';
+
 import {
   Drawer,
   DrawerClose,
@@ -31,7 +33,11 @@ const IntroButtonSection = () => {
             <DrawerDescription></DrawerDescription>
           </DrawerHeader>
           <div className="flex w-full flex-col items-center justify-center gap-4">
-            <Button className="w-1/2" variant="outline">
+            <Button
+              onClick={() => signIn('google')}
+              className="w-1/2"
+              variant="outline"
+            >
               구글로 로그인
             </Button>
             <Button className="w-1/2" variant="outline">
