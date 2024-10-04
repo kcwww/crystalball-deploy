@@ -6,7 +6,7 @@ import Header from '@/app/(landing)/_components/Header';
 import IntroButtonSection from '@/app/(landing)/_components/IntroButtonSection';
 import PreviousButton from '@/shared/components/ui/PreviousButton';
 
-const Home = () => {
+const LandingPage = () => {
   return (
     <>
       <PreviousButton />
@@ -19,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default LandingPage;
