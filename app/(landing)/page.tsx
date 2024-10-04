@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SnowGlobeCanvas from '@/shared/components/canvas/SnowGlobeCanvas';
+import CrystalCanvas from '@/shared/components/canvas/CrystalCanvas';
 import UISection from '@/shared/components/ui/UISection';
 import Header from '@/app/(landing)/_components/Header';
 import IntroButtonSection from '@/app/(landing)/_components/IntroButtonSection';
@@ -14,7 +14,7 @@ const LandingPage = () => {
         <Header />
         <IntroButtonSection />
       </UISection>
-      <SnowGlobeCanvas />
+      <CrystalCanvas />
     </>
   );
 };

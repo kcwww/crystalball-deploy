@@ -107,3 +107,17 @@ html::-webkit-scrollbar {
 .previous:hover {
   @apply text-yellow-300;
 }
+
+.user-header {
+  @apply font-bold text-green-800 text-2xl;
+}
+
+.ui-section {
+  @apply min-h-svh relative w-full overflow-hidden pointer-events-none flex flex-col items-center justify-between p-20;
+  z-index: 1;
+}
+
+
+.canvas-3d {
+  @apply w-full h-svh fixed top-0 left-0;
+}

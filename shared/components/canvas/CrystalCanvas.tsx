@@ -13,17 +13,9 @@ import Ground from '@/shared/components/3dModels/Ground';
 import Raycaster from '@/shared/components/canvas/Raycaster';
 import Decorations from '@/shared/components/canvas/Decorations';
 
-const SnowGlobeCanvas = () => {
+const CrystalCanvas = () => {
   return (
-    <section
-      style={{
-        width: '100%',
-        height: '100svh',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-      }}
-    >
+    <section className="canvas-3d">
       <Canvas
         flat
         linear
@@ -36,10 +28,11 @@ const SnowGlobeCanvas = () => {
           enableZoom={false}
           maxPolarAngle={(Math.PI / 2 / 9) * 8}
         />
-        <ambientLight intensity={1} color={'#ffffff'} />
+        <ambientLight intensity={1.5} color={'#ffffff'} />
+
         <directionalLight
           position={[10, 20, 10]}
-          intensity={2}
+          intensity={1.5}
           color={'#ffffff'}
           castShadow={true}
           shadow-mapSize-width={2048} // shadow resolution
@@ -66,4 +59,4 @@ const SnowGlobeCanvas = () => {
   );
 };
 
-export default SnowGlobeCanvas;
+export default CrystalCanvas;
