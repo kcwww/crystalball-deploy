@@ -13,7 +13,9 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@react-three/drei": "^9.112.0",
     "@react-three/fiber": "^8.16.6",
@@ -29,12 +31,14 @@
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.53.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.164.1",
     "vaul": "^0.9.4",
+    "zod": "^3.23.8",
     "zustand": "5.0.0-rc.2"
   },
   "devDependencies": {

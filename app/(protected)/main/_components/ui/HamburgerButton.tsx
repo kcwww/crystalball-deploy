@@ -2,6 +2,9 @@
 
 import React from 'react';
 import { Menu } from 'lucide-react';
+
+import useModal from '@/shared/hooks/useModal';
+
 import {
   Sheet,
   SheetContent,
@@ -10,8 +13,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
 
 const HamburgerButton = () => {
+  const { onOpen } = useModal();
+
   return (
     <>
       <Sheet>
@@ -29,6 +35,23 @@ const HamburgerButton = () => {
               account and remove your data from our servers.
             </SheetDescription>
           </SheetHeader>
+          <div className="flex w-full flex-col gap-2">
+            <Button
+              onClick={() => {
+                onOpen('AllMessage');
+              }}
+            >
+              모든 편지 보기
+            </Button>
+            <Button
+              onClick={() => {
+                onOpen('Form');
+              }}
+            >
+              내 정보 수정
+            </Button>
+            <Button>로그아웃</Button>
+          </div>
         </SheetContent>
       </Sheet>
     </>

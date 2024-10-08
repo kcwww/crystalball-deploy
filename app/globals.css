@@ -109,15 +109,28 @@ html::-webkit-scrollbar {
 }
 
 .user-header {
-  @apply font-bold text-green-800 text-2xl;
+  @apply text-2xl font-bold text-green-800;
 }
 
 .ui-section {
-  @apply min-h-svh relative w-full overflow-hidden pointer-events-none flex flex-col items-center justify-between p-20;
+  @apply pointer-events-none relative flex min-h-svh w-full flex-col items-center justify-between overflow-hidden p-20;
   z-index: 1;
 }
 
-
 .canvas-3d {
-  @apply w-full h-svh fixed top-0 left-0;
+  @apply fixed left-0 top-0 h-svh w-full;
+}
+
+.message-list-modal {
+  @apply border-none bg-transparent;
+}
+
+.message-list {
+  @apply overflow-y-auto;
+  max-height: 75svh;
+  scrollbar-width: none;
+}
+
+.message-list::-webkit-scrollbar {
+  display: none;
 }
