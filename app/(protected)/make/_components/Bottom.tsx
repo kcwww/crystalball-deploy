@@ -1,8 +1,10 @@
 'use client';
 
+import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
 import { Mesh, MeshStandardMaterial, CanvasTexture } from 'three';
 import { useGLTF } from '@react-three/drei';
-import { BOTTOM } from '@/shared/constants/3dModel';
+
+import { use3DModel } from '@/app/(protected)/make/store/modelStore';
 
 const makeCanvasTexture = ({
   width,
@@ -49,13 +51,14 @@ const makeCanvasTexture = ({
 };
 
 const Bottom = () => {
-  const bottomModel = useGLTF(BOTTOM.ONE).scene.clone();
+  const { bottom, bottomColor, title } = use3DModel();
+  const bottomModel = useGLTF(bottom).scene.clone();
 
   const nameTag = bottomModel.getObjectByName('nameTag') as Mesh | undefined;
 
   if (nameTag && nameTag.material instanceof MeshStandardMaterial) {
     const newTexture = makeCanvasTexture({
-      string: 'My Heart Crystal',
+      string: title,
       width: 1024,
       height: 1024,
       positionY: 1024 / 8,
@@ -68,10 +71,17 @@ const Bottom = () => {
   }
 
   bottomModel.scale.set(1, 1, 1);
-  bottomModel.position.set(0, 0, 0);
+  bottomModel.position.set(0, 1.5, 0);
   bottomModel.receiveShadow = true;
   bottomModel.castShadow = true;
-
+  const colorPart = bottomModel.getObjectByName('mainColor') as
+    | Mesh
+    | undefined;
+  const color = bottomColor;
+  if (!colorPart) {
+    return null;
+  }
+  colorPart.material = makeColorChangedMaterial(colorPart, color);
   return <primitive object={bottomModel} />;
 };
 

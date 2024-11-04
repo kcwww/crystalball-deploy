@@ -1,5 +1,5 @@
 {
-  "name": "snowball_project",
+  "name": "myheart_crystal",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,11 +16,14 @@
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-popover": "^1.1.2",
+    "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@react-three/drei": "^9.112.0",
     "@react-three/fiber": "^8.16.6",
     "@storybook/addon-themes": "^8.1.6",
     "@types/mongoose": "^5.11.97",
+    "@uiw/react-color": "^2.3.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.381.0",

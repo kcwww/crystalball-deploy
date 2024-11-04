@@ -52,3 +52,10 @@ export const SNOW_FLAKE = {
   TWO: '/assets/flakes/snowFlake02.glb',
   THREE: '/assets/flakes/snowFlake03.glb',
 } as const;
+
+export const DECO_TYPE = {
+  MAIN: 'MainDeco',
+  SUB: 'SubDeco',
+  BASE: 'Base',
+  BOTTOM: 'Bottom',
+} as const;

@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { Menu } from 'lucide-react';
 
@@ -17,6 +18,7 @@ import { Button } from '@/components/ui/button';
 
 const HamburgerButton = () => {
   const { onOpen } = useModal();
+  const router = useRouter();
 
   return (
     <>
@@ -42,6 +44,14 @@ const HamburgerButton = () => {
               }}
             >
               모든 편지 보기
+            </Button>
+            <Button
+              onClick={() => {
+                sessionStorage.removeItem('isDecorated');
+                router.push('/make');
+              }}
+            >
+              새로운 수정구슬 만들기
             </Button>
             <Button
               onClick={() => {
