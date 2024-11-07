@@ -12,18 +12,13 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 
-import Decoration from '@/app/(protected)/make/_components/Decoration';
-import { BOTTOM, DECO_TYPE, MAIN_DECORATION } from '@/shared/constants/3dModel';
+import Decoration from '@/app/(public)/visit/_components/Decoration';
+import ColorButton from '@/app/(public)/visit/_components/ColorButton';
+import MessageForm from '@/app/(public)/visit/_components/MessageForm';
+import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
+import { DECO } from '@/shared/constants/3dModel';
 
-import dynamic from 'next/dynamic';
-import TitleForm from '@/app/(protected)/make/_components/TitleForm';
-import { STEP } from '@/app/(protected)/make/_constants/step';
-
-const ColorButton = dynamic(
-  () => import('@/app/(protected)/make/_components/ColorButton')
-);
-
-const DecoDrawer = ({ step }: { step: number }) => {
+const DecoDrawer = ({ step, userId }: { step: number; userId: string }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -33,28 +28,20 @@ const DecoDrawer = ({ step }: { step: number }) => {
   if (!isMounted) return null;
 
   if (
-    step === STEP.MAIN_DECORATION_COLOR ||
-    step === STEP.BOTTOM_DECORATION_COLOR
+    step === STEP.MESSAGE_DECORATION_COLOR ||
+    step === STEP.MESSAGE_NOTE_COLOR
   )
-    return (
-      <ColorButton
-        type={
-          step === STEP.MAIN_DECORATION_COLOR
-            ? DECO_TYPE.MAIN
-            : DECO_TYPE.BOTTOM
-        }
-      />
-    );
+    return <ColorButton step={step} />;
 
-  if (step === STEP.TITLE) return <TitleForm />;
+  if (step === STEP.MESSAGE) return <MessageForm userId={userId} step={step} />;
 
-  const mainDecorationArray = Object.values(MAIN_DECORATION);
-  const bottomDecorationArray = Object.values(BOTTOM);
+  const decorationArray = Object.values(DECO);
+  const decorationPath = decorationArray.map((deco) => deco.fileName);
 
   return (
     <Drawer>
       <DrawerTrigger className="pointer-events-auto transform rounded-lg bg-white p-2 px-4 transition duration-200 hover:bg-gray-300">
-        {step === STEP.MAIN_DECORATION ? '장식 선택하기' : '바닥 장식 선택하기'}
+        장식 선택하기
       </DrawerTrigger>
       <DrawerContent className="flex flex-col items-center justify-center">
         <DrawerHeader className="flex flex-col items-center">
@@ -67,15 +54,9 @@ const DecoDrawer = ({ step }: { step: number }) => {
         </DrawerHeader>
 
         <div className="flex w-full overflow-auto">
-          {step === STEP.MAIN_DECORATION &&
-            mainDecorationArray.map((deco, index) => (
-              <Decoration key={index} path={deco} type={DECO_TYPE.MAIN} />
-            ))}
-
-          {step === STEP.BOTTOM_DECORATION &&
-            bottomDecorationArray.map((deco, index) => (
-              <Decoration key={index} path={deco} type={DECO_TYPE.BOTTOM} />
-            ))}
+          {decorationPath.map((deco, index) => (
+            <Decoration key={index} path={deco} />
+          ))}
         </div>
 
         <DrawerFooter>

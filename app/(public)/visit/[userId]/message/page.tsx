@@ -3,13 +3,13 @@
 import { useState, useEffect, Suspense } from 'react';
 
 import dynamic from 'next/dynamic';
-import { use3DModel } from './store/modelStore';
+import { use3DModel } from '../store/modelStore';
 
-const Make = dynamic(() => import('@/app/(protected)/make/_components/index'), {
+const Make = dynamic(() => import('@/app/(public)/visit/_components/Make'), {
   ssr: false,
 });
 
-const MakePage = () => {
+const VisitMakePage = ({ params }: { params: { userId: string } }) => {
   const [isMounted, setIsMounted] = useState(false);
   const { resetModel } = use3DModel();
 
@@ -25,9 +25,9 @@ const MakePage = () => {
 
   return (
     <Suspense fallback={null}>
-      <Make />
+      <Make userId={params.userId} />
     </Suspense>
   );
 };
 
-export default MakePage;
+export default VisitMakePage;

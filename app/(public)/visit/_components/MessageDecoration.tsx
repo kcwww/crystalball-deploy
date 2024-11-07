@@ -5,19 +5,19 @@ import { useGLTF } from '@react-three/drei';
 import { Mesh, Group } from 'three';
 
 import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
-import { use3DModel } from '@/app/(protected)/make/store/modelStore';
+import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
 
-const MainDecoration = () => {
+const MessageDecoration = () => {
   const { model, modelColor } = use3DModel();
 
   const deco = useGLTF(model).scene.clone() as Group;
 
-  deco.name = 'MainDeco';
-  deco.scale.set(1, 1, 1);
-  deco.position.set(0, 1.5, 0);
+  deco.name = 'MessageDeco';
+  deco.scale.set(2, 2, 2);
+  deco.position.set(0, 0, 0);
   deco.children.forEach((mesh) => (mesh.castShadow = false));
 
-  const colorPart = deco.getObjectByName('colorPart') as Mesh | undefined;
+  const colorPart = deco.getObjectByName('Main') as Mesh | undefined;
   const color = modelColor;
   if (!colorPart) {
     return null;
@@ -27,4 +27,4 @@ const MainDecoration = () => {
   return <primitive object={deco} />;
 };
 
-export default MainDecoration;
+export default MessageDecoration;

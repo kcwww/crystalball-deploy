@@ -15,7 +15,6 @@ import {
 import { Input } from '@/components/ui/input';
 
 import { use3DModel } from '@/app/(protected)/make/store/modelStore';
-import { toast } from 'sonner';
 
 const formSchema = z.object({
   title: z.string().min(1).max(10),
@@ -35,7 +34,7 @@ const TitleForm = () => {
     console.log(value);
     router.replace('/main');
     sessionStorage.setItem('isDecorated', 'true');
-    toast.success('새로운 수정 구슬이 만들어졌습니다.');
+    sessionStorage.setItem('toast', 'true');
   };
 
   return (

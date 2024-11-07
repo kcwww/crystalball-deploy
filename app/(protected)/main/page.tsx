@@ -1,4 +1,7 @@
-import React from 'react';
+'use client';
+
+import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 import CrystalCanvas from '@/shared/components/canvas/CrystalCanvas';
 import UISection from '@/shared/components/ui/UISection';
@@ -12,6 +15,15 @@ import FullScreen from './_components/ui/FullScreen';
 import HamburgerButton from './_components/ui/HamburgerButton';
 
 const MainPage = () => {
+  useEffect(() => {
+    const isMaked = sessionStorage.getItem('toast');
+
+    if (isMaked) {
+      toast.success('새로운 수정구슬이 생성되었습니다!');
+      sessionStorage.removeItem('toast');
+    }
+  }, []);
+
   return (
     <>
       <PreviousButton />

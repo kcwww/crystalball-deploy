@@ -4,16 +4,14 @@ import { useEffect, useState } from 'react';
 
 import { Suspense } from 'react';
 import { DrawerClose } from '@/components/ui/drawer';
-import { DecorationType } from '@/shared/types/model';
 import { Canvas } from '@react-three/fiber';
-import InitializeDecoration from '@/app/(protected)/make/_components/InitializeDecoration';
 
-import { use3DModel } from '@/app/(protected)/make/store/modelStore';
-import { DECO_TYPE } from '@/shared/constants/3dModel';
+import InitializeDecoration from '@/app/(public)/visit/_components/InitializeDecoration';
+import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
 
-const Decoration = ({ path, type }: { path: string; type: DecorationType }) => {
+const Decoration = ({ path }: { path: string }) => {
   const [isMounted, setIsMounted] = useState(false);
-  const { setModel, setBottom } = use3DModel();
+  const { setModel } = use3DModel();
 
   useEffect(() => {
     setIsMounted(true);
@@ -22,11 +20,7 @@ const Decoration = ({ path, type }: { path: string; type: DecorationType }) => {
   if (!isMounted) return null;
 
   const handleModel = () => {
-    if (type === DECO_TYPE.MAIN) {
-      setModel({ model: path });
-    } else if (type === DECO_TYPE.BOTTOM) {
-      setBottom({ bottom: path });
-    }
+    setModel({ model: path });
   };
 
   return (
@@ -42,7 +36,7 @@ const Decoration = ({ path, type }: { path: string; type: DecorationType }) => {
             intensity={1.5}
             color={'#ffffff'}
           />
-          <InitializeDecoration path={path} type={type} />
+          <InitializeDecoration path={path} />
         </Suspense>
       </Canvas>
     </DrawerClose>

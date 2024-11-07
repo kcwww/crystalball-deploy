@@ -24,9 +24,9 @@ const PreviousButton = () => {
         view && onOut();
       }}
       className="pointer-events-auto fixed flex h-12 w-12 items-center justify-center rounded-full bg-transparent p-2"
-      style={{ zIndex: 1, top: '2rem', left: '2rem' }}
+      style={{ zIndex: 1, top: '3rem', left: '3rem' }}
     >
-      <CircleArrowLeft className="previous" size={'1.5rem'} />
+      <CircleArrowLeft className="previous" />
     </Button>
   );
 };

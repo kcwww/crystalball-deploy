@@ -1,0 +1,7 @@
+export const STEP = {
+  MESSAGE_DECORATION: 1,
+  MESSAGE_DECORATION_COLOR: 2,
+  MESSAGE_NOTE_COLOR: 3,
+  MESSAGE: 4,
+  MAX: 4,
+} as const;

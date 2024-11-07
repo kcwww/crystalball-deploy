@@ -1,0 +1,8 @@
+export const STEP = {
+  MAIN_DECORATION: 1,
+  MAIN_DECORATION_COLOR: 2,
+  BOTTOM_DECORATION: 3,
+  BOTTOM_DECORATION_COLOR: 4,
+  TITLE: 5,
+  MAX: 5,
+} as const;

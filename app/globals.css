@@ -104,8 +104,9 @@ html::-webkit-scrollbar {
   @apply transition-colors hover:text-red-500;
 }
 
-.previous:hover {
-  @apply text-yellow-300;
+.previous {
+  width: 2rem !important;
+  height: 2rem !important;
 }
 
 .user-header {
@@ -133,4 +134,11 @@ html::-webkit-scrollbar {
 
 .message-list::-webkit-scrollbar {
   display: none;
+}
+
+.letter-paper {
+  height: 20rem;
+  border: none;
+  resize: none;
+  outline: none;
 }
