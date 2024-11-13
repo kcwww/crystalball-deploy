@@ -6,7 +6,7 @@ import { getDecoPosition } from '@/shared/components/canvas/utils/canvas';
 import { RADIUS } from '@/shared/constants/canvas';
 
 import { MessageResponse } from '@/shared/types/message';
-import { messageLists } from './dummy';
+import { messageLists } from '@/shared/components/canvas/dummy';
 
 const Decorations = () => {
   const center = new Vector3(0, RADIUS / 2, 0);

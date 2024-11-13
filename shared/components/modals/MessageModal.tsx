@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import useModal from '@/shared/hooks/useModal';
 import MODAL_TYPE from '@/shared/constants/modal';
+import { MessageType } from '@/shared/types/message';
 
 const MessageModal = () => {
   const { isOpen, onClose, type, props } = useModal();
@@ -22,7 +23,7 @@ const MessageModal = () => {
 
   if (!data) return null;
 
-  const { message, sender, letterColor, sendAt } = data;
+  const { sender, sendAt, message, letterColor } = data as MessageType;
 
   return (
     <Dialog open={isOpen}>

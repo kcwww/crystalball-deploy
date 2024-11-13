@@ -1,46 +1,58 @@
-'use client';
+import { redirect } from 'next/navigation';
+import { v4 as uuidv4 } from 'uuid';
 
-import { useEffect } from 'react';
-import { toast } from 'sonner';
+import { auth } from '@/auth';
+import { ROUTES } from '@/shared/constants/routes';
 
-import CrystalCanvas from '@/shared/components/canvas/CrystalCanvas';
-import UISection from '@/shared/components/ui/UISection';
+import { connectToMongoDB } from '@/shared/database/mongodb/config';
+import User, { IUser } from '@/shared/database/mongodb/models/userModel';
+import { sessionUser, User as UserType } from '@/shared/types/user';
+import { createUser } from '@/shared/database/mongodb/actions/userAction';
 
-import PreviousButton from '@/shared/components/ui/PreviousButton';
-import UserHeader from '@/shared/components/ui/UserHeader';
-import MessageCount from '@/shared/components/ui/MessageCount';
+import Main from './_components/Main';
 
-import ShareLink from './_components/ui/ShareLink';
-import FullScreen from './_components/ui/FullScreen';
-import HamburgerButton from './_components/ui/HamburgerButton';
+const getUserData = async () => {
+  const session = await auth();
 
-const MainPage = () => {
-  useEffect(() => {
-    const isMaked = sessionStorage.getItem('toast');
+  if (!session) redirect(ROUTES.LANDING);
+  const user = session.user as sessionUser;
 
-    if (isMaked) {
-      toast.success('새로운 수정구슬이 생성되었습니다!');
-      sessionStorage.removeItem('toast');
+  await connectToMongoDB();
+
+  const existingUser = (await User.findOne({
+    email: user.email,
+    provider: user.provider,
+  })) as UserType;
+
+  if (!existingUser) {
+    const uuid = uuidv4();
+    const newUser: IUser = {
+      email: user.email,
+      crystal_id: [],
+      uuid,
+      username: null,
+      provider: user.provider,
+    };
+
+    try {
+      const user = (await createUser(newUser)) as any;
+      return user;
+    } catch (error) {
+      console.error('Failed to create user', error);
+      return null;
     }
-  }, []);
+  }
 
-  return (
-    <>
-      <PreviousButton />
-      <HamburgerButton />
-      <UISection>
-        <div className="flex flex-col items-center gap-2">
-          <UserHeader user="김부캠" />
-          <MessageCount count={10} />
-        </div>
-        <div className="flex w-full justify-between">
-          <FullScreen />
-          <ShareLink userId="1234" />
-        </div>
-      </UISection>
-      <CrystalCanvas />
-    </>
-  );
+  return existingUser;
+};
+
+const MainPage = async () => {
+  const user = (await getUserData()) as UserType;
+  if (!user) redirect(ROUTES.ERROR);
+  if (user.username === null) redirect(ROUTES.NICKNAME);
+  if (user.crystal_id.length === 0) redirect(ROUTES.MAKE);
+
+  return <Main userData={user} />;
 };
 
 export default MainPage;

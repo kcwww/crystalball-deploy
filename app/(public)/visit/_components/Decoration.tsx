@@ -1,46 +1,71 @@
-'use client';
+import { Group, Mesh, Object3DEventMap, Vector3 } from 'three';
 
-import { useEffect, useState } from 'react';
+import { useGLTF } from '@react-three/drei';
 
-import { Suspense } from 'react';
-import { DrawerClose } from '@/components/ui/drawer';
-import { Canvas } from '@react-three/fiber';
+import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
+import { DECO, ETC } from '@/shared/constants/3dModel';
 
-import InitializeDecoration from '@/app/(public)/visit/_components/InitializeDecoration';
-import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
+interface DecoProps {
+  id: number;
+  scale: number;
+  position: Vector3;
+  message: string;
+  color: string;
+  sender: string;
+  letterColor: string;
+  isOpened: Date | null;
+  messageID: string;
+  sendAt: string;
+}
 
-const Decoration = ({ path }: { path: string }) => {
-  const [isMounted, setIsMounted] = useState(false);
-  const { setModel } = use3DModel();
+const DecoSet = (deco: Group<Object3DEventMap>) => {
+  const newModel = useGLTF(ETC.NEW).scene.clone().children[0];
+  newModel.position.set(0, 1.2, 0);
+  newModel.scale.set(0.1, 0.1, 0.1);
+  deco.add(newModel);
+};
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+const Decoration = ({
+  scale,
+  position,
+  message,
+  id,
+  color,
+  sender,
+  letterColor,
+  isOpened,
+  messageID,
+  sendAt,
+}: DecoProps) => {
+  const decorations = Object.values(DECO);
 
-  if (!isMounted) return null;
+  const deco = useGLTF(decorations[id - 1].fileName).scene.clone();
+  const target = { x: 8, z: 0 };
+  const focus = Math.atan2(position.z - target.z, position.x - target.x);
 
-  const handleModel = () => {
-    setModel({ model: path });
-  };
+  deco.name = decorations[id].name;
+  deco.scale.set(scale, scale, scale);
+  deco.position.set(position.x, position.y, position.z);
+  if (!isOpened) {
+    DecoSet(deco);
+  }
 
-  return (
-    <DrawerClose
-      onClick={() => handleModel()}
-      style={{ width: '18rem', height: '18rem' }}
-    >
-      <Canvas style={{ width: '100%', height: '100%' }}>
-        <Suspense fallback={null}>
-          <ambientLight intensity={1} color={'#ffffff'} />
-          <directionalLight
-            position={[10, 20, 10]}
-            intensity={1.5}
-            color={'#ffffff'}
-          />
-          <InitializeDecoration path={path} />
-        </Suspense>
-      </Canvas>
-    </DrawerClose>
-  );
+  deco.children.forEach((child) => {
+    if (child instanceof Mesh) {
+      child.userData.message = message;
+      child.userData.sender = sender;
+      child.userData.letterColor = letterColor;
+      child.userData.messageID = messageID;
+      child.userData.sendAt = sendAt;
+      child.castShadow = false;
+      if (child.name === 'Main') {
+        child.material = makeColorChangedMaterial(child, color);
+      }
+    }
+  });
+  deco.rotateY(Math.PI - focus);
+
+  return <primitive object={deco} />;
 };
 
 export default Decoration;

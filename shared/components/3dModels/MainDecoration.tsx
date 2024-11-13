@@ -22,18 +22,20 @@ const fallingModel = (
     speedRef.current.y -= acceleration;
     speedRef.current.y *= 1 - airResistance;
 
-    if (modelRef.position.y <= 0.1 && Math.abs(speedRef.current.y) <= 0.05) {
+    if (modelRef.position.y <= 0.3 && Math.abs(speedRef.current.y) <= 0.05) {
       isStoppedRef.current = true;
+      return;
     }
 
     if (modelRef.position.y <= 0) {
       speedRef.current.y *= -1;
+      return;
     }
   }
 };
 
 const MainDecoration = () => {
-  const deco = useGLTF(MAIN_DECORATION.DUCK).scene.clone() as Group;
+  const deco = useGLTF(MAIN_DECORATION.DUCK.path).scene.clone() as Group;
   const speedRef = useRef<Vector3>(new Vector3(0, 0, 0));
   const isStoppedRef = useRef<boolean>(false);
 

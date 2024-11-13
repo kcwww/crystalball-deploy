@@ -1,8 +1,10 @@
 'use client';
+
 import { useRouter } from 'next/navigation';
+
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -15,14 +17,27 @@ import {
 import { Input } from '@/components/ui/input';
 
 import { use3DModel } from '@/app/(protected)/make/store/modelStore';
+import { BOTTOM, MAIN_DECORATION } from '@/shared/constants/3dModel';
+import clientComponentFetch from '@/shared/utils/fetch/clientComponentFetch';
+import { BACKEND_ROUTES, ROUTES } from '@/shared/constants/routes';
+import { User } from '@/shared/types/user';
 
 const formSchema = z.object({
   title: z.string().min(1).max(10),
 });
 
-const TitleForm = () => {
+const TitleForm = ({ userData }: { userData: User }) => {
   const router = useRouter();
-  const { setTitle } = use3DModel();
+
+  const {
+    setTitle,
+    title,
+    model,
+    bottom,
+    modelColor,
+    bottomColor,
+    resetModel,
+  } = use3DModel();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,12 +45,44 @@ const TitleForm = () => {
     },
   });
 
-  const onSubmit = (value: z.infer<typeof formSchema>) => {
-    console.log(value);
-    router.replace('/main');
-    sessionStorage.setItem('isDecorated', 'true');
-    sessionStorage.setItem('toast', 'true');
+  const onSubmit = async () => {
+    const modelArray = Object.values(MAIN_DECORATION);
+    const modelId = modelArray.filter((item) => {
+      return item.path === model;
+    })[0].id;
+    const bottomArray = Object.values(BOTTOM);
+    const bottomId = bottomArray.filter((item) => {
+      return item.path === bottom;
+    })[0].id;
+
+    const data = {
+      user_id: userData._id,
+      title: title,
+      model: modelId,
+      modelColor,
+      bottom: bottomId,
+      bottomColor,
+      message_id: [],
+    };
+
+    try {
+      const response = await clientComponentFetch(BACKEND_ROUTES.CRYSTAL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        resetModel();
+        router.replace(ROUTES.MAIN);
+        sessionStorage.setItem('isDecorated', 'true');
+        sessionStorage.setItem('toast', 'true');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  const isLoading = form.formState.isSubmitting;
 
   return (
     <Form {...form}>
@@ -69,7 +116,12 @@ const TitleForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full" variant={'outline'} type="submit">
+        <Button
+          className="w-full"
+          variant={'outline'}
+          type="submit"
+          disabled={isLoading}
+        >
           Submit
         </Button>
       </form>

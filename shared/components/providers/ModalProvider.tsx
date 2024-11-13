@@ -6,6 +6,7 @@ import GuestModal from '@/shared/components/modals/GuestModal';
 import MessageModal from '@/shared/components/modals/MessageModal';
 import FormModal from '@/shared/components/modals/FormModal';
 import MessageListModal from '@/shared/components/modals/MessageListModal';
+import PrivateModal from '@/shared/components/modals/PrivateModal';
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -25,6 +26,7 @@ const ModalProvider = () => {
       <MessageModal />
       <FormModal />
       <MessageListModal />
+      <PrivateModal />
     </>
   );
 };

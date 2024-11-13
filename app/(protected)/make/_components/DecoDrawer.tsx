@@ -12,18 +12,19 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 
-import Decoration from '@/app/(protected)/make/_components/Decoration';
+import DecorationSelect from '@/app/(protected)/make/_components/DecorationSelect';
 import { BOTTOM, DECO_TYPE, MAIN_DECORATION } from '@/shared/constants/3dModel';
 
 import dynamic from 'next/dynamic';
 import TitleForm from '@/app/(protected)/make/_components/TitleForm';
 import { STEP } from '@/app/(protected)/make/_constants/step';
+import { User } from '@/shared/types/user';
 
 const ColorButton = dynamic(
   () => import('@/app/(protected)/make/_components/ColorButton')
 );
 
-const DecoDrawer = ({ step }: { step: number }) => {
+const DecoDrawer = ({ step, userData }: { step: number; userData: User }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const DecoDrawer = ({ step }: { step: number }) => {
       />
     );
 
-  if (step === STEP.TITLE) return <TitleForm />;
+  if (step === STEP.TITLE) return <TitleForm userData={userData} />;
 
   const mainDecorationArray = Object.values(MAIN_DECORATION);
   const bottomDecorationArray = Object.values(BOTTOM);
@@ -69,12 +70,20 @@ const DecoDrawer = ({ step }: { step: number }) => {
         <div className="flex w-full overflow-auto">
           {step === STEP.MAIN_DECORATION &&
             mainDecorationArray.map((deco, index) => (
-              <Decoration key={index} path={deco} type={DECO_TYPE.MAIN} />
+              <DecorationSelect
+                key={index}
+                path={deco.path}
+                type={DECO_TYPE.MAIN}
+              />
             ))}
 
           {step === STEP.BOTTOM_DECORATION &&
             bottomDecorationArray.map((deco, index) => (
-              <Decoration key={index} path={deco} type={DECO_TYPE.BOTTOM} />
+              <DecorationSelect
+                key={index}
+                path={deco.path}
+                type={DECO_TYPE.BOTTOM}
+              />
             ))}
         </div>
 

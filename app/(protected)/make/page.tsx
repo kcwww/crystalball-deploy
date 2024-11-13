@@ -1,33 +1,55 @@
-'use client';
+import { redirect } from 'next/navigation';
+import { auth, signOut } from '@/auth';
 
-import { useState, useEffect, Suspense } from 'react';
+import { ROUTES } from '@/shared/constants/routes';
+import User from '@/shared/database/mongodb/models/userModel';
+import { connectToMongoDB } from '@/shared/database/mongodb/config';
+import { sessionUser, User as UserType } from '@/shared/types/user';
+import Make from '@/app/(protected)/make/_components';
 
-import dynamic from 'next/dynamic';
-import { use3DModel } from './store/modelStore';
+const getUserData = async () => {
+  const session = await auth();
 
-const Make = dynamic(() => import('@/app/(protected)/make/_components/index'), {
-  ssr: false,
-});
+  if (!session) return null;
+  const user = session.user as sessionUser;
 
-const MakePage = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  const { resetModel } = use3DModel();
+  try {
+    await connectToMongoDB();
 
-  useEffect(() => {
-    setIsMounted(true);
+    const existingUser = (await User.findOne({
+      email: user.email,
+      provider: user.provider,
+    })) as UserType;
 
-    return () => {
-      resetModel();
-    };
-  }, []);
+    if (!existingUser) {
+      await signOut();
+      return null;
+    }
 
-  if (!isMounted) return null;
+    return existingUser;
+  } catch (error) {
+    console.error('Failed to get user data', error);
+    return null;
+  }
+};
 
-  return (
-    <Suspense fallback={null}>
-      <Make />
-    </Suspense>
-  );
+const MakePage = async () => {
+  const data = (await getUserData()) as UserType;
+  const userData = {
+    _id: data._id,
+    email: data.email,
+    uuid: data.uuid,
+    crystal_id: data.crystal_id,
+    username: data.username,
+    provider: data.provider,
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+  } as UserType;
+
+  if (!userData) redirect(ROUTES.LANDING);
+  if (userData.username === null) redirect(ROUTES.NICKNAME);
+
+  return <Make userData={userData} />;
 };
 
 export default MakePage;

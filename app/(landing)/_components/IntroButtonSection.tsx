@@ -14,13 +14,18 @@ import {
 } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
 import useModal from '@/shared/hooks/useModal';
+import { ROUTES } from '@/shared/constants/routes';
+import MODAL_TYPE from '@/shared/constants/modal';
 
 const IntroButtonSection = () => {
   const { onOpen } = useModal();
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <Button className="pointer-events-auto" onClick={() => onOpen('Intro')}>
+      <Button
+        className="pointer-events-auto"
+        onClick={() => onOpen(MODAL_TYPE.INTRODUCE)}
+      >
         소개
       </Button>
       <Drawer>
@@ -34,33 +39,33 @@ const IntroButtonSection = () => {
           </DrawerHeader>
           <div className="flex w-full flex-col items-center justify-center gap-4">
             <Button
-              onClick={() => signIn('naver')}
+              onClick={() => signIn('naver', { callbackUrl: ROUTES.MAIN })}
               className="w-1/2"
               variant="outline"
             >
               네이버로 로그인
             </Button>
             <Button
-              onClick={() => signIn('kakao')}
+              onClick={() => signIn('kakao', { callbackUrl: ROUTES.MAIN })}
               className="w-1/2"
               variant="outline"
             >
               카카오로 로그인
             </Button>
             <Button
-              onClick={() => signIn('google')}
+              onClick={() => signIn('google', { callbackUrl: ROUTES.MAIN })}
               className="w-1/2"
               variant="outline"
             >
               구글로 로그인
             </Button>
-            <Button
-              onClick={() => onOpen('Guest')}
+            {/* <Button
+              onClick={() => onOpen(MODAL_TYPE.GUEST)}
               className="w-1/2"
               variant="outline"
             >
               게스트로 로그인
-            </Button>
+            </Button> */}
           </div>
           <DrawerFooter className="flex items-center justify-center ">
             <DrawerClose className="w-1/3 rounded-md bg-primary py-2 text-white">

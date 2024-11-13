@@ -4,10 +4,11 @@ import { useCallback } from 'react';
 import { Share } from 'lucide-react';
 
 import { toast } from 'sonner';
+import { ORIGIN } from '@/shared/constants/url';
 
 const ShareLink = ({ userId }: { userId: string }) => {
   const share = useCallback(() => {
-    const url = `http://localhost:3000/visit/${userId}`;
+    const url = `${ORIGIN}/visit/${userId}`;
     if (navigator.share === undefined) {
       navigator.clipboard.writeText(url);
       toast('링크가 복사되었습니다.');

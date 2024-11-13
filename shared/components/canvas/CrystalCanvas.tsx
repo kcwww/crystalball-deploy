@@ -1,17 +1,18 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import Bottom from '@/shared/components/3dModels/Bottom';
 
 import { OrbitControls } from '@react-three/drei';
-import Base from '@/shared/components/3dModels/Base';
 import MainDecoration from '@/shared/components/3dModels/MainDecoration';
+import Bottom from '@/shared/components/3dModels/Bottom';
+import Decorations from '@/shared/components/canvas/Decorations';
+
+import Base from '@/shared/components/3dModels/Base';
 import Glass from '@/shared/components/3dModels/Glass';
 import Snowflake from '@/shared/components/3dModels/Snowflake';
 import Ground from '@/shared/components/3dModels/Ground';
 
 import Raycaster from '@/shared/components/canvas/Raycaster';
-import Decorations from '@/shared/components/canvas/Decorations';
 
 const CrystalCanvas = () => {
   return (

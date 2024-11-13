@@ -5,6 +5,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 // import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import AuthProvider from '@/shared/components/providers/AuthProvider';
+import QueryProvider from '@/shared/components/providers/QueryProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={cn(inter.className, 'min-h-svh bg-primary')}>
-        <AuthProvider>{children}</AuthProvider>
+        <QueryProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </QueryProvider>
       </body>
     </html>
   );

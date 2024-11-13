@@ -49,7 +49,7 @@ const makeCanvasTexture = ({
 };
 
 const Bottom = () => {
-  const bottomModel = useGLTF(BOTTOM.ONE).scene.clone();
+  const bottomModel = useGLTF(BOTTOM.ONE.path).scene.clone();
 
   const nameTag = bottomModel.getObjectByName('nameTag') as Mesh | undefined;
 

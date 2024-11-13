@@ -1,7 +1,5 @@
 'use client';
 
-import useModal from '@/shared/hooks/useModal';
-
 import {
   Dialog,
   DialogContent,
@@ -11,17 +9,22 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import MODAL_TYPE, { MSG_COLOR } from '@/shared/constants/modal';
 
-import { messageLists } from '../canvas/dummy';
-import DeleteModal from './DeleteModal';
+import useModal from '@/shared/hooks/useModal';
+import MODAL_TYPE from '@/shared/constants/modal';
+
+import DeleteModal from '@/shared/components/modals/DeleteModal';
+import { Message } from '@/shared/types/message';
+import { formattedTime } from '@/shared/utils/time/formattedTime';
 
 const MessageListModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, type, props } = useModal();
 
   if (!isOpen || type !== MODAL_TYPE.ALL_MESSAGE) {
     return null;
   }
+
+  const messageLists = props.data as Message[];
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -37,13 +40,13 @@ const MessageListModal = () => {
           {messageLists.map((message, index) => (
             <div
               key={index}
-              style={{ backgroundColor: MSG_COLOR[message.letter_id].color }}
+              style={{ backgroundColor: message.letter_color }}
               className="p-4"
             >
-              <div>{message.sendAt}</div>
+              <div>{formattedTime(message.createdAt)}</div>
               <div>{message.content}</div>
               <div>From . {message.sender}</div>
-              <DeleteModal />
+              <DeleteModal messageId={message._id} />
             </div>
           ))}
         </div>

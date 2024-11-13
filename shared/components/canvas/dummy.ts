@@ -3,7 +3,7 @@ import { MessageResponse as Message } from '@/shared/types/message';
 export const messageLists: Message[] = [
   {
     content: '안녕 나는 민수야\n 올 한해도 수고 많았어^^',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#911f1f',
     decoration_id: 1,
     id: 1,
@@ -19,7 +19,7 @@ export const messageLists: Message[] = [
   },
   {
     content: '메리크리스마스~\n 내년에도 사이좋게 지내자!!.',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#3a911f',
     decoration_id: 2,
     id: 2,
@@ -36,7 +36,7 @@ export const messageLists: Message[] = [
   {
     content:
       '나랑 마인크래프트 해줘서 고마워\n앞으로도 나랑 마인크래프트 같이하자',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#efff0a',
     decoration_id: 4,
     id: 3,
@@ -53,7 +53,7 @@ export const messageLists: Message[] = [
   {
     content:
       '선물은 작다 해도 큰 마음이 담겨있어요.\n 나의 작은 선물로 당신을 기쁘게 만들고 싶어요. 🎁❤️',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#1f4391',
     decoration_id: 4,
     id: 4,
@@ -70,7 +70,7 @@ export const messageLists: Message[] = [
   {
     content:
       '친구야,\n 내가 갖고 있는 최고의 선물은 너와 함께 있는 시간이에요.\n 이번 크리스마스를 잊지 못할 거에요. 🎄🕰️',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#00ea00',
     decoration_id: 1,
     id: 5,
@@ -87,7 +87,7 @@ export const messageLists: Message[] = [
   {
     content:
       '친애하는 친구, 크리스마스가 다가오네요!\n특별한 날을 함께 보내고 싶어요. \n🎄🎅❤️',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#0ff000',
     decoration_id: 3,
     id: 6,
@@ -104,7 +104,7 @@ export const messageLists: Message[] = [
   {
     content:
       '이번 크리스마스에는 따뜻한 차 한 잔과 함께 뜻깊은 이야기를 나눠보는 건 어떨까요? ☕🎄🎁',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#ffff00',
     decoration_id: 3,
     id: 7,
@@ -119,8 +119,8 @@ export const messageLists: Message[] = [
     confidence: 88,
   },
   {
-    content: '너무 슬픈 한 해였어..\n2024년은 행복했으면 좋겠다🙏',
-    sendAt: '2022-12-25 10:11',
+    content: '너무 슬픈 한 해였어..\n2025년은 행복했으면 좋겠다🙏',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#ffff00',
     decoration_id: 2,
     id: 8,
@@ -135,8 +135,8 @@ export const messageLists: Message[] = [
     confidence: 75,
   },
   {
-    content: '벌써 2024년이야,, 난 나이먹기 싫어😢',
-    sendAt: '2022-12-25 10:11',
+    content: '벌써 2025년이야,, 난 나이먹기 싫어😢',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#d12b2b',
     decoration_id: 3,
     id: 9,
@@ -144,7 +144,7 @@ export const messageLists: Message[] = [
     letter_id: 1,
     location: 9,
     opened: '',
-    sender: '2023 가지마',
+    sender: '2024 가지마',
     snowball_id: 1,
     user_id: 1,
     sentiment: 'negative',
@@ -152,7 +152,7 @@ export const messageLists: Message[] = [
   },
   {
     content: '올 한 해도 너 덕분에 행복했어😊',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#d15a2b',
     decoration_id: 2,
     id: 10,
@@ -168,7 +168,7 @@ export const messageLists: Message[] = [
   },
   {
     content: '내년에도 올해처럼 행복하게 흐르기를 바라🎄',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#65b182',
     decoration_id: 1,
     id: 11,
@@ -184,7 +184,7 @@ export const messageLists: Message[] = [
   },
   {
     content: '이번 크리스마스에는 너랑 같이 있고 싶어❤️',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#8865b1',
     decoration_id: 2,
     id: 12,
@@ -201,7 +201,7 @@ export const messageLists: Message[] = [
   {
     content:
       '난 올해 정말 힘들었어..\n내년에는 같이 좋은 일만 가득했으면 좋겠다💦',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#ffff00',
     decoration_id: 3,
     id: 13,
@@ -216,8 +216,8 @@ export const messageLists: Message[] = [
     confidence: 40,
   },
   {
-    content: '2024년 정말 설레ㅎㅎㅎㅎ\n또 어떤 좋은 일들이 기다리고 있을까?❤️',
-    sendAt: '2022-12-25 10:11',
+    content: '2025년 정말 설레ㅎㅎㅎㅎ\n또 어떤 좋은 일들이 기다리고 있을까?❤️',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#530fa0',
     decoration_id: 1,
     id: 14,
@@ -234,7 +234,7 @@ export const messageLists: Message[] = [
   {
     content:
       '제 편지가 기쁨이 되었으면 좋겠어요\n올 한해 정말 수고 많았어요\n항상 잘하고 있으니까 걱정하지말고 킵고잉❗',
-    sendAt: '2022-12-25 10:11',
+    sendAt: '2024-12-25 10:11',
     decoration_color: '#0fa08d',
     decoration_id: 1,
     id: 15,

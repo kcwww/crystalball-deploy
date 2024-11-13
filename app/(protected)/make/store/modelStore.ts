@@ -24,8 +24,8 @@ interface ModelStore {
 }
 
 export const use3DModel = create<ModelStore>((set) => ({
-  model: MAIN_DECORATION.DUCK,
-  bottom: BOTTOM.DEFAULT,
+  model: MAIN_DECORATION.DUCK.path,
+  bottom: BOTTOM.DEFAULT.path,
   modelColor: '#ff0000',
   bottomColor: '#ff0000',
   title: 'title',
@@ -48,8 +48,8 @@ export const use3DModel = create<ModelStore>((set) => ({
 
   resetModel: () =>
     set({
-      model: MAIN_DECORATION.DUCK,
-      bottom: BOTTOM.DEFAULT,
+      model: MAIN_DECORATION.DUCK.path,
+      bottom: BOTTOM.DEFAULT.path,
       modelColor: '#ff0000',
       bottomColor: '#ff0000',
       title: 'title',
