@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Jua } from 'next/font/google';
 import './globals.css';
 
 import { cn } from '@/lib/utils';
@@ -7,7 +7,10 @@ import { cn } from '@/lib/utils';
 import AuthProvider from '@/shared/components/providers/AuthProvider';
 import QueryProvider from '@/shared/components/providers/QueryProvider';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Jua({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',

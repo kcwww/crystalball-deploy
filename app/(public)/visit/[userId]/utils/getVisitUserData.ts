@@ -15,12 +15,19 @@ const getVisitUserData = async (userId: string) => {
     if (!user) return null;
     if ((user && user.crystal_id.length === 0) || user.username === null)
       return null;
+    user._id = user._id.toString();
+    user.crystal_id = user.crystal_id.map((crystalId) => crystalId.toString());
 
     const crystals = await Promise.all(
       user.crystal_id.map(async (crystalId) => {
         const crystalData = (
           await Crystal.findOne({ _id: crystalId })
         )?.toObject() as CrystalType;
+        crystalData._id = crystalData._id.toString();
+        crystalData.user_id = crystalData.user_id.toString();
+        crystalData.message_id = crystalData.message_id.map((messageId) =>
+          messageId.toString()
+        );
         if (!crystalData) throw new Error('No crystal data');
         return crystalData;
       })
@@ -33,7 +40,9 @@ const getVisitUserData = async (userId: string) => {
             const messages = (
               await Message.findOne({ _id: messageId })
             )?.toObject() as MessageType;
-
+            messages._id = messages._id.toString();
+            messages.crystal_id = messages.crystal_id.toString();
+            messages.user_id = messages.user_id.toString();
             if (crystal.is_private) {
               return {
                 ...messages,

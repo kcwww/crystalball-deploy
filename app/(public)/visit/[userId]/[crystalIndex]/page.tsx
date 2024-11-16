@@ -5,6 +5,7 @@ import { ROUTES } from '@/shared/constants/routes';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User from '@/shared/database/mongodb/models/userModel';
 import { redirect } from 'next/navigation';
+import { User as UserType } from '@/shared/types/user';
 
 const getCrystalData = async (userId: string, crystalIndex: string) => {
   const idx = parseInt(crystalIndex);
@@ -12,11 +13,14 @@ const getCrystalData = async (userId: string, crystalIndex: string) => {
   try {
     await connectToMongoDB();
 
-    const user = await User.findOne({
-      uuid: userId,
-    });
+    const user = (
+      await User.findOne({
+        uuid: userId,
+      })
+    )?.toObject() as UserType;
     if (!user) return null;
-    const crystalId = user.crystal_id[idx];
+    user._id = user._id.toString();
+    const crystalId = user.crystal_id[idx].toString();
     if (!crystalId) return null;
 
     return { id: user._id, crystalId };

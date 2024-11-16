@@ -10,8 +10,7 @@ export const createCrystal = async (crystalData: ICrystal) => {
 
   try {
     const newCrystal = await Crystal.create(crystalData);
-    newCrystal.save();
-    return newCrystal.toString();
+    return newCrystal.toObject();
   } catch (error) {
     console.error(error);
     throw { message: 'error creating crystal' };

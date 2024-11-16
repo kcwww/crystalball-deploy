@@ -105,12 +105,22 @@ html::-webkit-scrollbar {
 }
 
 .previous {
-  width: 2rem !important;
-  height: 2rem !important;
+  @apply transform transition duration-200;
+  width: 3rem;
+  height: 3rem;
+}
+
+.previous:hover {
+  @apply text-yellow-300;
 }
 
 .user-header {
-  @apply text-2xl font-bold text-green-800;
+  @apply text-2xl font-bold text-green-600;
+  text-shadow:
+    -1px 0px black,
+    0px 1px black,
+    1px 0px black,
+    0px -1px black;
 }
 
 .ui-section {

@@ -8,8 +8,7 @@ export const createUser = async (userData: IUser) => {
 
   try {
     const newUser = await User.create(userData);
-    newUser.save();
-    return newUser.toString();
+    return newUser.toObject();
   } catch (error) {
     console.error(error);
     throw { message: 'error creating user' };

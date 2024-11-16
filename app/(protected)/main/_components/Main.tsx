@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import { toast } from 'sonner';
 
-import UISection from '@/shared/components/ui/UISection';
+import UISection from '@/app/(protected)/main/_components/UISection';
 import PreviousButton from '@/shared/components/ui/PreviousButton';
 import UserHeader from '@/shared/components/ui/UserHeader';
 import MessageCount from '@/shared/components/ui/MessageCount';
@@ -19,9 +19,13 @@ import FullScreen from '@/app/(protected)/main/_components/ui/FullScreen';
 import HamburgerButton from '@/app/(protected)/main/_components/ui/HamburgerButton';
 import fetchCrystal from '@/app/(protected)/main/_utils/fetchCrystal';
 import PrivateButton from '@/app/(protected)/main/_components/ui/PrivateButton';
+import { use3DModel } from '@/app/(protected)/make/store/modelStore';
 
 const Main = ({ userData }: { userData: User }) => {
+  const fadeOutRef = useRef<HTMLDivElement>(null);
+
   const [current, setCurrent] = useState<number>(0);
+  const { resetModel } = use3DModel();
 
   const { data, isLoading, isError } = useQuery<Crystal[]>({
     queryKey: ['crystal'],
@@ -33,6 +37,7 @@ const Main = ({ userData }: { userData: User }) => {
     const isMaked = sessionStorage.getItem('toast');
 
     if (isMaked) {
+      resetModel();
       toast.success('새로운 수정구슬이 생성되었습니다!');
       sessionStorage.removeItem('toast');
     }
@@ -49,9 +54,9 @@ const Main = ({ userData }: { userData: User }) => {
 
   return (
     <>
-      <PreviousButton />
-      <HamburgerButton userData={userData} />
-      <UISection>
+      <UISection ref={fadeOutRef}>
+        <PreviousButton />
+        <HamburgerButton userData={userData} />
         <div className="flex flex-col items-center gap-2">
           <UserHeader user={userData.username || ''} />
           <MessageCount count={messageCount} />
@@ -78,10 +83,11 @@ const Main = ({ userData }: { userData: User }) => {
           )}
         </div>
         <div className="flex w-full justify-between">
-          <FullScreen />
+          <FullScreen fadeOutRef={fadeOutRef} />
           <ShareLink userId={userData.uuid} />
         </div>
       </UISection>
+
       <CrystalCanvas data={data || []} current={current} />
     </>
   );

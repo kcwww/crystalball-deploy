@@ -15,18 +15,22 @@ const getUserData = async () => {
   const session = await auth();
 
   if (!session) redirect(ROUTES.LANDING);
-  const user = session.user as sessionUser;
 
-  await connectToMongoDB();
+  try {
+    const user = session.user as sessionUser;
+    await connectToMongoDB();
 
-  const existingUser = (await User.findOne({
-    email: user.email,
-    provider: user.provider,
-  })) as UserType;
+    const existingUser = (
+      await User.findOne({
+        email: user.email,
+        provider: user.provider,
+      })
+    )?.toObject() as UserType;
 
-  if (!existingUser) {
+    if (existingUser) return existingUser;
+
     const uuid = uuidv4();
-    const newUser: IUser = {
+    const initUser: IUser = {
       email: user.email,
       crystal_id: [],
       uuid,
@@ -34,23 +38,25 @@ const getUserData = async () => {
       provider: user.provider,
     };
 
-    try {
-      const user = (await createUser(newUser)) as any;
-      return user;
-    } catch (error) {
-      console.error('Failed to create user', error);
-      return null;
-    }
-  }
+    const newUser = (await createUser(initUser)) as UserType;
 
-  return existingUser;
+    return newUser;
+  } catch (error) {
+    console.error('Failed to create user', error);
+    return null;
+  }
 };
 
 const MainPage = async () => {
   const user = (await getUserData()) as UserType;
+  user._id = String(user._id);
+  user.crystal_id = user.crystal_id.map((id) => id.toString());
+
   if (!user) redirect(ROUTES.ERROR);
   if (user.username === null) redirect(ROUTES.NICKNAME);
-  if (user.crystal_id.length === 0) redirect(ROUTES.MAKE);
+  else if (user.crystal_id === undefined || user.crystal_id.length === 0) {
+    redirect(ROUTES.MAKE);
+  }
 
   return <Main userData={user} />;
 };

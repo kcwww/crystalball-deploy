@@ -16,15 +16,22 @@ const getUserData = async () => {
   try {
     await connectToMongoDB();
 
-    const existingUser = (await User.findOne({
-      email: user.email,
-      provider: user.provider,
-    })) as UserType;
+    const existingUser = (
+      await User.findOne({
+        email: user.email,
+        provider: user.provider,
+      })
+    )?.toObject() as UserType;
 
     if (!existingUser) {
       await signOut();
       return null;
     }
+
+    existingUser._id = existingUser._id.toString();
+    existingUser.crystal_id = existingUser.crystal_id.map((id) =>
+      id.toString()
+    );
 
     return existingUser;
   } catch (error) {
@@ -35,21 +42,14 @@ const getUserData = async () => {
 
 const MakePage = async () => {
   const data = (await getUserData()) as UserType;
-  const userData = {
-    _id: data._id,
-    email: data.email,
-    uuid: data.uuid,
-    crystal_id: data.crystal_id,
-    username: data.username,
-    provider: data.provider,
-    createdAt: data.createdAt,
-    updatedAt: data.updatedAt,
-  } as UserType;
 
-  if (!userData) redirect(ROUTES.LANDING);
-  if (userData.username === null) redirect(ROUTES.NICKNAME);
+  if (data === undefined || data === null) {
+    await signOut();
+    redirect(ROUTES.LANDING);
+  }
+  if (data.username === null) redirect(ROUTES.NICKNAME);
 
-  return <Make userData={userData} />;
+  return <Make userData={data} />;
 };
 
 export default MakePage;

@@ -39,7 +39,7 @@ const CrystalCanvas = ({
         <ambientLight intensity={1.5} color={'#ffffff'} />
 
         <directionalLight
-          position={[10, 20, 10]}
+          position={[1, 2, 1]}
           intensity={1.5}
           color={'#ffffff'}
           castShadow={true}
@@ -54,7 +54,7 @@ const CrystalCanvas = ({
         />
         <directionalLight
           position={[1, 0, 0]}
-          intensity={0.5}
+          intensity={0.8}
           color={'#ffffff'}
         />
         <Raycaster />

@@ -3,8 +3,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/auth';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User from '@/shared/database/mongodb/models/userModel';
-import { revalidatePath } from 'next/cache';
-import { REVALIDATE_PATHS } from '@/shared/constants/routes';
 import { User as UserType } from '@/shared/types/user';
 
 type NicknameReq = {
@@ -45,11 +43,6 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // 캐시 업데이트
-    revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
-    revalidatePath(REVALIDATE_PATHS.MAKE, 'page');
-    revalidatePath(REVALIDATE_PATHS.VISIT, 'page');
-    revalidatePath(REVALIDATE_PATHS.NICKNAME, 'page');
     // 성공적으로 업데이트된 경우 응답 반환
     return NextResponse.json({
       message: 'Username updated',

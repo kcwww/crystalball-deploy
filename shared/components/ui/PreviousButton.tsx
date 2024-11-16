@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 
 import { CircleArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import usePrev from '@/shared/hooks/usePrev';
 
 const PreviousButton = () => {
@@ -14,20 +13,20 @@ const PreviousButton = () => {
     return () => {
       onOut();
     };
-  }, []);
+  }, [onOut]);
 
   if (!view) return null;
 
   return (
-    <Button
+    <button
       onClick={() => {
         view && onOut();
       }}
-      className="pointer-events-auto fixed flex h-12 w-12 items-center justify-center rounded-full bg-transparent p-2"
+      className="previous pointer-events-auto fixed flex h-12 w-12 items-center justify-center rounded-full bg-transparent p-2 text-gray-100 hover:bg-primary hover:text-yellow-400"
       style={{ zIndex: 1, top: '3rem', left: '3rem' }}
     >
-      <CircleArrowLeft className="previous" />
-    </Button>
+      <CircleArrowLeft size={'2rem'} />
+    </button>
   );
 };
 

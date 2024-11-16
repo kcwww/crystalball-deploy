@@ -44,7 +44,7 @@ const MakeSection = ({ userData }: { userData: User }) => {
   useEffect(() => {
     if (userData && userData.crystal_id.length === 5)
       router.replace(ROUTES.MAIN);
-  }, [router]);
+  }, [router, userData]);
 
   const handleNext = () => {
     const nextStep = step + 1;

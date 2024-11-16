@@ -29,15 +29,8 @@ const formSchema = z.object({
 const TitleForm = ({ userData }: { userData: User }) => {
   const router = useRouter();
 
-  const {
-    setTitle,
-    title,
-    model,
-    bottom,
-    modelColor,
-    bottomColor,
-    resetModel,
-  } = use3DModel();
+  const { setTitle, title, model, bottom, modelColor, bottomColor } =
+    use3DModel();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -72,7 +65,6 @@ const TitleForm = ({ userData }: { userData: User }) => {
       });
 
       if (response.ok) {
-        resetModel();
         router.replace(ROUTES.MAIN);
         sessionStorage.setItem('isDecorated', 'true');
         sessionStorage.setItem('toast', 'true');

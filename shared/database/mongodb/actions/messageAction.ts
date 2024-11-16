@@ -11,8 +11,7 @@ export const createMessage = async (messageData: IMessage) => {
 
   try {
     const newMessage = await Message.create(messageData);
-    newMessage.save();
-    return newMessage.toString();
+    return newMessage.toObject();
   } catch (error) {
     console.error(error);
     throw { message: 'error creating message' };

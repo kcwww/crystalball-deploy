@@ -8,9 +8,10 @@ import DecorationWrap from './DecorationWrap';
 
 const Decorations = ({ crystal }: { crystal: Crystal['_id'] }) => {
   const { data, isLoading, isError } = useQuery<Message[]>({
-    queryKey: ['meesages'],
+    queryKey: ['messages', crystal],
     queryFn: () => fetchMessages(crystal),
     gcTime: 0,
+    staleTime: 0,
   });
 
   if (isLoading || isError) return null;

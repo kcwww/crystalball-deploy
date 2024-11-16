@@ -18,7 +18,7 @@ export interface IUserDocument extends IUser, Document {
 // User 스키마 정의
 const userSchema = new mongoose.Schema<IUserDocument>(
   {
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true },
     uuid: { type: String, required: true },
     crystal_id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Crystal' }],
     username: { type: String, default: null },
@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema<IUserDocument>(
     timestamps: true, // 자동으로 'createdAt' 및 'updatedAt' 필드 추가
   }
 );
+
+// 복합 인덱스 생성
+userSchema.index({ email: 1, provider: 1 }, { unique: true });
 
 // User 모델의 프리 훅을 사용하여 관련 Crystal 및 Message 모두 삭제
 userSchema.pre('findOneAndDelete', async function (next) {
