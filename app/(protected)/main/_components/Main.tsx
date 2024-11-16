@@ -33,16 +33,16 @@ const Main = ({ userData }: { userData: User }) => {
 
   useEffect(() => {
     resetModel();
-  }, []);
+  }, [resetModel]);
 
   if (isLoading || isError) return null;
   if (!data) return null;
 
   const crystalCount = data.length;
-  const messageCount = data.reduce(
-    (acc, cur) => acc + cur.message_id.length,
-    0
-  );
+  const messageCount = data.reduce((acc, cur) => {
+    if (cur === null || cur === undefined) return acc;
+    return acc + cur.message_id.length;
+  }, 0);
 
   return (
     <>
