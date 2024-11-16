@@ -10,6 +10,7 @@ import InitializeDecoration from '@/app/(protected)/make/_components/InitializeD
 
 import { use3DModel } from '@/app/(protected)/make/store/modelStore';
 import { DECO_TYPE } from '@/shared/constants/3dModel';
+import Loading from '@/app/loading';
 
 const DecorationSelect = ({
   path,
@@ -41,7 +42,7 @@ const DecorationSelect = ({
       style={{ width: '18rem', height: '18rem' }}
     >
       <Canvas style={{ width: '100%', height: '100%' }}>
-        <Suspense fallback={null}>
+        <Suspense fallback={Loading()}>
           <ambientLight intensity={1} color={'#ffffff'} />
           <directionalLight
             position={[10, 20, 10]}

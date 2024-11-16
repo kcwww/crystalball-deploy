@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { useState, useEffect, Suspense } from 'react';
 
 import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
+import Loading from '@/app/loading';
 
 const Make = dynamic(
   () => import('@/app/(public)/visit/_components/_make/Make'),
@@ -37,7 +38,7 @@ const VisitMake = ({
   if (!isMounted) return null;
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={Loading()}>
       <Make userId={userId} uuid={uuid} crystalId={crystalId} index={index} />
     </Suspense>
   );

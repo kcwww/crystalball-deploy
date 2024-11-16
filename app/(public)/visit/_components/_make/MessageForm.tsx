@@ -65,7 +65,7 @@ const MessageForm = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       message,
-      author: author === '' ? '익명' : author,
+      author,
     },
   });
 
@@ -103,6 +103,7 @@ const MessageForm = ({
         },
         body: JSON.stringify(data),
       });
+      console.log(response);
 
       if (response.ok) {
         router.replace(`/visit/${uuid}`);

@@ -8,6 +8,7 @@ import { Canvas } from '@react-three/fiber';
 
 import InitializeDecoration from '@/app/(public)/visit/_components/_make/InitializeDecoration';
 import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
+import Loading from '@/app/loading';
 
 const DecorationSelect = ({ path }: { path: string }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -29,7 +30,7 @@ const DecorationSelect = ({ path }: { path: string }) => {
       style={{ width: '18rem', height: '18rem' }}
     >
       <Canvas style={{ width: '100%', height: '100%' }}>
-        <Suspense fallback={null}>
+        <Suspense fallback={Loading()}>
           <ambientLight intensity={1} color={'#ffffff'} />
           <directionalLight
             position={[10, 20, 10]}

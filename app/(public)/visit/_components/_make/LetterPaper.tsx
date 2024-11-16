@@ -18,7 +18,7 @@ const LetterPaper = ({ step }: { step: number }) => {
     >
       <div>
         <div
-          className="text-2xl"
+          className="p-4 text-2xl"
           style={{
             color: 'white',
             textShadow:
@@ -33,13 +33,13 @@ const LetterPaper = ({ step }: { step: number }) => {
         </div>
       </div>
       <div
-        className="flex justify-between"
+        className="flex flex-col text-xl"
         style={{
           textShadow:
             '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black',
         }}
       >
-        <h3 className="flex-1 text-red-100">
+        <h3 className="flex flex-1 justify-end text-red-100">
           {step === STEP.MESSAGE_NOTE_COLOR
             ? '2025-12-25 00:00'
             : transKoreaTime()}

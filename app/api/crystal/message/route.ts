@@ -83,11 +83,6 @@ type MessageReq = {
 };
 
 export const POST = async (req: NextRequest) => {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
   const {
     user_id,
     crystal_id,
