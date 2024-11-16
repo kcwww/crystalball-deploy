@@ -41,6 +41,7 @@ const Visit = ({ userData }: { userData: UserData }) => {
           handleCurrent={setCurrent}
         />
         <Button
+          variant={'secondary'}
           className="pointer-events-auto w-full md:w-1/2 xl:w-1/3"
           onClick={() => {
             sessionStorage.removeItem('messageIsDecorated');
@@ -48,6 +49,7 @@ const Visit = ({ userData }: { userData: UserData }) => {
         >
           <Link
             href="/visit/[userId]/message"
+            className="w-full"
             as={ROUTES.MESSAGE(userData.user.uuid, String(current))}
           >
             수정구슬 꾸미고 메세지 남기기

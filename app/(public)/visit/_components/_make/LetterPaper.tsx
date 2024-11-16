@@ -3,28 +3,21 @@
 import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
 import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
 
+import { transKoreaTime } from '@/shared/utils/time/transKoreaTime';
+
 const LetterPaper = ({ step }: { step: number }) => {
   const { messageColor, author, message } = use3DModel();
   return (
     <div
-      className="letter-paper pointer-events-auto flex w-4/5 flex-col justify-between rounded-lg p-4 md:w-1/2"
+      className="letter-paper pointer-events-auto my-8 flex w-4/5 flex-col justify-between rounded-lg p-4 md:w-1/2"
       style={{
         backgroundColor: messageColor,
-        opacity: '60%',
+        opacity: '80%',
         lineHeight: '2rem',
       }}
     >
       <div>
-        <h3
-          style={{
-            color: 'green',
-            textShadow:
-              '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black',
-          }}
-        >
-          To. {step === STEP.MESSAGE_NOTE_COLOR ? '누구' : '누구'}
-        </h3>
-        <p
+        <div
           className="text-2xl"
           style={{
             color: 'white',
@@ -34,19 +27,30 @@ const LetterPaper = ({ step }: { step: number }) => {
         >
           {step === STEP.MESSAGE_NOTE_COLOR
             ? '따뜻한 마음을 담아 메세지를 작성해 주세요.'
-            : message}
-        </p>
+            : message
+                .split('\n')
+                .map((line, index) => <p key={index}>{line}</p>)}
+        </div>
       </div>
-      <h3
-        className="flex w-full justify-end"
+      <div
+        className="flex justify-between"
         style={{
-          color: 'green',
           textShadow:
             '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black',
         }}
       >
-        from . {step === STEP.MESSAGE_NOTE_COLOR ? '익명' : author}
-      </h3>
+        <h3 className="flex-1 text-red-100">
+          {step === STEP.MESSAGE_NOTE_COLOR
+            ? '2025-12-25 00:00'
+            : transKoreaTime()}
+        </h3>
+        <h3 className="flex w-full flex-1 justify-end gap-2 text-gray-300">
+          <p>From</p>
+          <p className="text-green-500">
+            {step === STEP.MESSAGE_NOTE_COLOR ? '익명' : author}
+          </p>
+        </h3>
+      </div>
     </div>
   );
 };

@@ -4,8 +4,6 @@ import { useEffect, useState, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-import { toast } from 'sonner';
-
 import UISection from '@/app/(protected)/main/_components/UISection';
 import PreviousButton from '@/shared/components/ui/PreviousButton';
 import UserHeader from '@/shared/components/ui/UserHeader';
@@ -34,13 +32,7 @@ const Main = ({ userData }: { userData: User }) => {
   });
 
   useEffect(() => {
-    const isMaked = sessionStorage.getItem('toast');
-
-    if (isMaked) {
-      resetModel();
-      toast.success('새로운 수정구슬이 생성되었습니다!');
-      sessionStorage.removeItem('toast');
-    }
+    resetModel();
   }, []);
 
   if (isLoading || isError) return null;

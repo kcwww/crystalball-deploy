@@ -34,26 +34,71 @@ const MessageListModal = () => {
       >
         <DialogHeader className="flex flex-col items-center justify-center">
           <DialogTitle className="text-white">메세지 리스트</DialogTitle>
-          <DialogDescription>모든 메세지를 확인 해보세요 !</DialogDescription>
+          <DialogDescription>모든 메세지를 확인해보세요 !</DialogDescription>
         </DialogHeader>
         <div className="message-list flex flex-col gap-4">
           {messageLists.map((message, index) => (
-            <div
-              key={index}
-              style={{ backgroundColor: message.letter_color }}
-              className="p-4"
-            >
-              <div>{formattedTime(message.createdAt)}</div>
-              <div>{message.content}</div>
-              <div>From . {message.sender}</div>
-              <DeleteModal messageId={message._id} />
-            </div>
+            <>
+              <div
+                key={index + message._id}
+                style={{
+                  backgroundColor: message.letter_color,
+                }}
+                className="message flex flex-col justify-between rounded-lg p-4"
+              >
+                <div>
+                  <DeleteModal messageId={message._id} />
+                  <div
+                    className="text-2xl text-white"
+                    style={{
+                      paddingTop: '2rem',
+                      paddingBottom: '2rem',
+                      paddingLeft: '1rem',
+                      paddingRight: '1rem',
+                      textShadow:
+                        '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black',
+                    }}
+                  >
+                    {message.content.split('\n').map((line, index) => (
+                      <p key={index}>{line}</p>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-col justify-between gap-1">
+                  <div
+                    className="flex justify-end gap-2 text-xl md:justify-start"
+                    style={{
+                      color: 'rgba(34,197,94,1)',
+                      textShadow:
+                        '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black',
+                    }}
+                  >
+                    <p style={{ color: 'rgba(156, 163, 175, 1)' }}>From . </p>
+                    {message.sender}
+                  </div>
+                  <div
+                    className="flex justify-end text-xl"
+                    style={{
+                      color: 'rgba(254, 202, 202, 1)',
+                      textShadow:
+                        '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black',
+                    }}
+                  >
+                    {formattedTime(message.createdAt)}
+                  </div>
+                </div>
+              </div>
+            </>
           ))}
         </div>
 
         <DialogFooter>
-          <Button className="w-full" onClick={() => onClose()}>
-            Close
+          <Button
+            variant={'secondary'}
+            className="w-full"
+            onClick={() => onClose()}
+          >
+            닫기
           </Button>
         </DialogFooter>
       </DialogContent>

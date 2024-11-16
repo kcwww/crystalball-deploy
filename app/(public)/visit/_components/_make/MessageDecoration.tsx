@@ -14,7 +14,7 @@ const MessageDecoration = () => {
 
   deco.name = 'MessageDeco';
   deco.scale.set(2, 2, 2);
-  deco.position.set(0, 0, 0);
+  deco.position.set(0, -1.0, 0);
   deco.children.forEach((mesh) => (mesh.castShadow = false));
 
   const colorPart = deco.getObjectByName('Main') as Mesh | undefined;

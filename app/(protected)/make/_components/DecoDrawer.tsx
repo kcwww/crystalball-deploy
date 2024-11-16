@@ -57,10 +57,10 @@ const DecoDrawer = ({ step, userData }: { step: number; userData: User }) => {
       <DrawerTrigger className="pointer-events-auto transform rounded-lg bg-white p-2 px-4 transition duration-200 hover:bg-gray-300">
         {step === STEP.MAIN_DECORATION ? '장식 선택하기' : '바닥 장식 선택하기'}
       </DrawerTrigger>
-      <DrawerContent className="flex flex-col items-center justify-center">
-        <DrawerHeader className="flex flex-col items-center">
-          <DrawerTitle className="flex gap-2">
-            좌우로 스크롤해 장식을 선택해 주세요. <ArrowLeftRight />
+      <DrawerContent className="flex flex-col items-center justify-center gap-8 border-none bg-primary">
+        <DrawerHeader className="flex flex-col items-center gap-2">
+          <DrawerTitle className="flex items-center gap-2 text-white">
+            좌우로 스크롤해 장식을 선택해 주세요 <ArrowLeftRight />
           </DrawerTitle>
           <DrawerDescription>
             선택한 장식은 수정구슬에 보관되어요.
@@ -88,8 +88,8 @@ const DecoDrawer = ({ step, userData }: { step: number; userData: User }) => {
         </div>
 
         <DrawerFooter>
-          <DrawerClose className="transform rounded-lg border-2 border-gray-400 p-2 px-4 transition duration-200 hover:bg-gray-300">
-            Cancel
+          <DrawerClose className="mb-8 transform rounded-lg  bg-gray-200 p-2 px-8 transition duration-200 hover:bg-gray-300">
+            닫기
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

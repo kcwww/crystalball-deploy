@@ -55,10 +55,10 @@ const MakeSection = ({ userData }: { userData: User }) => {
   return (
     <>
       <UISection>
-        <div className="space-y-10 bg-gray-300 text-center">
-          <div>
-            <h1>새로운 수정 구슬 만들기</h1>
-            <p>
+        <div className="space-y-6  text-center">
+          <div className="space-y-2">
+            <h1 className="text-2xl text-white">새로운 수정 구슬 만들기</h1>
+            <p className="text-xl text-white">
               수정구슬은 소중한 마음을 주고 받는 예쁜 선물 상자가 될 거예요.
             </p>
           </div>

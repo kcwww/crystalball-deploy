@@ -61,10 +61,10 @@ const HamburgerButton = ({ userData }: { userData: User }) => {
             <SheetTitle className="flex justify-center gap-2 text-gray-100">
               <p className="text-yellow-200">{userData.username}</p> 님
             </SheetTitle>
-            <SheetDescription className="text-green-300">
+            <SheetDescription className="text-center text-green-300">
               나의 수정구슬 {userData.crystal_id.length}개
             </SheetDescription>
-            <SheetDescription>
+            <SheetDescription className="text-center">
               수정 구슬은 최대 {MAX_CRYSTAL}개까지 만들 수 있습니다.
             </SheetDescription>
           </SheetHeader>

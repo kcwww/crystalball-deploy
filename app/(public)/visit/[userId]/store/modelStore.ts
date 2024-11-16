@@ -29,7 +29,7 @@ export const use3DModel = create<ModelStore>((set) => ({
   model: DECO.GINGERBREAD.fileName,
   modelColor: '#ff0000',
   message: '따뜻한 마음을 담아 메세지를 작성해 주세요.',
-  author: '익명',
+  author: '',
   messageColor: '#ff0000',
   setModel: (newModel) =>
     set((prev: ModelStore) => ({ ...prev, model: newModel.model })),
@@ -62,5 +62,6 @@ export const use3DModel = create<ModelStore>((set) => ({
       modelColor: '#ff0000',
       message: '',
       messageColor: '#ff0000',
+      author: '',
     }),
 }));

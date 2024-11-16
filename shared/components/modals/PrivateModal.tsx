@@ -68,15 +68,15 @@ const PrivateModal = () => {
   return (
     <Dialog open={isOpen}>
       <DialogContent
-        className="no-scrollbar"
+        className="no-scrollbar rounded-lg border-none bg-primary"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogHeader className="flex flex-col items-center gap-4">
-          <DialogTitle>메세지 {to}</DialogTitle>
+          <DialogTitle className="text-white">메세지 {to}</DialogTitle>
           <DialogDescription>
             현재 이 수정구슬의 메세지는 {from} 상태입니다.
           </DialogDescription>
-          <div className="text-center">
+          <div className="text-center text-white">
             전환 버튼을 누르면 방문자들이 해당 수정구슬의 메세지를 {to} 상태로
             변경합니다.
           </div>
@@ -87,12 +87,18 @@ const PrivateModal = () => {
 
         <DialogFooter className="gap-4">
           <DialogClose
-            className="rounded-md bg-gray-300 px-4 py-2"
+            className="rounded-md bg-gray-50 px-8 py-2"
             onClick={() => onClose()}
           >
             취소
           </DialogClose>
-          <Button onClick={() => fetchPrivate()}>{to}로 전환하기</Button>
+          <Button
+            className="bg-blue-500"
+            style={{ backgroundColor: 'rgba(59, 130, 246, 1)' }}
+            onClick={() => fetchPrivate()}
+          >
+            {to}로 전환하기
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

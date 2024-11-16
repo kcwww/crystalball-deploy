@@ -46,7 +46,7 @@ const MakeCanvas = ({ step }: { step: number }) => {
           intensity={0.7}
           color={'#ffffff'}
         />
-        {step >= STEP.MAIN_DECORATION && <MainDecoration />}
+        {step >= STEP.MAIN_DECORATION && <MainDecoration step={step} />}
         {step >= STEP.BOTTOM_DECORATION && (
           <>
             <Base />

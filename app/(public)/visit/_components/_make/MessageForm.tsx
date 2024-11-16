@@ -2,6 +2,7 @@
 
 import mongoose from 'mongoose';
 
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -49,17 +50,35 @@ const MessageForm = ({
   step: number;
 }) => {
   const router = useRouter();
-  const { setMessage, setAuthor, model, modelColor, messageColor } =
-    use3DModel();
+  const [submitted, setSubmitted] = useState(false);
+  const {
+    setMessage,
+    setAuthor,
+    model,
+    modelColor,
+    messageColor,
+    message,
+    author,
+    resetModel,
+  } = use3DModel();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      message: '',
-      author: '',
+      message,
+      author: author === '' ? '익명' : author,
     },
   });
 
+  useEffect(() => {
+    if (submitted) {
+      form.reset();
+      resetModel();
+      setSubmitted(false);
+    }
+  }, [submitted, form, resetModel]);
+
   const onSubmit = async (value: z.infer<typeof formSchema>) => {
+    setSubmitted(true);
     const modelId = Object.values(DECO).find(
       (deco) => deco.fileName === model
     )!.id;
@@ -92,6 +111,7 @@ const MessageForm = ({
         router.refresh();
       }
     } catch (error) {
+      setSubmitted(false);
       console.error('Failed to send message', error);
       toast.error('메세지 전송에 실패했습니다.');
     }
@@ -112,7 +132,7 @@ const MessageForm = ({
               <FormControl>
                 <Textarea
                   disabled={step === STEP.MESSAGE_NOTE_COLOR}
-                  className="w-4/5 p-4 md:w-1/3"
+                  className="no-scrollbar w-4/5 p-4 md:w-1/3"
                   placeholder="따뜻한 마음을 담아 메세지를 작성해 주세요."
                   {...field}
                   onChange={(e) => {
@@ -156,7 +176,12 @@ const MessageForm = ({
           )}
         />
         <div className="flex w-full justify-center">
-          <Button className="w-4/5 md:w-1/3" variant={'outline'} type="submit">
+          <Button
+            disabled={submitted}
+            className="w-4/5 md:w-1/3"
+            variant={'outline'}
+            type="submit"
+          >
             Submit
           </Button>
         </div>

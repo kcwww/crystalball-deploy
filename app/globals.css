@@ -83,6 +83,26 @@ html::-webkit-scrollbar {
   display: none;
 }
 
+/* 스크롤바 막대 */
+
+*::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+}
+/* 스크롤바 막대 hover */
+*::-webkit-scrollbar-thumb {
+  background-color: #e89a3e; /* 스크롤바 막대 색상 */
+  border-radius: 12px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #9e682b; /* hover 시 스크롤바 막대 색상 */
+}
+
 /* 스크롤바 숨기기 */
 .no-scrollbar {
   max-height: 85svh;
@@ -124,7 +144,7 @@ html::-webkit-scrollbar {
 }
 
 .ui-section {
-  @apply pointer-events-none relative flex min-h-svh w-full flex-col items-center justify-between overflow-hidden px-10 py-20;
+  @apply pointer-events-none relative flex min-h-svh w-full flex-col items-center justify-between overflow-hidden px-10 pb-20 pt-10;
   z-index: 1;
 }
 
@@ -147,7 +167,7 @@ html::-webkit-scrollbar {
 }
 
 .letter-paper {
-  height: 20rem;
+  min-height: 20rem;
   border: none;
   resize: none;
   outline: none;

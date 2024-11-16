@@ -55,7 +55,7 @@ const Make = ({
 
       setStep(step);
     }
-  }, [searchParams, router, userId]);
+  }, [searchParams, router, userId, uuid, index]);
 
   const handleNext = () => {
     const nextStep = step + 1;
@@ -66,10 +66,12 @@ const Make = ({
   return (
     <>
       <UISection>
-        <div className="space-y-10 bg-gray-300 text-center">
-          <div>
-            <h1>메세지 전송하기</h1>
-            <p>전송한 메세지는 수정 구슬 속 예쁜 장식이 될 거예요.</p>
+        <div className="space-y-10  text-center">
+          <div className="space-y-4">
+            <h1 className="text-2xl text-white">메세지 전송하기</h1>
+            <p className="text-xl text-white">
+              전송한 메세지는 수정 구슬 속 예쁜 장식이 될 거예요.
+            </p>
           </div>
           <Progress value={step * 25} />
         </div>

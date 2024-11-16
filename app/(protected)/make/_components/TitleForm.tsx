@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { z } from 'zod';
@@ -28,6 +29,13 @@ const formSchema = z.object({
 
 const TitleForm = ({ userData }: { userData: User }) => {
   const router = useRouter();
+  const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      setSubmitting(false);
+    };
+  }, []);
 
   const { setTitle, title, model, bottom, modelColor, bottomColor } =
     use3DModel();
@@ -39,6 +47,7 @@ const TitleForm = ({ userData }: { userData: User }) => {
   });
 
   const onSubmit = async () => {
+    setSubmitting(true);
     const modelArray = Object.values(MAIN_DECORATION);
     const modelId = modelArray.filter((item) => {
       return item.path === model;
@@ -67,9 +76,9 @@ const TitleForm = ({ userData }: { userData: User }) => {
       if (response.ok) {
         router.replace(ROUTES.MAIN);
         sessionStorage.setItem('isDecorated', 'true');
-        sessionStorage.setItem('toast', 'true');
       }
     } catch (error) {
+      setSubmitting(false);
       console.error(error);
     }
   };
@@ -112,9 +121,9 @@ const TitleForm = ({ userData }: { userData: User }) => {
           className="w-full"
           variant={'outline'}
           type="submit"
-          disabled={isLoading}
+          disabled={isLoading || submitting}
         >
-          Submit
+          수정구슬 만들기
         </Button>
       </form>
     </Form>
