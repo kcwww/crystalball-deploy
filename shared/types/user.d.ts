@@ -7,7 +7,7 @@ export type User = {
 } & IUser;
 
 export type sessionUser = {
-  name: string;
+  uid: string;
   provider: string;
   email: string;
 };

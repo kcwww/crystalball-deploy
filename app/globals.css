@@ -144,7 +144,7 @@ html::-webkit-scrollbar {
 }
 
 .ui-section {
-  @apply pointer-events-none relative flex min-h-svh w-full flex-col items-center justify-between overflow-hidden px-10 pb-20 pt-10;
+  @apply pointer-events-none relative flex min-h-dvh w-full flex-col items-center justify-between overflow-hidden px-10 pb-20 pt-10;
   z-index: 1;
 }
 

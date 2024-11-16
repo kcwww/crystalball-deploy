@@ -4,6 +4,7 @@ import Crystal from '@/shared/database/mongodb/models/crystalModel';
 export interface IUser {
   email: string;
   uuid: string;
+  uid: string;
   crystal_id: mongoose.Schema.Types.ObjectId[] | string[] | [];
   username: string | null;
   provider: string;
@@ -19,6 +20,7 @@ export interface IUserDocument extends IUser, Document {
 const userSchema = new mongoose.Schema<IUserDocument>(
   {
     email: { type: String, required: true },
+    uid: { type: String, required: true },
     uuid: { type: String, required: true },
     crystal_id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Crystal' }],
     username: { type: String, default: null },
@@ -30,7 +32,7 @@ const userSchema = new mongoose.Schema<IUserDocument>(
 );
 
 // 복합 인덱스 생성
-userSchema.index({ email: 1, provider: 1 }, { unique: true });
+userSchema.index({ email: 1, provider: 1, uid: 1 }, { unique: true });
 
 // User 모델의 프리 훅을 사용하여 관련 Crystal 및 Message 모두 삭제
 userSchema.pre('findOneAndDelete', async function (next) {

@@ -32,6 +32,7 @@ const getUserData = async () => {
     const uuid = uuidv4();
     const initUser: IUser = {
       email: user.email,
+      uid: user.uid,
       crystal_id: [],
       uuid,
       username: null,

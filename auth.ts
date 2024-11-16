@@ -51,9 +51,8 @@ export const { auth, handlers, signIn, signOut, unstable_update } = NextAuth({
     },
 
     session: async ({ session, token }: any) => {
-      session.user.name = token.id;
+      session.user.uid = token.id;
       session.user.provider = token.provider;
-
       return session;
     },
   },
