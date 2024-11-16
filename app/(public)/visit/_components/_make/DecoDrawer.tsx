@@ -5,10 +5,8 @@ import { ArrowLeftRight } from 'lucide-react';
 
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -78,12 +76,6 @@ const DecoDrawer = ({
             <DecorationSelect key={index} path={deco} />
           ))}
         </div>
-
-        <DrawerFooter className="mb-10">
-          <DrawerClose className="transform rounded-lg bg-gray-200 p-2 px-8 transition duration-200 hover:bg-gray-300">
-            닫기
-          </DrawerClose>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
