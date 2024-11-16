@@ -24,7 +24,14 @@ import { BACKEND_ROUTES, ROUTES } from '@/shared/constants/routes';
 import { User } from '@/shared/types/user';
 
 const formSchema = z.object({
-  title: z.string().min(1).max(10),
+  title: z
+    .string()
+    .min(1, {
+      message: '수정구슬 이름을 입력해주세요.',
+    })
+    .max(10, {
+      message: '수정구슬 이름은 10자 이하로 입력해주세요.',
+    }),
 });
 
 const TitleForm = ({ userData }: { userData: User }) => {
