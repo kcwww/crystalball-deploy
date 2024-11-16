@@ -29,7 +29,7 @@ const IntroduceModal = () => {
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <DialogHeader className="flex flex-col items-center justify-center">
-          <DialogTitle>🎅수정구슬 속 내 마음🎅</DialogTitle>
+          <DialogTitle>🔮수정구슬 속 내 마음🔮</DialogTitle>
           <DialogDescription>
             📌수정구슬은 최대 5️⃣개까지 생성 가능해요👍
             <br />
@@ -83,7 +83,7 @@ const IntroduceModal = () => {
           <p>로 부탁드립니다🙇</p>
         </section>
 
-        <DialogFooter>
+        <DialogFooter className="block">
           <Button
             className="w-full"
             variant={'secondary'}
@@ -91,6 +91,18 @@ const IntroduceModal = () => {
           >
             Close
           </Button>
+          <footer className="flex w-full flex-col justify-center py-4 text-gray-400">
+            <p className="text-center">
+              CopyRight © SSOCK 2024. All Rights Reserved.
+            </p>
+            <Link
+              className="text-center hover:underline"
+              target="_blank"
+              href={'https://docs.myheartcrystal.com/'}
+            >
+              Private Policy & Terms of Service
+            </Link>
+          </footer>
         </DialogFooter>
       </DialogContent>
     </Dialog>
