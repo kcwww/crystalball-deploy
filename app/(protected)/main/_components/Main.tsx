@@ -32,14 +32,6 @@ const Main = ({ userData }: { userData: User }) => {
   });
 
   useEffect(() => {
-    const resetIfZoomed = () => {
-      if (window.visualViewport && window.visualViewport.scale !== 1) {
-        document.body.style.zoom = '100%';
-      }
-    };
-
-    resetIfZoomed();
-
     resetModel();
   }, [resetModel]);
 
