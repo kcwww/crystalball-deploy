@@ -40,10 +40,10 @@ const Visit = ({ userData }: { userData: UserData }) => {
           current={current}
           handleCurrent={setCurrent}
         />
-        <div className="space-y-4">
+        <div className="space-y-4 md:flex md:w-1/2 md:flex-col md:gap-4">
           <Button
             variant={'secondary'}
-            className="pointer-events-auto w-full md:w-1/2 xl:w-1/3"
+            className="pointer-events-auto w-full"
             onClick={() => {
               sessionStorage.removeItem('messageIsDecorated');
             }}
@@ -53,10 +53,10 @@ const Visit = ({ userData }: { userData: UserData }) => {
               className="w-full"
               as={ROUTES.MESSAGE(userData.user.uuid, String(current))}
             >
-              {userData.user.username}의 수정구슬 꾸미고 메세지 남기기
+              {userData.user.username} 님의 수정구슬 꾸미고 메세지 남기기
             </Link>
           </Button>
-          <Button className="pointer-events-auto w-full md:w-1/2 xl:w-1/3">
+          <Button className="pointer-events-auto w-full ">
             <Link href={ROUTES.LANDING} className="w-full">
               나의 수정 구슬 만들러 가기
             </Link>
