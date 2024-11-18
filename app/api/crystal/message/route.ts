@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 import { NextRequest, NextResponse } from 'next/server';
 
 import { auth } from '@/auth';
@@ -14,11 +16,15 @@ export const DELETE = async (req: NextRequest) => {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  await connectToMongoDB();
+
+  const sessionDB = await mongoose.startSession();
+  sessionDB.startTransaction();
+
   try {
     const { messageId, date } = await req.json();
 
     // MongoDB에 연결
-    await connectToMongoDB();
 
     // Message 삭제
     const message = await Message.findOneAndUpdate(
@@ -26,44 +32,37 @@ export const DELETE = async (req: NextRequest) => {
       {
         is_deleted: date,
       },
-      { new: true }
+      { new: true, session: sessionDB }
     );
-    if (!message) {
-      return NextResponse.json({ error: 'Message not found' }, { status: 404 });
-    }
+    if (!message) throw new Error('Message not found');
 
     // crystal_id 배열에서 message_id 삭제
-    const crystal = await Crystal.findOneAndUpdate(
+    await Crystal.findOneAndUpdate(
       { message_id: messageId },
       {
         $pull: {
           message_id: messageId,
         },
       },
-      { new: true }
+      { new: true, session: sessionDB }
     );
 
-    if (!crystal) {
-      await Message.findOneAndUpdate(
-        { _id: messageId },
-        {
-          is_deleted: null,
-        },
-        { new: true }
-      );
-      return NextResponse.json({ error: 'Crystal not found' }, { status: 404 });
-    }
+    await sessionDB.commitTransaction();
 
     return NextResponse.json({
       message: 'Message deleted',
       ok: true,
     });
   } catch (error) {
+    await sessionDB.abortTransaction();
+
     console.error('Error deleting message : ', error);
     return NextResponse.json(
       { error: 'Failed to delete message ' + error },
       { status: 500 }
     );
+  } finally {
+    sessionDB.endSession();
   }
 };
 
@@ -92,30 +91,35 @@ export const POST = async (req: NextRequest) => {
     is_opend,
   } = (await req.json()) as MessageReq;
 
+  await connectToMongoDB();
+
+  const sessionDB = await mongoose.startSession();
+  sessionDB.startTransaction();
+
   try {
     // MongoDB에 연결
-    await connectToMongoDB();
 
     // Message 생성
-    const message = await Message.create({
-      user_id,
-      crystal_id,
-      decoration_id,
-      decoration_color,
-      content,
-      sender,
-      letter_color,
-      is_deleted,
-      is_opend,
-    });
-    if (!message) {
-      return NextResponse.json(
-        { error: 'Failed to create message' },
-        { status: 500 }
-      );
-    }
+    const message = await Message.create(
+      [
+        {
+          user_id,
+          crystal_id,
+          decoration_id,
+          decoration_color,
+          content,
+          sender,
+          letter_color,
+          is_deleted,
+          is_opend,
+        },
+      ],
+      { session: sessionDB }
+    );
+    if (!message) throw new Error('Failed to create message');
 
-    const message_id = message._id;
+    const message_id = message[0]._id;
+    if (!message) throw new Error('Failed to create message');
 
     await Crystal.findOneAndUpdate(
       { _id: crystal_id },
@@ -127,16 +131,10 @@ export const POST = async (req: NextRequest) => {
           },
         },
       },
-      { new: true }
+      { new: true, session: sessionDB }
     );
 
-    if (!message) {
-      await Message.findOneAndDelete({ _id: message_id });
-      return NextResponse.json(
-        { error: 'Failed to update crystal' },
-        { status: 500 }
-      );
-    }
+    await sessionDB.commitTransaction();
 
     return NextResponse.json({
       message: 'Message created',
@@ -144,11 +142,15 @@ export const POST = async (req: NextRequest) => {
       ok: true,
     });
   } catch (error) {
+    await sessionDB.abortTransaction();
+
     console.error('Error creating message : ', error);
     return NextResponse.json(
       { error: 'Failed to create message ' + error },
       { status: 500 }
     );
+  } finally {
+    sessionDB.endSession();
   }
 };
 
