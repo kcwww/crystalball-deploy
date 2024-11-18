@@ -1,5 +1,5 @@
-import type { Metadata } from 'next';
-import Head from 'next/head';
+import type { Metadata, Viewport } from 'next';
+
 import { Jua } from 'next/font/google';
 import './globals.css';
 
@@ -18,6 +18,14 @@ export const metadata: Metadata = {
   description: '수정 구슬 속 내 마음',
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,13 +33,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1"
-        />
-      </Head>
-
       <body className={cn(inter.className, 'min-h-svh bg-primary')}>
         <QueryProvider>
           <AuthProvider>{children}</AuthProvider>
