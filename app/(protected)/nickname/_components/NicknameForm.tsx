@@ -97,14 +97,7 @@ const NicknameForm = ({ user }: { user: sessionUser }) => {
                 사용하실 이름을 입력해주세요
               </FormLabel>
               <FormControl>
-                <Input
-                  onFocus={(e) => {
-                    // no zoom on mobile
-                    e.target.style.fontSize = '16px';
-                  }}
-                  placeholder="Nickname"
-                  {...field}
-                />
+                <Input placeholder="Nickname" {...field} />
               </FormControl>
               <FormDescription>
                 이 이름은 다른 사용자들에게 보여지는 이름이 됩니다.

@@ -107,10 +107,6 @@ const TitleForm = ({ userData }: { userData: User }) => {
             <FormItem>
               <FormControl>
                 <Input
-                  onFocus={(e) => {
-                    // no zoom on mobile
-                    e.target.style.fontSize = '16px';
-                  }}
                   className="w-full"
                   placeholder="수정구슬 이름을 입력해주세요."
                   {...field}
