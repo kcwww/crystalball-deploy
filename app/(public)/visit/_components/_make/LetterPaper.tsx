@@ -7,6 +7,7 @@ import { transKoreaTime } from '@/shared/utils/time/transKoreaTime';
 
 const LetterPaper = ({ step }: { step: number }) => {
   const { messageColor, author, message } = use3DModel();
+
   return (
     <div
       className="letter-paper pointer-events-auto my-8 flex w-4/5 flex-col justify-between rounded-lg p-4 md:w-1/2"
@@ -26,10 +27,12 @@ const LetterPaper = ({ step }: { step: number }) => {
           }}
         >
           {step === STEP.MESSAGE_NOTE_COLOR
-            ? '따뜻한 마음을 담아 메세지를 작성해 주세요.'
+            ? '따뜻한 마음을 담아 메세지 입니다.'
             : message
-                .split('\n')
-                .map((line, index) => <p key={index}>{line}</p>)}
+              ? message
+                  .split('\n')
+                  .map((line, index) => <p key={index}>{line}</p>)
+              : '아래 입력창에 메세지를 입력해주세요.'}
         </div>
       </div>
       <div
@@ -47,7 +50,9 @@ const LetterPaper = ({ step }: { step: number }) => {
         <h3 className="flex w-full flex-1 justify-end gap-2 text-gray-300">
           <p>From</p>
           <p className="text-green-500">
-            {step === STEP.MESSAGE_NOTE_COLOR ? '익명' : author}
+            {step === STEP.MESSAGE_NOTE_COLOR && '보내는 이'}
+            {step !== STEP.MESSAGE_NOTE_COLOR &&
+              (author === '' ? '보내는 이' : author)}
           </p>
         </h3>
       </div>

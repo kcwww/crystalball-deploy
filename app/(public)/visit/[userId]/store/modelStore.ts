@@ -28,7 +28,7 @@ interface ModelStore {
 export const use3DModel = create<ModelStore>((set) => ({
   model: DECO.GINGERBREAD.fileName,
   modelColor: '#ff0000',
-  message: '따뜻한 마음을 담아 메세지를 작성해 주세요.',
+  message: '',
   author: '',
   messageColor: '#ff0000',
   setModel: (newModel) =>

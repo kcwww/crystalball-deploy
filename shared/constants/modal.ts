@@ -56,6 +56,7 @@ const MODAL_TYPE = {
   FORM: 'Form',
   ALL_MESSAGE: 'AllMessage',
   PRIVATE: 'Private',
+  MESSAGE_SUBMIT: 'MessageSubmit',
 } as const;
 
 export type ModalType = (typeof MODAL_TYPE)[keyof typeof MODAL_TYPE];

@@ -55,7 +55,7 @@ const DecoDrawer = ({ step, userData }: { step: number; userData: User }) => {
       <DrawerTrigger className="pointer-events-auto transform rounded-lg bg-white p-2 px-4 transition duration-200 hover:bg-gray-300">
         {step === STEP.MAIN_DECORATION ? '장식 선택하기' : '바닥 장식 선택하기'}
       </DrawerTrigger>
-      <DrawerContent className="flex flex-col items-center justify-center gap-8 border-none bg-primary">
+      <DrawerContent className="flex flex-col items-center justify-center gap-8 border-none bg-primary pb-10">
         <DrawerHeader className="flex flex-col items-center gap-2">
           <DrawerTitle className="flex items-center gap-2 text-white">
             좌우로 스크롤해 장식을 선택해 주세요 <ArrowLeftRight />

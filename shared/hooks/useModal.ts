@@ -10,8 +10,21 @@ export type Private = {
   handlePrivate: () => void;
 };
 
+export type MessageSubmit = {
+  user_id: string;
+  crystal_id: string;
+  decoration_id: number;
+  decoration_color: string;
+  content: string;
+  sender: string;
+  letter_color: string;
+  is_deleted: null;
+  is_opend: null;
+  uuid: string;
+};
+
 type ModalProps = {
-  data?: Message[] | MessageType | Private;
+  data?: Message[] | MessageType | Private | MessageSubmit;
 };
 
 interface ModalStore {

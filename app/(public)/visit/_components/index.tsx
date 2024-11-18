@@ -40,21 +40,28 @@ const Visit = ({ userData }: { userData: UserData }) => {
           current={current}
           handleCurrent={setCurrent}
         />
-        <Button
-          variant={'secondary'}
-          className="pointer-events-auto w-full md:w-1/2 xl:w-1/3"
-          onClick={() => {
-            sessionStorage.removeItem('messageIsDecorated');
-          }}
-        >
-          <Link
-            href="/visit/[userId]/message"
-            className="w-full"
-            as={ROUTES.MESSAGE(userData.user.uuid, String(current))}
+        <div className="space-y-4">
+          <Button
+            variant={'secondary'}
+            className="pointer-events-auto w-full md:w-1/2 xl:w-1/3"
+            onClick={() => {
+              sessionStorage.removeItem('messageIsDecorated');
+            }}
           >
-            수정구슬 꾸미고 메세지 남기기
-          </Link>
-        </Button>
+            <Link
+              href="/visit/[userId]/message"
+              className="w-full"
+              as={ROUTES.MESSAGE(userData.user.uuid, String(current))}
+            >
+              {userData.user.username}의 수정구슬 꾸미고 메세지 남기기
+            </Link>
+          </Button>
+          <Button className="pointer-events-auto w-full md:w-1/2 xl:w-1/3">
+            <Link href={ROUTES.LANDING} className="w-full">
+              나의 수정 구슬 만들러 가기
+            </Link>
+          </Button>
+        </div>
       </UISection>
       <CrystalCanvas userData={userData} current={current} />
     </>
