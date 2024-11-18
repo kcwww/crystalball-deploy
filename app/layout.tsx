@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Head from 'next/head';
 import { Jua } from 'next/font/google';
 import './globals.css';
 
@@ -24,12 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head>
+      <Head>
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1"
         />
-      </head>
+      </Head>
 
       <body className={cn(inter.className, 'min-h-svh bg-primary')}>
         <QueryProvider>
