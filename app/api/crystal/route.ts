@@ -51,18 +51,19 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  await connectToMongoDB();
-
   // start transaction
   const sessionDB = await mongoose.startSession();
   sessionDB.startTransaction();
+  await connectToMongoDB();
 
   try {
     const { user_id, title, model, modelColor, bottom, bottomColor } =
       (await req.json()) as CrystalReq;
 
     // user_id에 해당하는 유저가 있는지 확인
-    const user = await User.findOne({ _id: user_id }, { session: sessionDB });
+    const user = await User.findOne({ _id: user_id }, null, {
+      session: sessionDB,
+    });
     if (!user) throw new Error('User not found');
 
     // Crystal 생성
@@ -105,7 +106,7 @@ export const POST = async (req: NextRequest) => {
 
     console.error('Error creating crystal:', error);
     return NextResponse.json(
-      { error: 'Failed to create crystal' + error },
+      { error: 'Failed to create crystal ' + error },
       { status: 500 }
     );
   } finally {
