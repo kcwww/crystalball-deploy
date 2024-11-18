@@ -4,7 +4,7 @@ import { Toaster } from 'sonner';
 const UISection = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <section className="ui-section">
+      <section className="ui-section" style={{ minHeight: '100svh' }}>
         {children}
         <ModalProvider />
       </section>

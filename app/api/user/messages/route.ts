@@ -5,6 +5,8 @@ import { connectToMongoDB } from '@/shared/database/mongodb/config';
 
 import Message from '@/shared/database/mongodb/models/messageModel';
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (req: NextRequest) => {
   const userId = req.headers.get('X-User-Id');
 

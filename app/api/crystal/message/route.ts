@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 
 import { auth } from '@/auth';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import Crystal from '@/shared/database/mongodb/models/crystalModel';
 
 import Message from '@/shared/database/mongodb/models/messageModel';
-import { REVALIDATE_PATHS } from '@/shared/constants/routes';
+
+export const dynamic = 'force-dynamic';
 
 export const DELETE = async (req: NextRequest) => {
   const session = await auth();
@@ -54,9 +54,6 @@ export const DELETE = async (req: NextRequest) => {
       return NextResponse.json({ error: 'Crystal not found' }, { status: 404 });
     }
 
-    // 캐시 업데이트
-    revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
-    revalidatePath(REVALIDATE_PATHS.VISIT, 'page');
     return NextResponse.json({
       message: 'Message deleted',
       ok: true,
@@ -141,10 +138,6 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    // 캐시 업데이트
-    revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
-    revalidatePath(REVALIDATE_PATHS.MAKE, 'page');
-    revalidatePath(REVALIDATE_PATHS.VISIT, 'page');
     return NextResponse.json({
       message: 'Message created',
       message_id,
@@ -180,9 +173,6 @@ export const PATCH = async (req: NextRequest) => {
       { new: true }
     );
 
-    // 캐시 업데이트
-    revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
-    revalidatePath(REVALIDATE_PATHS.VISIT, 'page');
     return NextResponse.json({
       message: 'Message updated',
       ok: true,

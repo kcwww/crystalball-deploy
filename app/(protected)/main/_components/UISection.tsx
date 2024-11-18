@@ -8,7 +8,7 @@ const UISection = React.forwardRef<
 >(({ children }, ref) => {
   return (
     <>
-      <section ref={ref} className="ui-section">
+      <section ref={ref} className="ui-section" style={{ minHeight: '100svh' }}>
         {children}
         <ModalProvider />
       </section>

@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 
 import { auth } from '@/auth';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import Crystal from '@/shared/database/mongodb/models/crystalModel';
 import User from '@/shared/database/mongodb/models/userModel';
 import { User as UserType } from '@/shared/types/user';
-import { REVALIDATE_PATHS } from '@/shared/constants/routes';
+
+export const dynamic = 'force-dynamic';
 
 export const PATCH = async (req: NextRequest) => {
   const session = await auth();
@@ -23,8 +23,6 @@ export const PATCH = async (req: NextRequest) => {
       { new: true }
     );
 
-    revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
-    revalidatePath(REVALIDATE_PATHS.VISIT, 'page');
     return NextResponse.json({ message: 'Crystal updated', ok: true });
   } catch (error) {
     console.error('Error updating crystal:', error);
@@ -85,9 +83,6 @@ export const POST = async (req: NextRequest) => {
       { new: true }
     );
 
-    revalidatePath(REVALIDATE_PATHS.MAIN, 'page');
-    revalidatePath(REVALIDATE_PATHS.MAKE, 'page');
-    revalidatePath(REVALIDATE_PATHS.VISIT, 'page');
     return NextResponse.json({
       message: 'Crystal created',
       crystal_id,

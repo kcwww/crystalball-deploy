@@ -6,6 +6,8 @@ import Crystal from '@/shared/database/mongodb/models/crystalModel';
 import { Crystal as CrystalType } from '@/shared/types/crystal';
 import Message from '@/shared/database/mongodb/models/messageModel';
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (req: NextRequest) => {
   const crystalId = req.headers.get('X-Crystal-Id');
 

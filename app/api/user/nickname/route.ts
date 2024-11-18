@@ -11,6 +11,8 @@ type NicknameReq = {
   username: string;
 };
 
+export const dynamic = 'force-dynamic';
+
 export const POST = async (req: NextRequest) => {
   // 세션 확인
   const session = await auth();
