@@ -52,9 +52,10 @@ export const POST = async (req: NextRequest) => {
   }
 
   // start transaction
+  await connectToMongoDB();
+
   const sessionDB = await mongoose.startSession();
   sessionDB.startTransaction();
-  await connectToMongoDB();
 
   try {
     const { user_id, title, model, modelColor, bottom, bottomColor } =
