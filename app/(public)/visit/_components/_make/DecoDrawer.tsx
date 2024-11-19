@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { ArrowLeftRight } from 'lucide-react';
 
 import {
@@ -12,11 +12,11 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 
-import DecorationSelect from '@/app/(public)/visit/_components/_make/DecorationSelect';
 import ColorButton from '@/app/(public)/visit/_components/_make/ColorButton';
 import MessageForm from '@/app/(public)/visit/_components/_make/MessageForm';
 import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
 import { DECO } from '@/shared/constants/3dModel';
+import DecorationsViewer from './DecorationViewer';
 
 const DecoDrawer = ({
   step,
@@ -29,13 +29,11 @@ const DecoDrawer = ({
   uuid: string;
   crystalId: string | mongoose.Schema.Types.ObjectId;
 }) => {
-  const [isMounted, setIsMounted] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
+  const drawerClose = useCallback(() => {
+    setIsOpened(false);
   }, []);
-
-  if (!isMounted) return null;
 
   if (
     step === STEP.MESSAGE_DECORATION_COLOR ||
@@ -54,10 +52,9 @@ const DecoDrawer = ({
     );
 
   const decorationArray = Object.values(DECO);
-  const decorationPath = decorationArray.map((deco) => deco.fileName);
 
   return (
-    <Drawer>
+    <Drawer open={isOpened} onOpenChange={setIsOpened}>
       <DrawerTrigger className="pointer-events-auto transform rounded-lg bg-white p-2 px-4 transition duration-200 hover:bg-gray-300">
         장식 선택하기
       </DrawerTrigger>
@@ -71,11 +68,10 @@ const DecoDrawer = ({
           </DrawerDescription>
         </DrawerHeader>
 
-        <div className="flex w-full overflow-auto">
-          {decorationPath.map((deco, index) => (
-            <DecorationSelect key={index} path={deco} />
-          ))}
-        </div>
+        <DecorationsViewer
+          onClose={drawerClose}
+          decorations={decorationArray}
+        />
       </DrawerContent>
     </Drawer>
   );
