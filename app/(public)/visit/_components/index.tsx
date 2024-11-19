@@ -49,9 +49,8 @@ const Visit = ({ userData }: { userData: UserData }) => {
             }}
           >
             <Link
-              href="/visit/[userId]/message"
               className="w-full"
-              as={ROUTES.MESSAGE(userData.user.uuid, String(current))}
+              href={ROUTES.MESSAGE(userData.user.uuid, String(current))}
             >
               {userData.user.username} 님의 수정구슬 꾸미고 메세지 남기기
             </Link>

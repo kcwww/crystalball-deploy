@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
+
 import { ArrowLeftRight } from 'lucide-react';
 
 import {
@@ -10,7 +11,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 
-import DecorationSelect from '@/app/(protected)/make/_components/DecorationSelect';
+import DecorationsViewer from '@/app/(protected)/make/_components/DecorationViewer';
 import { BOTTOM, DECO_TYPE, MAIN_DECORATION } from '@/shared/constants/3dModel';
 
 import dynamic from 'next/dynamic';
@@ -23,13 +24,11 @@ const ColorButton = dynamic(
 );
 
 const DecoDrawer = ({ step, userData }: { step: number; userData: User }) => {
-  const [isMounted, setIsMounted] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
+  const drawerClose = useCallback(() => {
+    setIsOpened(false);
   }, []);
-
-  if (!isMounted) return null;
 
   if (
     step === STEP.MAIN_DECORATION_COLOR ||
@@ -50,10 +49,13 @@ const DecoDrawer = ({ step, userData }: { step: number; userData: User }) => {
   const mainDecorationArray = Object.values(MAIN_DECORATION);
   const bottomDecorationArray = Object.values(BOTTOM);
 
+  const isMain = step === STEP.MAIN_DECORATION;
+  const decorations = isMain ? mainDecorationArray : bottomDecorationArray;
+
   return (
-    <Drawer>
+    <Drawer open={isOpened} onOpenChange={setIsOpened}>
       <DrawerTrigger className="pointer-events-auto transform rounded-lg bg-white p-2 px-4 transition duration-200 hover:bg-gray-300">
-        {step === STEP.MAIN_DECORATION ? '장식 선택하기' : '바닥 장식 선택하기'}
+        {isMain ? '장식 선택하기' : '바닥 장식 선택하기'}
       </DrawerTrigger>
       <DrawerContent className="flex flex-col items-center justify-center gap-8 border-none bg-primary pb-10">
         <DrawerHeader className="flex flex-col items-center gap-2">
@@ -65,25 +67,11 @@ const DecoDrawer = ({ step, userData }: { step: number; userData: User }) => {
           </DrawerDescription>
         </DrawerHeader>
 
-        <div className="flex w-full overflow-auto">
-          {step === STEP.MAIN_DECORATION &&
-            mainDecorationArray.map((deco, index) => (
-              <DecorationSelect
-                key={index}
-                path={deco.path}
-                type={DECO_TYPE.MAIN}
-              />
-            ))}
-
-          {step === STEP.BOTTOM_DECORATION &&
-            bottomDecorationArray.map((deco, index) => (
-              <DecorationSelect
-                key={index}
-                path={deco.path}
-                type={DECO_TYPE.BOTTOM}
-              />
-            ))}
-        </div>
+        <DecorationsViewer
+          onClose={drawerClose}
+          decorations={decorations}
+          type={isMain ? DECO_TYPE.MAIN : DECO_TYPE.BOTTOM}
+        />
       </DrawerContent>
     </Drawer>
   );
