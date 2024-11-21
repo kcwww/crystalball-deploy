@@ -25,7 +25,7 @@ const MakeSection = ({ userData }: { userData: User }) => {
     if (typeof window !== 'undefined') {
       const isDecorated = sessionStorage.getItem('isDecorated');
       if (isDecorated) {
-        router.replace('/main');
+        router.replace(ROUTES.MAIN);
         return;
       }
 
@@ -33,7 +33,7 @@ const MakeSection = ({ userData }: { userData: User }) => {
       const step = stepParam ? parseInt(stepParam) : STEP.MAIN_DECORATION;
 
       if (isNaN(step) || step < STEP.MAIN_DECORATION || step > STEP.MAX) {
-        router.replace('/make?step=1');
+        router.replace(ROUTES.MAKE);
         return;
       }
 

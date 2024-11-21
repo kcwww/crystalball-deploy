@@ -81,7 +81,7 @@ const TitleForm = ({ userData }: { userData: User }) => {
       });
 
       if (response.ok) {
-        router.replace(ROUTES.MAIN);
+        router.push(ROUTES.MAIN);
         sessionStorage.setItem('isDecorated', 'true');
         router.refresh();
       }

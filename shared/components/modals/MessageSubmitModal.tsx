@@ -49,7 +49,7 @@ const MessageSubmitModal = () => {
       });
 
       if (response.ok) {
-        router.replace(`/visit/${data.uuid}`);
+        router.push(`/visit/${data.uuid}`);
         sessionStorage.setItem('messageIsDecorated', 'true');
         sessionStorage.setItem('visitToast', 'true');
         router.refresh();
