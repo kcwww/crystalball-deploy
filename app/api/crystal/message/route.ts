@@ -79,6 +79,7 @@ type MessageReq = {
 };
 
 export const POST = async (req: NextRequest) => {
+  console.log('POST');
   const {
     user_id,
     crystal_id,
@@ -90,12 +91,25 @@ export const POST = async (req: NextRequest) => {
     is_deleted,
     is_opend,
   } = (await req.json()) as MessageReq;
-
+  console.log(
+    'POST',
+    user_id,
+    crystal_id,
+    decoration_id,
+    decoration_color,
+    content,
+    sender,
+    letter_color,
+    is_deleted,
+    is_opend
+  );
   await connectToMongoDB();
+  console.log('POST', 'connected to mongoDB');
 
   const sessionDB = await mongoose.startSession();
   sessionDB.startTransaction();
 
+  console.log('POST', 'sessionDB started');
   try {
     // MongoDB에 연결
 
@@ -116,10 +130,11 @@ export const POST = async (req: NextRequest) => {
       ],
       { session: sessionDB }
     );
+
+    console.log('POST', 'message created', message);
     if (!message) throw new Error('Failed to create message');
 
     const message_id = message[0]._id;
-    if (!message) throw new Error('Failed to create message');
 
     await Crystal.findOneAndUpdate(
       { _id: crystal_id },
@@ -133,18 +148,20 @@ export const POST = async (req: NextRequest) => {
       },
       { new: true, session: sessionDB }
     );
-
+    console.log('POST', 'crystal updated');
     await sessionDB.commitTransaction();
 
+    console.log('POST', 'sessionDB committed');
     return NextResponse.json({
       message: 'Message created',
       message_id,
       ok: true,
     });
   } catch (error) {
-    await sessionDB.abortTransaction();
-
     console.error('Error creating message : ', error);
+
+    await sessionDB.abortTransaction();
+    console.log('POST', 'sessionDB aborted');
     return NextResponse.json(
       { error: 'Failed to create message ' + error },
       { status: 500 }

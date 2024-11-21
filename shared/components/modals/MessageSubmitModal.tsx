@@ -60,6 +60,7 @@ const MessageSubmitModal = () => {
       console.error('Failed to send message', error);
       toast.error('메세지 전송에 실패했습니다.');
       onClose();
+      setIsSubmitting(false);
     }
   };
 
