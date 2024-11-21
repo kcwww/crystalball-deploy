@@ -29,6 +29,13 @@ const Make = ({
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const STEP_MESSAGE = [
+    '',
+    '아래 장식 선택하기 버튼을 눌러 장식을 선택해주세요.',
+    '아래 색상 변경 버튼을 눌러 색상을 변경해주세요.',
+    '아래 색상 변경 버튼을 눌러 편지지 색상을 변경해주세요.',
+    '아래 창에 메세지와 보내는 이를 입력해 메세지를 작성해주세요.',
+  ] as const;
 
   const [step, setStep] = useState(() => {
     const stepParam = searchParams.get('messageStep');
@@ -66,12 +73,13 @@ const Make = ({
   return (
     <>
       <UISection>
-        <div className="space-y-10  text-center">
-          <div className="space-y-4">
+        <div className="space-y-6  text-center">
+          <div className="space-y-2">
             <h1 className="text-2xl text-white">메세지 전송하기</h1>
             <p className="text-xl text-white">
               전송한 메세지는 수정 구슬 속 예쁜 장식이 될 거예요.
             </p>
+            <p className="text-gray-400">{STEP_MESSAGE[step]}</p>
           </div>
           <Progress value={step * 25} />
         </div>
@@ -108,7 +116,7 @@ const Make = ({
           </div>
         </div>
       </UISection>
-      <MakeCanvas />
+      <MakeCanvas step={step} />
     </>
   );
 };

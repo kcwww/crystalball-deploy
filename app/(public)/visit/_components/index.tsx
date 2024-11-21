@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState, useCallback } from 'react';
 import { toast } from 'sonner';
 
 import CrystalCanvas from '@/app/(public)/visit/_components/CrystalCanvas';
@@ -17,6 +18,7 @@ import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/shared/constants/routes';
 
 const Visit = ({ userData }: { userData: UserData }) => {
+  const router = useRouter();
   const [current, setCurrent] = useState(0);
   useEffect(() => {
     const isMaked = sessionStorage.getItem('visitToast');
@@ -26,6 +28,17 @@ const Visit = ({ userData }: { userData: UserData }) => {
       sessionStorage.removeItem('visitToast');
     }
   }, []);
+
+  const checkMaxCount = useCallback(() => {
+    const currentCrystal = userData.crystals[current];
+    const messageCounts = currentCrystal.message_id.length;
+    const MAX_MEESAGE_COUNT = 30;
+    if (messageCounts >= MAX_MEESAGE_COUNT) {
+      toast.error('수정구슬 당 메세지는 30개까지만 작성 가능합니다.');
+      return false;
+    }
+    return true;
+  }, [userData, current]);
 
   return (
     <>
@@ -45,18 +58,18 @@ const Visit = ({ userData }: { userData: UserData }) => {
             variant={'secondary'}
             className="pointer-events-auto w-full"
             onClick={() => {
-              sessionStorage.removeItem('messageIsDecorated');
+              if (checkMaxCount()) {
+                sessionStorage.removeItem('messageIsDecorated');
+                router.push(
+                  ROUTES.MESSAGE(userData.user.uuid, String(current))
+                );
+              }
             }}
           >
-            <Link
-              className="w-full"
-              href={ROUTES.MESSAGE(userData.user.uuid, String(current))}
-            >
-              {userData.user.username} 님의 수정구슬 꾸미고 메세지 남기기
-            </Link>
+            {userData.user.username} 님의 수정구슬 꾸미고 메세지 남기기
           </Button>
           <Button className="pointer-events-auto w-full ">
-            <Link href={ROUTES.LANDING} className="w-full">
+            <Link href={ROUTES.LANDING} className="w-full" prefetch={true}>
               나의 수정 구슬 만들러 가기
             </Link>
           </Button>

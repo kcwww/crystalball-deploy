@@ -108,7 +108,7 @@ const TitleForm = ({ userData }: { userData: User }) => {
               <FormControl>
                 <Input
                   className="w-full"
-                  placeholder="수정구슬 이름을 입력해주세요."
+                  placeholder="새로운 수정구슬 이름"
                   {...field}
                   onChange={(e) => {
                     const value = e.target.value;

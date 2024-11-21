@@ -33,7 +33,7 @@ const VisitMake = ({
     return () => {
       resetModel();
     };
-  }, []);
+  }, [resetModel]);
 
   if (!isMounted) return null;
 

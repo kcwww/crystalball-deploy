@@ -19,6 +19,7 @@ import { toast } from 'sonner';
 import clientComponentFetch from '@/shared/utils/fetch/clientComponentFetch';
 import { BACKEND_ROUTES } from '@/shared/constants/routes';
 import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
+import { ERROR_MESSAGES } from '@/shared/constants/enum';
 
 const MessageSubmitModal = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,9 +57,11 @@ const MessageSubmitModal = () => {
         resetModel();
         onClose();
       }
-    } catch (error) {
-      console.error('Failed to send message', error);
-      toast.error('메세지 전송에 실패했습니다.');
+    } catch (error: any) {
+      console.error(error);
+      if (error.message === ERROR_MESSAGES[400])
+        toast.error('수정구슬당 메세지는 30개까지만 작성 가능합니다.');
+      else toast.error('메세지 전송에 실패했습니다.');
       onClose();
       setIsSubmitting(false);
     }

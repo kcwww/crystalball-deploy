@@ -12,42 +12,15 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 
-import clientComponentFetch from '@/shared/utils/fetch/clientComponentFetch';
-import { BACKEND_ROUTES } from '@/shared/constants/routes';
-import { transKoreaTime } from '@/shared/utils/time/transKoreaTime';
-import { toast } from 'sonner';
-import useModal from '@/shared/hooks/useModal';
-import { useMessage } from '@/app/(protected)/main/_store/useMessage';
-
-const DeleteModal = ({ messageId }: { messageId: string }) => {
-  const koreaTime = transKoreaTime();
-  const { onClose } = useModal();
-  const { setMessages, messages } = useMessage();
-
-  const fetchDeleteMessage = async () => {
-    try {
-      const response = await clientComponentFetch(BACKEND_ROUTES.MESSAGE, {
-        method: 'DELETE',
-        body: JSON.stringify({
-          messageId: messageId,
-          date: koreaTime,
-        }),
-      });
-
-      if (response.ok) {
-        toast.success('메세지가 삭제되었습니다.');
-
-        const newMessages = messages.filter(
-          (message) => message._id !== messageId
-        );
-        setMessages(newMessages);
-      }
-    } catch (error) {
-      console.error('Error deleting message : ', error);
-      toast.error('메세지 삭제에 실패했습니다.');
-    }
-  };
-
+const DeleteModal = ({
+  messageId,
+  onClose,
+  fetchDeleteMessage,
+}: {
+  messageId: string;
+  onClose: () => void;
+  fetchDeleteMessage: (messageId: string) => void;
+}) => {
   return (
     <Dialog>
       <DialogTrigger className="flex w-full justify-end">
@@ -68,7 +41,7 @@ const DeleteModal = ({ messageId }: { messageId: string }) => {
         <DialogFooter className="flex gap-4">
           <DialogClose
             onClick={async () => {
-              await fetchDeleteMessage();
+              await fetchDeleteMessage(messageId);
               onClose();
             }}
             className="rounded-md px-8 py-2"

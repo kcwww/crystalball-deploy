@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import MessageDecoration from '@/app/(public)/visit/_components/_make/MessageDecoration';
+import { STEP } from '@/app/(public)/visit/[userId]/_constants/step';
 
-const MakeCanvas = () => {
+const MakeCanvas = ({ step }: { step: number }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -23,11 +24,13 @@ const MakeCanvas = () => {
         shadows={true}
         camera={{ position: [5, 0, 0], fov: 100 }}
       >
-        <OrbitControls
-          target={[0, 0, 0]}
-          enablePan={false}
-          enableZoom={false}
-        />
+        {step < STEP.MESSAGE_NOTE_COLOR && (
+          <OrbitControls
+            target={[0, 0, 0]}
+            enablePan={false}
+            enableZoom={false}
+          />
+        )}
         <ambientLight intensity={1.5} color={'#ffffff'} />
 
         <directionalLight

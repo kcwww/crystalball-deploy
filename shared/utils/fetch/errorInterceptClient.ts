@@ -1,21 +1,22 @@
 import { signOut } from 'next-auth/react';
+import { ERROR_MESSAGES } from '@/shared/constants/enum';
 
 const errorInterceptClient = async (response: Response) => {
   if (!response.ok) {
     switch (response.status) {
       case 400:
-        throw new Error('Error 400: Bad Request');
+        throw ERROR_MESSAGES['400'];
       case 401:
         await signOut();
-        throw new Error('Error 401: Unauthorized');
+        throw ERROR_MESSAGES['401'];
       case 403:
-        throw new Error('Error 403: Forbidden');
+        throw ERROR_MESSAGES['403'];
       case 404:
-        throw new Error('Error 404: Not Found');
+        throw ERROR_MESSAGES['404'];
       case 500:
-        throw new Error('Error 500: Internal Server Error');
+        throw ERROR_MESSAGES['500'];
       default:
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
+        throw `${response.status}: ${response.statusText}`;
     }
   }
 };

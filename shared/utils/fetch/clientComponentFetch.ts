@@ -19,7 +19,7 @@ const clientComponentFetch = async (url: string, init?: RequestInit) => {
     const data = await res.json();
     return data;
   } catch (error) {
-    throw new Error('Fetching Error: ' + error);
+    throw new Error(String(error));
   }
 };
 

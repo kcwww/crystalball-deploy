@@ -15,6 +15,14 @@ import { User } from '@/shared/types/user';
 const MakeSection = ({ userData }: { userData: User }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const STEP_MESSAGE = [
+    '',
+    '아래 버튼을 클릭해 장식을 선택해주세요.',
+    '아래 버튼을 클릭해 색상을 선택해주세요.',
+    '아래 버튼을 클릭해 바닥 장식을 선택해주세요.',
+    '아래 버튼을 클릭해 색상을 선택해주세요.',
+    '아래 입력창에 수정 구슬 이름을 입력해주세요.',
+  ] as const;
 
   const [step, setStep] = useState(() => {
     const stepParam = searchParams.get('step');
@@ -61,6 +69,7 @@ const MakeSection = ({ userData }: { userData: User }) => {
             <p className="text-xl text-white">
               수정구슬은 소중한 마음을 주고 받는 예쁜 선물 상자가 될 거예요.
             </p>
+            <p className="text-gray-400">{STEP_MESSAGE[step]}</p>
           </div>
           <Progress value={step * 20} />
         </div>
