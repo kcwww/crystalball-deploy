@@ -98,11 +98,9 @@ export const POST = async (req: NextRequest) => {
   try {
     // MongoDB에 연결
 
-    const crystal = (
-      await Crystal.findOne({ _id: crystal_id }, null, {
-        session: sessionDB,
-      })
-    )?.toObject();
+    const crystal = await Crystal.findOne({ _id: crystal_id }, null, {
+      session: sessionDB,
+    });
 
     if (!crystal) throw new Error('Crystal not found');
 
@@ -112,7 +110,7 @@ export const POST = async (req: NextRequest) => {
         { status: 400 }
       );
 
-    // Message 생성
+    // Message 생성 후 crystal 업데이트
     const message = await Message.create(
       [
         {
@@ -132,10 +130,20 @@ export const POST = async (req: NextRequest) => {
 
     if (!message) throw new Error('Failed to create message');
 
-    const message_id = message[0]._id as mongoose.Types.ObjectId;
+    const message_id = message[0]._id;
 
-    (crystal.message_id as mongoose.Types.ObjectId[]).push(message_id);
-    await crystal.save({ session: sessionDB });
+    await Crystal.findOneAndUpdate(
+      { _id: crystal_id },
+      {
+        $push: {
+          message_id: {
+            $each: [message_id],
+            $slice: 30, // 최대 30개까지만 유지
+          },
+        },
+      },
+      { session: sessionDB, new: true }
+    );
 
     await sessionDB.commitTransaction();
 

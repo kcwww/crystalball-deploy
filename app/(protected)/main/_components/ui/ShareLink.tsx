@@ -15,8 +15,6 @@ const ShareLink = ({ userId }: { userId: string }) => {
     } else {
       navigator.clipboard.writeText(url);
       navigator.share({
-        title: '부캠',
-        text: '부캠',
         url: url,
       });
     }
