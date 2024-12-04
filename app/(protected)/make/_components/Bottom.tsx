@@ -82,6 +82,11 @@ const Bottom = () => {
     return null;
   }
   colorPart.material = makeColorChangedMaterial(colorPart, color);
+
+  if (nameTag && nameTag.material instanceof MeshStandardMaterial) {
+    nameTag.material.metalness = 0.5;
+    nameTag.material.roughness = 0.8;
+  }
   return <primitive object={bottomModel} />;
 };
 

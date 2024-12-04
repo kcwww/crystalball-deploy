@@ -41,11 +41,7 @@ const MakeCanvas = ({ step }: { step: number }) => {
           intensity={1.5}
           color={'#ffffff'}
         />
-        <directionalLight
-          position={[1, 0, 0]}
-          intensity={0.7}
-          color={'#ffffff'}
-        />
+
         {step >= STEP.MAIN_DECORATION && <MainDecoration step={step} />}
         {step >= STEP.BOTTOM_DECORATION && (
           <>

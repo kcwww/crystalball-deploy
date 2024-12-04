@@ -90,7 +90,14 @@ export const POST = async (req: NextRequest) => {
     // user_id에 해당하는 유저의 crystal_id 업데이트
     await User.findOneAndUpdate(
       { _id: user_id },
-      { $push: { crystal_id } },
+      {
+        $push: {
+          crystal_id: {
+            $each: [crystal_id],
+            $slice: 5,
+          },
+        },
+      },
       { new: true, session: sessionDB }
     );
 

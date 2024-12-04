@@ -90,6 +90,16 @@ const Bottom = ({
     return null;
   }
   colorPart.material = makeColorChangedMaterial(colorPart, color);
+  if (colorPart.material instanceof MeshStandardMaterial) {
+    colorPart.material.metalness = 0; // 금속성 낮추기 (0-1)
+    colorPart.material.roughness = 1; // 거칠기 낮추기 (0-1)
+  }
+
+  // nameTag의 material 속성도 조정
+  if (nameTag && nameTag.material instanceof MeshStandardMaterial) {
+    nameTag.material.metalness = 0.5;
+    nameTag.material.roughness = 0.8;
+  }
 
   return <primitive object={bottomModel} />;
 };

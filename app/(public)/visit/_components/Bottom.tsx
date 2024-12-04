@@ -87,6 +87,17 @@ const Bottom = ({ crystal }: { crystal: UserCrystal }) => {
     return null;
   }
   colorPart.material = makeColorChangedMaterial(colorPart, color);
+  if (colorPart.material instanceof MeshStandardMaterial) {
+    colorPart.material.metalness = 0; // 금속성 낮추기 (0-1)
+    colorPart.material.roughness = 1; // 거칠기 낮추기 (0-1)
+    colorPart.material.emissive.set(color); // 발광 효과
+    colorPart.material.emissiveIntensity = 1; // 발광 강도
+  }
+
+  if (nameTag && nameTag.material instanceof MeshStandardMaterial) {
+    nameTag.material.metalness = 0.5;
+    nameTag.material.roughness = 0.8;
+  }
 
   return <primitive object={bottomModel} />;
 };
