@@ -100,7 +100,7 @@ const Raycaster = () => {
               sender,
               letterColor,
               messageID,
-              sendAt: forrmattedDate,
+              sendAt,
             } as MessageType,
           });
           handleOpen();
