@@ -9,7 +9,7 @@ import User, { IUser } from '@/shared/database/mongodb/models/userModel';
 import { sessionUser, User as UserType } from '@/shared/types/user';
 import { createUser } from '@/shared/database/mongodb/actions/userAction';
 
-import Main from './_components/Main';
+import Main from '@/app/(protected)/main/_components/Main';
 
 const getUserData = async () => {
   const session = await auth();

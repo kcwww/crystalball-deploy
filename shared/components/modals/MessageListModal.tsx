@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 
 import {
   Dialog,
@@ -30,6 +31,7 @@ const MessageListModal = () => {
   const { isOpen, onClose, type, props } = useModal();
   const { setMessages, messages } = useMessage();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   if (!isOpen || type !== MODAL_TYPE.ALL_MESSAGE) {
     return null;
@@ -50,6 +52,7 @@ const MessageListModal = () => {
 
       if (response.ok) {
         toast.success('메세지가 삭제되었습니다.');
+        queryClient.invalidateQueries({ queryKey: ['crystal'] });
 
         const newMessages = messages.filter(
           (message) => message._id !== messageId
