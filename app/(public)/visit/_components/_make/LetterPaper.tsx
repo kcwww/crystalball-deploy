@@ -27,7 +27,7 @@ const LetterPaper = ({ step }: { step: number }) => {
           }}
         >
           {step === STEP.MESSAGE_NOTE_COLOR
-            ? '따뜻한 마음을 담아 메세지 입니다.'
+            ? '따뜻한 마음을 담은 메세지 입니다.'
             : message
               ? message
                   .split('\n')

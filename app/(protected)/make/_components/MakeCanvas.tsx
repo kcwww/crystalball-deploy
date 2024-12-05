@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -8,6 +8,7 @@ import MainDecoration from '@/app/(protected)/make/_components/MainDecoration';
 import Bottom from '@/app/(protected)/make/_components/Bottom';
 import Base from '@/app/(protected)/make/_components/Base';
 import { STEP } from '@/app/(protected)/make/_constants/step';
+import Loading from '@/shared/components/canvas/Loading';
 
 const MakeCanvas = ({ step }: { step: number }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -26,29 +27,31 @@ const MakeCanvas = ({ step }: { step: number }) => {
         shadows={true}
         camera={{ position: [12, 2, 0], fov: 100 }}
       >
-        <OrbitControls
-          target={[0, 0, 0]}
-          enablePan={false}
-          maxZoom={1}
-          minDistance={12}
-          maxDistance={18}
-          maxPolarAngle={(Math.PI / 2) * 1.2}
-        />
-        <ambientLight intensity={1.5} color={'#ffffff'} />
+        <Suspense fallback={<Loading />}>
+          <OrbitControls
+            target={[0, 0, 0]}
+            enablePan={false}
+            maxZoom={1}
+            minDistance={12}
+            maxDistance={18}
+            maxPolarAngle={(Math.PI / 2) * 1.2}
+          />
+          <ambientLight intensity={1.5} color={'#ffffff'} />
 
-        <directionalLight
-          position={[1, 2, 1]}
-          intensity={1.5}
-          color={'#ffffff'}
-        />
+          <directionalLight
+            position={[1, 2, 1]}
+            intensity={1.5}
+            color={'#ffffff'}
+          />
 
-        {step >= STEP.MAIN_DECORATION && <MainDecoration step={step} />}
-        {step >= STEP.BOTTOM_DECORATION && (
-          <>
-            <Base />
-            <Bottom />
-          </>
-        )}
+          {step >= STEP.MAIN_DECORATION && <MainDecoration step={step} />}
+          {step >= STEP.BOTTOM_DECORATION && (
+            <>
+              <Base />
+              <Bottom />
+            </>
+          )}
+        </Suspense>
       </Canvas>
     </section>
   );

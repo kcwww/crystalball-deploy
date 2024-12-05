@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 
 import InitializeDecoration from '@/app/(public)/visit/_components/_make/InitializeDecoration';
 import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
-import Loading from '@/app/loading';
+import Loading from '@/shared/components/canvas/Loading';
 
 const DecorationsViewer = ({
   onClose,
@@ -49,8 +49,8 @@ const DecorationsViewer = ({
 
   return (
     <div style={{ width: '100%', height: '400px' }}>
-      <Suspense fallback={Loading()}>
-        <Canvas style={{ width: '100%', height: '100%' }}>
+      <Canvas style={{ width: '100%', height: '100%' }}>
+        <Suspense fallback={<Loading />}>
           <ambientLight intensity={1} color={'#ffffff'} />
           <directionalLight
             position={[10, 20, 10]}
@@ -71,8 +71,8 @@ const DecorationsViewer = ({
               ))}
             </Scroll>
           </ScrollControls>
-        </Canvas>
-      </Suspense>
+        </Suspense>
+      </Canvas>
     </div>
   );
 };
