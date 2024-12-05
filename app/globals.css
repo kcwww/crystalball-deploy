@@ -154,12 +154,12 @@ html::-webkit-scrollbar {
 }
 
 .message-list-modal {
-  @apply border-none bg-transparent shadow-none;
+  @apply border-none bg-transparent pt-0 shadow-none;
 }
 
 .message-list {
   @apply overflow-y-auto;
-  max-height: 75svh;
+  max-height: 65svh;
   scrollbar-width: none;
 }
 

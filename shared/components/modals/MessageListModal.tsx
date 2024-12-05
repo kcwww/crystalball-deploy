@@ -37,9 +37,8 @@ const MessageListModal = () => {
 
   const messageLists = props.data as Message[];
 
-  const koreaTime = transKoreaTime();
-
   const fetchDeleteMessage = async (messageId: string) => {
+    const koreaTime = transKoreaTime();
     try {
       const response = await clientComponentFetch(BACKEND_ROUTES.MESSAGE, {
         method: 'DELETE',

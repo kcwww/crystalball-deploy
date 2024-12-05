@@ -81,6 +81,7 @@ const Raycaster = () => {
           isOpened,
           handleOpen,
         } = selectedDeco.object.userData;
+
         const forrmattedDate = formattedTime(sendAt);
         if (isOpened) {
           onOpen(MODAL_TYPE.MESSAGE, {

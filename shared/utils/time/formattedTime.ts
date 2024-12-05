@@ -1,3 +1,5 @@
+'use client';
+
 export const formattedTime = (time: string) => {
   const date = new Date(time);
   const year = date.getFullYear();
