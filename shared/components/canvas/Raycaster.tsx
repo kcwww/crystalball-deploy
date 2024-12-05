@@ -7,7 +7,6 @@ import useModal from '@/shared/hooks/useModal';
 
 import { MessageType } from '@/shared/types/message';
 import MODAL_TYPE from '@/shared/constants/modal';
-import { formattedTime } from '@/shared/utils/time/formattedTime';
 
 const Raycaster = () => {
   const { camera, pointer, raycaster, scene, gl } = useThree();
@@ -80,7 +79,7 @@ const Raycaster = () => {
             sender,
             letterColor,
             messageID,
-            sendAt: formattedTime(sendAt),
+            sendAt,
           } as MessageType,
         });
       }

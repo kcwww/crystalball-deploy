@@ -8,7 +8,6 @@ import useModal from '@/shared/hooks/useModal';
 import { MessageType } from '@/shared/types/message';
 import MODAL_TYPE from '@/shared/constants/modal';
 import fetchUpdateMessageOpen from '../_utils/fetchUpdateMessageOpen';
-import { formattedTime } from '@/shared/utils/time/formattedTime';
 
 const Raycaster = () => {
   const { camera, pointer, raycaster, scene, gl } = useThree();
@@ -82,7 +81,6 @@ const Raycaster = () => {
           handleOpen,
         } = selectedDeco.object.userData;
 
-        const forrmattedDate = formattedTime(sendAt);
         if (isOpened) {
           onOpen(MODAL_TYPE.MESSAGE, {
             data: {
@@ -90,7 +88,7 @@ const Raycaster = () => {
               sender,
               letterColor,
               messageID,
-              sendAt: forrmattedDate,
+              sendAt,
             } as MessageType,
           });
           return;

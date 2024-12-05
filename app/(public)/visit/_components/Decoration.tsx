@@ -4,6 +4,7 @@ import { useGLTF } from '@react-three/drei';
 
 import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
 import { DECO, ETC } from '@/shared/constants/3dModel';
+import { formattedTime } from '@/shared/utils/time/formattedTime';
 
 interface DecoProps {
   id: number;
@@ -56,7 +57,7 @@ const Decoration = ({
       child.userData.sender = sender;
       child.userData.letterColor = letterColor;
       child.userData.messageID = messageID;
-      child.userData.sendAt = sendAt;
+      child.userData.sendAt = formattedTime(sendAt);
       child.castShadow = false;
       if (child.name === 'Main') {
         child.material = makeColorChangedMaterial(child, color);
