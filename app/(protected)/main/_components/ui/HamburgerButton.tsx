@@ -49,7 +49,7 @@ const HamburgerButton = ({ userData }: { userData: User }) => {
       <Sheet>
         <SheetTrigger asChild>
           <Menu
-            className="pointer-events-auto fixed h-12 w-12 items-center justify-center rounded-full bg-transparent p-2 text-gray-100 hover:text-blue-400"
+            className="main-onboarding-hamburger pointer-events-auto fixed h-12 w-12 items-center justify-center rounded-full bg-transparent p-2 text-gray-100 hover:text-blue-400"
             style={{ cursor: 'pointer', zIndex: 1, top: '2rem', right: '2rem' }}
           />
         </SheetTrigger>

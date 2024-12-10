@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { useProgress } from '@react-three/drei';
 import { useState } from 'react';
 
-const Loading = () => {
+const Loading = ({ loadingDone }: { loadingDone?: () => void }) => {
   const { progress } = useProgress();
   const progressValue = Math.min(100, Math.round(progress));
   const [dots, setDots] = useState('.');
@@ -20,7 +20,10 @@ const Loading = () => {
       });
     }, 200); // 0.2초마다 점 변경
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      loadingDone?.();
+    };
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Group, Mesh, Object3DEventMap, Vector3 } from 'three';
 
 import { useGLTF } from '@react-three/drei';
@@ -42,10 +42,6 @@ const Decoration = ({
   const [open, setOpen] = useState(isOpened);
   const decorations = Object.values(DECO);
 
-  const handleOpen = useCallback(() => {
-    setOpen(true);
-  }, []);
-
   const deco = useGLTF(decorations[id - 1].fileName).scene.clone();
   const target = { x: 8, z: 0 };
   const focus = Math.atan2(position.z - target.z, position.x - target.x);
@@ -65,7 +61,7 @@ const Decoration = ({
       child.userData.messageID = messageID;
       child.userData.sendAt = formattedTime(sendAt);
       child.userData.isOpened = open;
-      child.userData.handleOpen = handleOpen;
+      child.userData.handleOpen = () => setOpen(true);
       child.castShadow = false;
       if (child.name === 'Main') {
         child.material = makeColorChangedMaterial(child, color);

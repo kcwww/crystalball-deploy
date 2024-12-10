@@ -42,7 +42,10 @@ const DecorationsViewer = ({
       const screenWidth = window.innerWidth;
       const minWidth =
         decorations.length * ITEM_WIDTH + ITEM_GAP + screenWidth / 2;
-      const newPages = Math.ceil(minWidth / screenWidth);
+      const newPages =
+        Math.ceil(minWidth / screenWidth) <= 1
+          ? 2
+          : Math.ceil(minWidth / screenWidth);
       setPages(newPages);
     };
 
@@ -52,7 +55,7 @@ const DecorationsViewer = ({
     return () => {
       window.removeEventListener('resize', handleScrollSize);
     };
-  }, [decorations]);
+  }, [decorations, type, ITEM_GAP, ITEM_WIDTH]);
 
   return (
     <div style={{ width: '100%', height: '400px' }}>

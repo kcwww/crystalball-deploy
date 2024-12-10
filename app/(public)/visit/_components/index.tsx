@@ -56,7 +56,7 @@ const Visit = ({ userData }: { userData: UserData }) => {
         <div className="space-y-4 md:flex md:w-1/2 md:flex-col md:gap-4">
           <Button
             variant={'secondary'}
-            className="pointer-events-auto w-full"
+            className="visitor-onboarding-message pointer-events-auto w-full"
             onClick={() => {
               if (checkMaxCount()) {
                 sessionStorage.removeItem('messageIsDecorated');

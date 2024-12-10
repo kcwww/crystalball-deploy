@@ -72,6 +72,12 @@ const Bottom = () => {
   bottomModel.receiveShadow = true;
   bottomModel.castShadow = true;
 
+  // nameTag의 material 속성도 조정
+  if (nameTag && nameTag.material instanceof MeshStandardMaterial) {
+    nameTag.material.metalness = 0.5;
+    nameTag.material.roughness = 0.8;
+  }
+
   return <primitive object={bottomModel} />;
 };
 

@@ -18,8 +18,8 @@ const inter = Jua({
 });
 
 export const metadata: Metadata = {
-  title: 'My Heart Crystal',
-  description: '수정 구슬 속 내 마음',
+  title: '수정 구슬 속 내 마음',
+  description: '수정 구슬 속 따뜻한 마음이 담긴 여러 장식들을 보관해보세요.',
   icons: {
     icon: '/images/favicon.png',
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    siteName: 'My Heart Crystal',
+    siteName: '수정 구슬 속 내 마음',
     images: [
       {
         url: new URL('/images/crystal.png', ORIGIN),
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
         alt: 'My Heart Crystal',
       },
     ],
-    title: 'My Heart Crystal',
-    description: '수정 구슬 속 내 마음',
+    title: '수정 구슬 속 내 마음',
+    description: '수정 구슬 속 따뜻한 마음이 담긴 여러 장식들을 보관해보세요.',
     url: ORIGIN,
   },
 };
@@ -59,8 +59,9 @@ export default function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    'name': 'My Heart Crystal',
-    'description': '수정 구슬 속 내 마음',
+    'name': '수정 구슬 속 내 마음',
+    'description':
+      '수정 구슬 속 따뜻한 마음이 담긴 여러 장식들을 보관해보세요.',
     'url': ORIGIN,
     'logo': new URL('/images/favicon.png', ORIGIN),
   };

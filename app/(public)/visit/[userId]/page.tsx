@@ -32,12 +32,12 @@ export const generateMetadata = async (
   return {
     ...previousMetadata,
     description: data.username
-      ? `${data.username} 님의 수정구슬 입니다. 꾸며주세요 !`
+      ? `${data.username} 님의 수정구슬 입니다. 예쁜 메세지를 선물해주세요 !`
       : '존재하지 않는 사용자 입니다.',
     openGraph: {
       ...previousMetadata.openGraph,
       description: data.username
-        ? `${data.username} 님의 수정구슬 입니다. 꾸며주세요 !`
+        ? `${data.username} 님의 수정구슬 입니다. 예쁜 메세지를 선물해주세요 !`
         : '존재하지 않는 사용자 입니다.',
       url: `${ORIGIN}/${ROUTES.VISIT_USER(params.userId)}`,
     },

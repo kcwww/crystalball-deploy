@@ -26,7 +26,7 @@ const IntroButtonSection = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <Button
-        className="pointer-events-auto w-[10rem]"
+        className="onboarding-service-detail pointer-events-auto w-[10rem]"
         onClick={() => onOpen(MODAL_TYPE.INTRODUCE)}
       >
         서비스 자세히 보기

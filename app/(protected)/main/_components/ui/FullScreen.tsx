@@ -30,7 +30,7 @@ const FullScreen = ({
   return (
     <Fullscreen
       onClick={handleFadeOut}
-      className="pointer-events-auto cursor-pointer hover:text-blue-500"
+      className="main-onboarding-full-screen pointer-events-auto cursor-pointer hover:text-blue-500"
       size={'2rem'}
     />
   );
