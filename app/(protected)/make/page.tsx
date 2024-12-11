@@ -6,6 +6,8 @@ import User from '@/shared/database/mongodb/models/userModel';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import { sessionUser, User as UserType } from '@/shared/types/user';
 import Make from '@/app/(protected)/make/_components';
+import { CURRENT_YEAR } from '@/shared/constants/Date';
+import { CURRENT_SEASON } from '@/shared/constants/Date';
 
 const getUserData = async () => {
   const session = await auth();
@@ -43,6 +45,17 @@ const MakePage = async () => {
     redirect(ROUTES.LANDING);
   }
   if (data.username === null) redirect(ROUTES.NICKNAME);
+  data._id = data._id.toString();
+  const currentYearMap = data.crystal_id?.get(CURRENT_YEAR);
+
+  const currentSeason = currentYearMap?.[CURRENT_SEASON]?.map((item) =>
+    item.toString()
+  );
+  const newMap = new Map();
+  newMap.set(CURRENT_YEAR, {
+    [CURRENT_SEASON]: currentSeason,
+  });
+  data.crystal_id = newMap;
 
   return <Make userData={data} />;
 };

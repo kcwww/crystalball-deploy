@@ -46,7 +46,7 @@ const VisitMakePage = async ({
 
   return (
     <VisitMake
-      userId={id}
+      userId={id.toString()}
       uuid={params.userId}
       crystalId={crystalId}
       index={params.crystalIndex}
