@@ -14,7 +14,7 @@ const DecorationsViewer = ({
   decorations,
 }: {
   onClose: () => void;
-  decorations: Array<{ id: number; path: string; name: string }>;
+  decorations: Array<{ path: string; name: string }>;
 }) => {
   const { setModel } = use3DModel();
   const [pages, setPages] = useState(1);
