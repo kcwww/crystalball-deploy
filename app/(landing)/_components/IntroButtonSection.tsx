@@ -88,13 +88,6 @@ const IntroButtonSection = () => {
                 구글 로그인은 크롬 및 모바일 브라우저에서만 가능합니다.
               </p>
             )}
-            {/* <Button
-              onClick={() => onOpen(MODAL_TYPE.GUEST)}
-              className="w-1/2 border-none md:w-1/3"
-              variant="outline"
-            >
-              게스트로 로그인
-            </Button> */}
           </div>
           <DrawerFooter className="flex items-center justify-center ">
             <DrawerClose className="w-1/3 rounded-md bg-gray-50 py-2 text-primary">

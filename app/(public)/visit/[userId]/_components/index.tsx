@@ -1,7 +1,5 @@
 'use client';
 
-import mongoose from 'mongoose';
-
 import dynamic from 'next/dynamic';
 import { useState, useEffect, Suspense } from 'react';
 
@@ -19,9 +17,9 @@ const VisitMake = ({
   crystalId,
   index,
 }: {
-  userId: string | mongoose.Schema.Types.ObjectId;
+  userId: string;
   uuid: string;
-  crystalId: string | mongoose.Schema.Types.ObjectId;
+  crystalId: string;
   index: string;
 }) => {
   const [isMounted, setIsMounted] = useState(false);

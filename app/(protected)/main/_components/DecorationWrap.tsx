@@ -18,7 +18,7 @@ const DecorationWrap = ({ messages }: { messages: Message[] }) => {
       {messageList.map((message, index) => (
         <Decoration
           key={index}
-          id={message.decoration_id}
+          name={message.decoration_name}
           scale={1}
           position={getDecoPosition(index + 1)}
           message={message.content ?? '비공개 메시지 입니다.'}

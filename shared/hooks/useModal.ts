@@ -13,7 +13,7 @@ export type Private = {
 export type MessageSubmit = {
   user_id: string;
   crystal_id: string;
-  decoration_id: number;
+  decoration_name: string;
   decoration_color: string;
   content: string;
   sender: string;

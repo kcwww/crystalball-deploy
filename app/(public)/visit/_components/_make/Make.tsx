@@ -1,7 +1,5 @@
 'use client';
 
-import mongoose from 'mongoose';
-
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -22,9 +20,9 @@ const Make = ({
   crystalId,
   index,
 }: {
-  userId: string | mongoose.Schema.Types.ObjectId;
+  userId: string;
   uuid: string;
-  crystalId: string | mongoose.Schema.Types.ObjectId;
+  crystalId: string;
   index: string;
 }) => {
   const router = useRouter();

@@ -7,7 +7,7 @@ const Decorations = ({ messages }: { messages: Message[] }) => {
   const decos = messages.map((message, index) => (
     <Decoration
       key={index}
-      id={message.decoration_id}
+      name={message.decoration_name}
       scale={1}
       position={getDecoPosition(index + 1)}
       message={message.content}

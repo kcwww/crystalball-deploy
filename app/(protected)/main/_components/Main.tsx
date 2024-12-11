@@ -8,7 +8,7 @@ import UISection from '@/app/(protected)/main/_components/UISection';
 import PreviousButton from '@/shared/components/ui/PreviousButton';
 import UserHeader from '@/shared/components/ui/UserHeader';
 import MessageCount from '@/shared/components/ui/MessageCount';
-import type { User } from '@/shared/types/user';
+import type { UserType } from '@/shared/types/user';
 import type { Crystal } from '@/shared/types/crystal';
 
 import CrystalCanvas from '@/app/(protected)/main/_components/CrystalCanvas';
@@ -19,14 +19,14 @@ import fetchCrystal from '@/app/(protected)/main/_utils/fetchCrystal';
 import PrivateButton from '@/app/(protected)/main/_components/ui/PrivateButton';
 import { use3DModel } from '@/app/(protected)/make/store/modelStore';
 
-const Main = ({ userData }: { userData: User }) => {
+const Main = ({ userData }: { userData: UserType }) => {
   const fadeOutRef = useRef<HTMLDivElement>(null);
 
   const [current, setCurrent] = useState<number>(0);
   const { resetModel } = use3DModel();
 
   const { data, isLoading, isError } = useQuery<Crystal[]>({
-    queryKey: ['crystal'],
+    queryKey: ['crystal', userData._id],
     queryFn: () => fetchCrystal(userData._id),
     gcTime: 0,
   });

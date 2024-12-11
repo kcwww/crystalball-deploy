@@ -10,9 +10,12 @@ import DecoDrawer from '@/app/(protected)/make/_components/DecoDrawer';
 
 import UISection from '@/shared/components/ui/UISection';
 import { ROUTES } from '@/shared/constants/routes';
-import { User } from '@/shared/types/user';
+import { UserType } from '@/shared/types/user';
+import { CURRENT_SEASON } from '@/shared/constants/Date';
+import { CURRENT_YEAR } from '@/shared/constants/Date';
+import { MAX_CRYSTAL } from '@/shared/constants/enum';
 
-const MakeSection = ({ userData }: { userData: User }) => {
+const MakeSection = ({ userData }: { userData: UserType }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const STEP_MESSAGE = [
@@ -28,6 +31,7 @@ const MakeSection = ({ userData }: { userData: User }) => {
     const stepParam = searchParams.get('step');
     return stepParam ? parseInt(stepParam) : STEP.MAIN_DECORATION;
   });
+  const crystal = userData.crystal_id?.get(CURRENT_YEAR)?.[CURRENT_SEASON];
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -50,9 +54,8 @@ const MakeSection = ({ userData }: { userData: User }) => {
   }, [searchParams, router]);
 
   useEffect(() => {
-    if (userData && userData.crystal_id.length === 5)
-      router.replace(ROUTES.MAIN);
-  }, [router, userData]);
+    if (crystal && crystal.length === MAX_CRYSTAL) router.replace(ROUTES.MAIN);
+  }, [router, crystal]);
 
   const handleNext = () => {
     const nextStep = step + 1;

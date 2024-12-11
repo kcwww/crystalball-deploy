@@ -28,11 +28,6 @@ const getUserData = async () => {
       return null;
     }
 
-    existingUser._id = existingUser._id.toString();
-    existingUser.crystal_id = existingUser.crystal_id.map((id) =>
-      id.toString()
-    );
-
     return existingUser;
   } catch (error) {
     console.error('Failed to get user data', error);

@@ -17,13 +17,19 @@ import { BOTTOM, DECO_TYPE, MAIN_DECORATION } from '@/shared/constants/3dModel';
 import dynamic from 'next/dynamic';
 import TitleForm from '@/app/(protected)/make/_components/TitleForm';
 import { STEP } from '@/app/(protected)/make/_constants/step';
-import { User } from '@/shared/types/user';
+import { UserType } from '@/shared/types/user';
 
 const ColorButton = dynamic(
   () => import('@/app/(protected)/make/_components/ColorButton')
 );
 
-const DecoDrawer = ({ step, userData }: { step: number; userData: User }) => {
+const DecoDrawer = ({
+  step,
+  userData,
+}: {
+  step: number;
+  userData: UserType;
+}) => {
   const [isOpened, setIsOpened] = useState(false);
 
   const drawerClose = useCallback(() => {

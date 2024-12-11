@@ -4,36 +4,36 @@ export const BASE = {
 } as const;
 
 export const BOTTOM = {
-  DEFAULT: { id: 0, name: '기본', path: '/assets/bottoms/bottom.glb' },
-  ONE: { id: 1, name: '눈', path: '/assets/bottoms/bottom1.glb' },
-  TWO: { id: 2, name: '수풀', path: '/assets/bottoms/bottom2.glb' },
-  THREE: { id: 3, name: '나무', path: '/assets/bottoms/bottom3.glb' },
+  DEFAULT: { id: 0, name: 'default', path: '/assets/bottoms/bottom.glb' },
+  ONE: { id: 1, name: 'snow', path: '/assets/bottoms/bottom1.glb' },
+  TWO: { id: 2, name: 'grass', path: '/assets/bottoms/bottom2.glb' },
+  THREE: { id: 3, name: 'tree', path: '/assets/bottoms/bottom3.glb' },
 } as const;
 
 export const DECO = {
   PRESENT: {
     id: 1,
-    name: '선물상자',
+    name: 'giftBox',
     fileName: '/assets/models/ribbonBox.glb',
   },
   FISHBREAD: {
     id: 2,
-    name: '붕어빵',
+    name: 'fishBread',
     fileName: '/assets/models/fishBread.glb',
   },
   GINGERBREAD: {
     id: 3,
-    name: '진저브레드',
+    name: 'gingerBread',
     fileName: '/assets/models/gingerBread.glb',
   },
-  CHEST: { id: 4, name: '마크상자', fileName: '/assets/models/chest.glb' },
-  DDONG: { id: 5, name: '똥', fileName: '/assets/models/ddong.glb' },
+  CHEST: { id: 4, name: 'chest', fileName: '/assets/models/chest.glb' },
+  DDONG: { id: 5, name: 'poop', fileName: '/assets/models/ddong.glb' },
   MINISNOWMAN: {
     id: 6,
-    name: '미니눈사람',
+    name: 'miniSnowMan',
     fileName: '/assets/models/miniSnowMan.glb',
   },
-  SOCKS: { id: 7, name: '양말', fileName: '/assets/models/socks.glb' },
+  SOCKS: { id: 7, name: 'socks', fileName: '/assets/models/socks.glb' },
 } as const;
 
 export const SENTIMENT = {
@@ -49,16 +49,16 @@ export const GROUND = {
 } as const;
 
 export const MAIN_DECORATION = {
-  DUCK: { id: 1, name: '오리', path: '/assets/sprites/bcduck.glb' },
+  DUCK: { id: 1, name: 'duck', path: '/assets/sprites/bcduck.glb' },
   GLASSES_DUCK: {
     id: 2,
-    name: '안경오리',
+    name: 'glassesDuck',
     path: '/assets/sprites/bcduck_glasses.glb',
   },
-  SANTACLAUS: { id: 3, name: '산타클로스', path: '/assets/sprites/santa.glb' },
-  SNOWMAN: { id: 4, name: '눈사람', path: '/assets/sprites/snowman.glb' },
-  TREE: { id: 5, name: '크리스마스트리', path: '/assets/sprites/tree.glb' },
-  TUX: { id: 6, name: '펭귄', path: '/assets/sprites/tux.glb' },
+  SANTACLAUS: { id: 3, name: 'santa', path: '/assets/sprites/santa.glb' },
+  SNOWMAN: { id: 4, name: 'snowMan', path: '/assets/sprites/snowman.glb' },
+  TREE: { id: 5, name: 'tree', path: '/assets/sprites/tree.glb' },
+  TUX: { id: 6, name: 'tux', path: '/assets/sprites/tux.glb' },
 } as const;
 
 export const SNOW_FLAKE = {

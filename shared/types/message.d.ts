@@ -5,7 +5,7 @@ export type MessageResponse = {
   content: string;
   sendAt: string; // Changed from created to sendAt
   decoration_color: string;
-  decoration_id: number;
+  decoration_name: string;
   id: number;
   is_deleted: boolean;
   letter_id: number;

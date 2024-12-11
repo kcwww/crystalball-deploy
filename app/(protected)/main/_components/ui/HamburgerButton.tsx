@@ -23,13 +23,16 @@ import fetchAllMessages from '@/app/(protected)/main/_utils/fetchAllMessages';
 
 import useModal from '@/shared/hooks/useModal';
 import { ROUTES } from '@/shared/constants/routes';
-import { User } from '@/shared/types/user';
+import { UserType } from '@/shared/types/user';
 import { MAX_CRYSTAL } from '@/shared/constants/enum';
 import MODAL_TYPE from '@/shared/constants/modal';
+import { CURRENT_YEAR } from '@/shared/constants/Date';
+import { CURRENT_SEASON } from '@/shared/constants/Date';
 
-const HamburgerButton = ({ userData }: { userData: User }) => {
+const HamburgerButton = ({ userData }: { userData: UserType }) => {
   const { onOpen } = useModal();
   const router = useRouter();
+  const crystal = userData.crystal_id?.get(CURRENT_YEAR)?.[CURRENT_SEASON];
 
   const onOpenAllMessage = async () => {
     try {
@@ -62,7 +65,7 @@ const HamburgerButton = ({ userData }: { userData: User }) => {
               <p className="text-yellow-200">{userData.username}</p> 님
             </SheetTitle>
             <SheetDescription className="text-center text-green-300">
-              나의 수정구슬 {userData.crystal_id.length}개
+              나의 수정구슬 {crystal ? crystal.length : 0}개
             </SheetDescription>
             <SheetDescription className="text-center">
               수정 구슬은 최대 {MAX_CRYSTAL}개까지 만들 수 있습니다.
@@ -80,7 +83,7 @@ const HamburgerButton = ({ userData }: { userData: User }) => {
             <Button
               variant={'secondary'}
               onClick={() => {
-                if (userData && userData.crystal_id.length >= MAX_CRYSTAL) {
+                if (crystal && crystal.length >= MAX_CRYSTAL) {
                   toast.error('더 이상 수정구슬을 만들 수 없습니다.');
                   return;
                 }

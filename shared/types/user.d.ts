@@ -11,3 +11,9 @@ export type sessionUser = {
   provider: string;
   email: string;
 };
+
+export type UserType = {
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+} & IUser;

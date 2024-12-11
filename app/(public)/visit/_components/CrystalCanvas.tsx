@@ -49,7 +49,7 @@ const CrystalCanvas = ({
 
     // Joyride 상태 확인: 'finished' 또는 'skipped'일 때 로컬 스토리지 저장
     if (status === 'finished' || action === 'skip') {
-      localStorage.setItem('mainOnboarding', 'completed');
+      localStorage.setItem('visitOnboarding', 'completed');
       setRun(false); // 투어 중단
     }
   };

@@ -95,12 +95,12 @@ const CrystalCanvas = ({
             ))}
             <Decorations crystal={data[current]._id} />
             <MainDecoration
-              id={data[current].main_decoration_id}
+              name={data[current].main_decoration_name}
               color={data[current].main_decoration_color}
             />
             <Base />
             <Bottom
-              id={data[current].bottom_decoration_id}
+              name={data[current].bottom_decoration_name}
               color={data[current].bottom_decoration_color}
               title={data[current].title}
             />

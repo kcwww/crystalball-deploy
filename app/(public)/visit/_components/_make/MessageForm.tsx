@@ -68,14 +68,14 @@ const MessageForm = ({
   }, [form]);
 
   const onSubmit = async (value: z.infer<typeof formSchema>) => {
-    const modelId = Object.values(DECO).find(
+    const modelName = Object.values(DECO).find(
       (deco) => deco.fileName === model
-    )!.id;
+    )!.name;
 
     const data = {
       user_id: userId,
       crystal_id: crystalId,
-      decoration_id: modelId,
+      decoration_name: modelName,
       decoration_color: modelColor,
       content: value.message,
       sender: value.author,

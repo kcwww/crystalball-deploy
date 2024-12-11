@@ -69,7 +69,7 @@ export const DELETE = async (req: NextRequest) => {
 type MessageReq = {
   user_id: string;
   crystal_id: string;
-  decoration_id: number;
+  decoration_name: string;
   decoration_color: string;
   content: string;
   sender: string;
@@ -82,7 +82,7 @@ export const POST = async (req: NextRequest) => {
   const {
     user_id,
     crystal_id,
-    decoration_id,
+    decoration_name,
     decoration_color,
     content,
     sender,
@@ -116,7 +116,7 @@ export const POST = async (req: NextRequest) => {
         {
           user_id,
           crystal_id,
-          decoration_id,
+          decoration_name,
           decoration_color,
           content,
           sender,

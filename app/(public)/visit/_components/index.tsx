@@ -49,7 +49,7 @@ const Visit = ({ userData }: { userData: UserData }) => {
           <MessageCount count={userData.crystals[current].message_id.length} />
         </div>
         <ArrowButtons
-          maxIndex={userData.user.crystal_id.length - 1}
+          maxIndex={userData.crystals.length - 1}
           current={current}
           handleCurrent={setCurrent}
         />

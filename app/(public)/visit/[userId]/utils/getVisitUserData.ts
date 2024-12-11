@@ -6,6 +6,7 @@ import Message from '@/shared/database/mongodb/models/messageModel';
 import type { User as UserType } from '@/shared/types/user';
 import { Crystal as CrystalType } from '@/shared/types/crystal';
 import { Message as MessageType } from '@/shared/types/message';
+import { CURRENT_SEASON, CURRENT_YEAR } from '@/shared/constants/Date';
 
 const getVisitUserData = async (userId: string) => {
   try {
@@ -13,13 +14,12 @@ const getVisitUserData = async (userId: string) => {
 
     const user = (await User.findOne({ uuid: userId }))?.toObject() as UserType;
     if (!user) return null;
-    if ((user && user.crystal_id.length === 0) || user.username === null)
-      return null;
-    user._id = user._id.toString();
-    user.crystal_id = user.crystal_id.map((crystalId) => crystalId.toString());
+    const crystalId = user.crystal_id?.get(CURRENT_YEAR)?.[CURRENT_SEASON];
+    if (!crystalId) return null;
+    if (user.username === null || crystalId.length === 0) return null;
 
     const crystals = await Promise.all(
-      user.crystal_id.map(async (crystalId) => {
+      crystalId.map(async (crystalId) => {
         const crystalData = (
           await Crystal.findOne({ _id: crystalId })
         )?.toObject() as CrystalType;

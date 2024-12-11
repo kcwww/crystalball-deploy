@@ -54,7 +54,7 @@ const makeCanvasTexture = ({
 
 const Bottom = ({ crystal }: { crystal: UserCrystal }) => {
   const path = Object.values(BOTTOM).find(
-    (deco) => deco.id === crystal.bottom_decoration_id
+    (deco) => deco.name === crystal.bottom_decoration_name
   )!.path;
   const color = crystal.bottom_decoration_color;
   const bottomModel = useGLTF(path).scene.clone();

@@ -6,7 +6,9 @@ import { auth } from '@/auth';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import Crystal from '@/shared/database/mongodb/models/crystalModel';
 import User from '@/shared/database/mongodb/models/userModel';
-import { User as UserType } from '@/shared/types/user';
+import { UserType } from '@/shared/types/user';
+import { CURRENT_SEASON } from '@/shared/constants/Date';
+import { CURRENT_YEAR } from '@/shared/constants/Date';
 
 export const dynamic = 'force-dynamic';
 
@@ -73,10 +75,12 @@ export const POST = async (req: NextRequest) => {
         {
           user_id,
           title,
-          main_decoration_id: model,
+          main_decoration_name: model,
           main_decoration_color: modelColor,
-          bottom_decoration_id: bottom,
+          bottom_decoration_name: bottom,
           bottom_decoration_color: bottomColor,
+          year: CURRENT_YEAR,
+          season: CURRENT_SEASON,
         },
       ],
       { session: sessionDB }
@@ -92,7 +96,7 @@ export const POST = async (req: NextRequest) => {
       { _id: user_id },
       {
         $push: {
-          crystal_id: {
+          [`crystal_id.${CURRENT_YEAR}.${CURRENT_SEASON}`]: {
             $each: [crystal_id],
             $slice: 5,
           },
@@ -141,7 +145,7 @@ export const GET = async (req: NextRequest) => {
     // user_id에 해당하는 유저의 crystal_id 조회
     const crystal = (
       (await User.findOne({ _id: userId }).select('crystal_id')) as UserType
-    ).crystal_id;
+    ).crystal_id?.get(CURRENT_YEAR)?.[CURRENT_SEASON];
 
     if (!crystal) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });

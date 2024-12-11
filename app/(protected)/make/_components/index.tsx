@@ -1,7 +1,7 @@
 'use client';
 
 import Loading from '@/app/loading';
-import { User } from '@/shared/types/user';
+import { UserType } from '@/shared/types/user';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
@@ -9,7 +9,7 @@ const MainSection = dynamic(
   () => import('@/app/(protected)/make/_components/MakeSection')
 );
 
-const Make = ({ userData }: { userData: User }) => {
+const Make = ({ userData }: { userData: UserType }) => {
   return (
     <Suspense fallback={Loading()}>
       <MainSection userData={userData} />

@@ -56,20 +56,20 @@ const TitleForm = ({ userData }: { userData: User }) => {
   const onSubmit = async () => {
     setSubmitting(true);
     const modelArray = Object.values(MAIN_DECORATION);
-    const modelId = modelArray.filter((item) => {
+    const modelName = modelArray.filter((item) => {
       return item.path === model;
-    })[0].id;
+    })[0].name;
     const bottomArray = Object.values(BOTTOM);
-    const bottomId = bottomArray.filter((item) => {
+    const bottomName = bottomArray.filter((item) => {
       return item.path === bottom;
-    })[0].id;
+    })[0].name;
 
     const data = {
       user_id: userData._id,
       title: title,
-      model: modelId,
+      model: modelName,
       modelColor,
-      bottom: bottomId,
+      bottom: bottomName,
       bottomColor,
       message_id: [],
     };

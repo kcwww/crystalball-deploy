@@ -8,7 +8,7 @@ import { DECO, ETC } from '@/shared/constants/3dModel';
 import { formattedTime } from '@/shared/utils/time/formattedTime';
 
 interface DecoProps {
-  id: number;
+  name: string;
   scale: number;
   position: Vector3;
   message: string;
@@ -31,7 +31,7 @@ const Decoration = ({
   scale,
   position,
   message,
-  id,
+  name,
   color,
   sender,
   letterID,
@@ -42,11 +42,13 @@ const Decoration = ({
   const [open, setOpen] = useState(isOpened);
   const decorations = Object.values(DECO);
 
-  const deco = useGLTF(decorations[id - 1].fileName).scene.clone();
+  const deco = useGLTF(
+    decorations.find((deco) => deco.name === name)!.fileName
+  ).scene.clone();
   const target = { x: 8, z: 0 };
   const focus = Math.atan2(position.z - target.z, position.x - target.x);
 
-  deco.name = decorations[id].name;
+  deco.name = name;
   deco.scale.set(scale, scale, scale);
   deco.position.set(position.x, position.y, position.z);
   if (!open) {

@@ -34,9 +34,9 @@ const fallingModel = (
   }
 };
 
-const MainDecoration = ({ id, color }: { id: number; color: string }) => {
+const MainDecoration = ({ name, color }: { name: string; color: string }) => {
   const path = Object.values(MAIN_DECORATION).find(
-    (deco) => deco.id === id
+    (deco) => deco.name === name
   )!.path;
 
   const deco = useGLTF(path).scene.clone() as Group;

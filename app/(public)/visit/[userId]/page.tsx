@@ -8,6 +8,8 @@ import { connectToMongoDB } from '@/shared/database/mongodb/config';
 import User from '@/shared/database/mongodb/models/userModel';
 import { ORIGIN } from '@/shared/constants/url';
 
+import { CURRENT_YEAR, CURRENT_SEASON } from '@/shared/constants/Date';
+
 const getUserData = async (userId: string) => {
   await connectToMongoDB();
 
@@ -47,8 +49,19 @@ export const generateMetadata = async (
 
 const VisitPage = async ({ params }: { params: { userId: string } }) => {
   const data = await getVisitUserData(params.userId);
-  if (!data) redirect(ROUTES.LANDING);
 
+  if (!data) redirect(ROUTES.LANDING);
+  data.user._id = data.user._id.toString();
+  const currentYearMap = data.user.crystal_id?.get(CURRENT_YEAR);
+
+  const currentSeason = currentYearMap?.[CURRENT_SEASON]?.map((item) =>
+    item.toString()
+  );
+  const newMap = new Map();
+  newMap.set(CURRENT_YEAR, {
+    [CURRENT_SEASON]: currentSeason,
+  });
+  data.user.crystal_id = newMap;
   return (
     <>
       <Visit userData={data} />

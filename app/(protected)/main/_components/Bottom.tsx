@@ -51,15 +51,17 @@ const makeCanvasTexture = ({
 };
 
 const Bottom = ({
-  id,
+  name,
   color,
   title,
 }: {
-  id: number;
+  name: string;
   color: string;
   title: string;
 }) => {
-  const path = Object.values(BOTTOM).find((bottom) => bottom.id === id)!.path;
+  const path = Object.values(BOTTOM).find(
+    (bottom) => bottom.name === name
+  )!.path;
   const bottomModel = useGLTF(path).scene.clone();
 
   const nameTag = bottomModel.getObjectByName('nameTag') as Mesh | undefined;

@@ -7,10 +7,12 @@ export interface ICrystal {
   title: string;
   is_private: Date | null;
   main_decoration_color: string;
-  main_decoration_id: number;
+  main_decoration_name: string;
   bottom_decoration_color: string;
-  bottom_decoration_id: number;
+  bottom_decoration_name: string;
   message_id: mongoose.Schema.Types.ObjectId[] | string[] | [];
+  year: string;
+  season: string;
 }
 
 // ICrystal과 Document 인터페이스를 결합하여 MongoDB 문서의 타입 정의
@@ -30,10 +32,12 @@ const crystalSchema = new mongoose.Schema<ICrystalDocument>(
     title: { type: String, required: true },
     is_private: { type: Date, default: null },
     main_decoration_color: { type: String, required: true },
-    main_decoration_id: { type: Number, required: true },
+    main_decoration_name: { type: String, required: true },
     bottom_decoration_color: { type: String, required: true },
-    bottom_decoration_id: { type: Number, required: true },
+    bottom_decoration_name: { type: String, required: true },
     message_id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
+    year: { type: String, required: true },
+    season: { type: String, required: true },
   },
   {
     timestamps: true, // 'createdAt' 및 'updatedAt' 필드 자동 추가

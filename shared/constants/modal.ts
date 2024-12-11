@@ -50,7 +50,6 @@ export const MSG_COLOR = [
 ] as const;
 
 const MODAL_TYPE = {
-  GUEST: 'Guest',
   INTRODUCE: 'Intro',
   MESSAGE: 'Message',
   FORM: 'Form',

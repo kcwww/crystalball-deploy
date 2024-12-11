@@ -4,7 +4,7 @@ import mongoose, { Document, Model } from 'mongoose';
 export interface IMessage {
   user_id: mongoose.Schema.Types.ObjectId | string;
   crystal_id: mongoose.Schema.Types.ObjectId | string;
-  decoration_id: number;
+  decoration_name: string;
   decoration_color: string;
   content: string;
   sender: string;
@@ -32,7 +32,7 @@ const messageSchema = new mongoose.Schema<IMessageDocument>(
       ref: 'Crystal',
       required: true,
     },
-    decoration_id: { type: Number, required: true },
+    decoration_name: { type: String, required: true },
     decoration_color: { type: String, required: true },
     content: { type: String, required: true },
     sender: { type: String, required: true },
