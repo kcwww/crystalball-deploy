@@ -4,36 +4,36 @@ export const BASE = {
 } as const;
 
 export const BOTTOM = {
-  DEFAULT: { id: 0, name: 'default', path: '/assets/bottoms/bottom.glb' },
-  ONE: { id: 1, name: 'snow', path: '/assets/bottoms/bottom1.glb' },
-  TWO: { id: 2, name: 'grass', path: '/assets/bottoms/bottom2.glb' },
-  THREE: { id: 3, name: 'tree', path: '/assets/bottoms/bottom3.glb' },
+  DEFAULT: { name: 'default', path: '/assets/bottoms/bottom.glb' },
+  ONE: { name: 'snow', path: '/assets/bottoms/bottom1.glb' },
+  TWO: { name: 'grass', path: '/assets/bottoms/bottom2.glb' },
+  THREE: { name: 'tree', path: '/assets/bottoms/bottom3.glb' },
 } as const;
 
 export const DECO = {
+  LUCKY_CAT: { name: 'luckyCat', path: '/assets/models/luckyCat.glb' },
+  MILK_COOKIE: { name: 'milkCookie', path: '/assets/models/milkCookie.glb' },
+  MINI_SANTA: { name: 'miniSanta', path: '/assets/models/miniSanta.glb' },
+  SANTA_CAT: { name: 'santaCat', path: '/assets/models/santaCat.glb' },
   PRESENT: {
-    id: 1,
     name: 'giftBox',
-    fileName: '/assets/models/ribbonBox.glb',
+    path: '/assets/models/ribbonBox.glb',
   },
   FISHBREAD: {
-    id: 2,
     name: 'fishBread',
-    fileName: '/assets/models/fishBread.glb',
+    path: '/assets/models/fishBread.glb',
   },
   GINGERBREAD: {
-    id: 3,
     name: 'gingerBread',
-    fileName: '/assets/models/gingerBread.glb',
+    path: '/assets/models/gingerBread.glb',
   },
-  CHEST: { id: 4, name: 'chest', fileName: '/assets/models/chest.glb' },
-  DDONG: { id: 5, name: 'poop', fileName: '/assets/models/ddong.glb' },
+  CHEST: { name: 'chest', path: '/assets/models/chest.glb' },
+  DDONG: { name: 'poop', path: '/assets/models/ddong.glb' },
   MINISNOWMAN: {
-    id: 6,
     name: 'miniSnowMan',
-    fileName: '/assets/models/miniSnowMan.glb',
+    path: '/assets/models/miniSnowMan.glb',
   },
-  SOCKS: { id: 7, name: 'socks', fileName: '/assets/models/socks.glb' },
+  SOCKS: { name: 'socks', path: '/assets/models/socks.glb' },
 } as const;
 
 export const SENTIMENT = {
@@ -49,16 +49,16 @@ export const GROUND = {
 } as const;
 
 export const MAIN_DECORATION = {
-  DUCK: { id: 1, name: 'duck', path: '/assets/sprites/bcduck.glb' },
+  BANANA_CAT: { name: 'bananaCat', path: '/assets/sprites/bananaCat.glb' },
+  DUCK: { name: 'duck', path: '/assets/sprites/bcduck.glb' },
   GLASSES_DUCK: {
-    id: 2,
     name: 'glassesDuck',
     path: '/assets/sprites/bcduck_glasses.glb',
   },
-  SANTACLAUS: { id: 3, name: 'santa', path: '/assets/sprites/santa.glb' },
-  SNOWMAN: { id: 4, name: 'snowMan', path: '/assets/sprites/snowman.glb' },
-  TREE: { id: 5, name: 'tree', path: '/assets/sprites/tree.glb' },
-  TUX: { id: 6, name: 'tux', path: '/assets/sprites/tux.glb' },
+  SANTACLAUS: { name: 'santaclaus', path: '/assets/sprites/santaclaus.glb' },
+  SNOWMAN: { name: 'snowMan', path: '/assets/sprites/snowman.glb' },
+  TREE: { name: 'tree', path: '/assets/sprites/tree.glb' },
+  TUX: { name: 'tux', path: '/assets/sprites/tux.glb' },
 } as const;
 
 export const SNOW_FLAKE = {

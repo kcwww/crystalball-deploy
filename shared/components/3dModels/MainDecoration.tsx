@@ -35,7 +35,7 @@ const fallingModel = (
 };
 
 const MainDecoration = () => {
-  const deco = useGLTF(MAIN_DECORATION.DUCK.path).scene.clone() as Group;
+  const deco = useGLTF(MAIN_DECORATION.SANTACLAUS.path).scene.clone() as Group;
   const speedRef = useRef<Vector3>(new Vector3(0, 0, 0));
   const isStoppedRef = useRef<boolean>(false);
 
@@ -58,7 +58,7 @@ const MainDecoration = () => {
   });
 
   const colorPart = deco.getObjectByName('colorPart') as Mesh | undefined;
-  const color = '#ff0000';
+  const color = '#ffff00';
   if (!colorPart) {
     return null;
   }

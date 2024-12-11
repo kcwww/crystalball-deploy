@@ -14,7 +14,7 @@ const DecorationsViewer = ({
   decorations,
 }: {
   onClose: () => void;
-  decorations: Array<{ id: number; fileName: string; name: string }>;
+  decorations: Array<{ id: number; path: string; name: string }>;
 }) => {
   const { setModel } = use3DModel();
   const [pages, setPages] = useState(1);
@@ -63,10 +63,10 @@ const DecorationsViewer = ({
               {decorations.map((deco, index) => (
                 <group
                   key={index}
-                  onClick={() => handleModel(deco.fileName)}
+                  onClick={() => handleModel(deco.path)}
                   position={[index * 4.5, 0, 0]} // 장식 간격 조정
                 >
-                  <InitializeDecoration path={deco.fileName} />
+                  <InitializeDecoration path={deco.path} />
                 </group>
               ))}
             </Scroll>

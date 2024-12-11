@@ -69,7 +69,7 @@ const MessageForm = ({
 
   const onSubmit = async (value: z.infer<typeof formSchema>) => {
     const modelName = Object.values(DECO).find(
-      (deco) => deco.fileName === model
+      (deco) => deco.path === model
     )!.name;
 
     const data = {

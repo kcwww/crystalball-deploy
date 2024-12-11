@@ -26,7 +26,7 @@ interface ModelStore {
 }
 
 export const use3DModel = create<ModelStore>((set) => ({
-  model: DECO.GINGERBREAD.fileName,
+  model: DECO.GINGERBREAD.path,
   modelColor: '#ff0000',
   message: '',
   author: '',
@@ -58,7 +58,7 @@ export const use3DModel = create<ModelStore>((set) => ({
 
   resetModel: () =>
     set({
-      model: DECO.GINGERBREAD.fileName,
+      model: DECO.GINGERBREAD.path,
       modelColor: '#ff0000',
       message: '',
       messageColor: '#ff0000',
