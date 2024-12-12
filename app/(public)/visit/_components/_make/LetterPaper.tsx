@@ -19,7 +19,7 @@ const LetterPaper = ({ step }: { step: number }) => {
     >
       <div>
         <div
-          className="p-4 text-2xl"
+          className="break-words p-4 text-2xl"
           style={{
             color: 'white',
             textShadow:

@@ -14,16 +14,14 @@ const Nickname = async () => {
 
   const user = session.user as sessionUser;
   await connectToMongoDB();
-  const result = (
-    await User.findOne({
-      email: user.email,
-      uid: user.uid,
-      provider: user.provider,
-    })
-  )?.toObject() as UserType;
+  const result = (await User.findOne({
+    email: user.email,
+    uid: user.uid,
+    provider: user.provider,
+  })) as UserType;
 
   if (!result) {
-    signOut();
+    await signOut();
     redirect(ROUTES.LANDING);
   }
 

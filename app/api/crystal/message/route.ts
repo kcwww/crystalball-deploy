@@ -93,14 +93,10 @@ export const POST = async (req: NextRequest) => {
 
   await connectToMongoDB();
 
-  const sessionDB = await mongoose.startSession();
-  sessionDB.startTransaction();
   try {
     // MongoDB에 연결
 
-    const crystal = await Crystal.findOne({ _id: crystal_id }, null, {
-      session: sessionDB,
-    });
+    const crystal = await Crystal.findOne({ _id: crystal_id });
 
     if (!crystal) throw new Error('Crystal not found');
 
@@ -111,22 +107,19 @@ export const POST = async (req: NextRequest) => {
       );
 
     // Message 생성 후 crystal 업데이트
-    const message = await Message.create(
-      [
-        {
-          user_id,
-          crystal_id,
-          decoration_name,
-          decoration_color,
-          content,
-          sender,
-          letter_color,
-          is_deleted,
-          is_opend,
-        },
-      ],
-      { session: sessionDB }
-    );
+    const message = await Message.create([
+      {
+        user_id,
+        crystal_id,
+        decoration_name,
+        decoration_color,
+        content,
+        sender,
+        letter_color,
+        is_deleted,
+        is_opend,
+      },
+    ]);
 
     if (!message) throw new Error('Failed to create message');
 
@@ -141,11 +134,8 @@ export const POST = async (req: NextRequest) => {
             $slice: 30, // 최대 30개까지만 유지
           },
         },
-      },
-      { session: sessionDB, new: true }
+      }
     );
-
-    await sessionDB.commitTransaction();
 
     return NextResponse.json({
       message: 'Message created',
@@ -155,13 +145,10 @@ export const POST = async (req: NextRequest) => {
   } catch (error) {
     console.error('Error creating message : ', error);
 
-    await sessionDB.abortTransaction();
     return NextResponse.json(
       { error: 'Failed to create message ' + error },
       { status: 500 }
     );
-  } finally {
-    sessionDB.endSession();
   }
 };
 

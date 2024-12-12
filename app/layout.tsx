@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
-import { Jua } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 
 import { cn } from '@/lib/utils';
@@ -12,9 +12,24 @@ import QueryProvider from '@/shared/components/providers/QueryProvider';
 import { ORIGIN } from '@/shared/constants/url';
 import Head from 'next/head';
 
-const inter = Jua({
-  weight: '400',
-  subsets: ['latin'],
+const sejongGeulggot = localFont({
+  src: [
+    {
+      path: './fonts/SejongGeulggot.woff2',
+      weight: '800',
+      style: 'normal',
+    },
+    {
+      path: './fonts/SejongGeulggot.woff',
+      weight: '800',
+      style: 'normal',
+    },
+    {
+      path: './fonts/SejongGeulggot.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -78,7 +93,7 @@ export default function RootLayout({
         />
       </Head>
 
-      <body className={cn(inter.className, 'min-h-svh bg-primary')}>
+      <body className={cn(sejongGeulggot.className, 'min-h-svh bg-primary')}>
         <QueryProvider>
           <AuthProvider>{children}</AuthProvider>
         </QueryProvider>

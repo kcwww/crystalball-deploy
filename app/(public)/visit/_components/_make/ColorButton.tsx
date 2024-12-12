@@ -49,9 +49,13 @@ const ColorButton = ({ step }: { step: number }) => {
           ? '모델 색상 변경'
           : '편지지 색상 변경'}
       </PopoverTrigger>
-      <PopoverContent className="pointer-events-auto flex items-center justify-center">
+      <PopoverContent className="pointer-events-auto flex max-h-[200px] items-center justify-center">
         {step === STEP.MESSAGE_DECORATION_COLOR ? (
           <Chrome
+            showAlpha={false}
+            showColorPreview={false}
+            showEditableInput={false}
+            showEyeDropper={false}
             color={modelColor}
             onChange={(color) => handleColorChange(color)}
           />

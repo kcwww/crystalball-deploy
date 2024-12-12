@@ -83,33 +83,32 @@ const Make = ({
         </div>
         {step >= STEP.MESSAGE_NOTE_COLOR && <LetterPaper step={step} />}
         <div className="flex w-full flex-col items-center justify-center gap-12">
-          <DecoDrawer
-            step={step}
-            userId={userId}
-            uuid={uuid}
-            crystalId={crystalId}
-          />
-
           <div className="flex w-full justify-between md:w-1/2">
             {step > 1 ? (
               <Button
                 onClick={() => router.back()}
-                className="pointer-events-auto bg-gray-700"
+                className="pointer-events-auto w-[55px] bg-gray-700"
               >
                 이전
               </Button>
             ) : (
-              <div />
+              <div className="w-[55px]" />
             )}
+            <DecoDrawer
+              step={step}
+              userId={userId}
+              uuid={uuid}
+              crystalId={crystalId}
+            />
             {step < STEP.MAX ? (
               <Button
                 onClick={() => handleNext()}
-                className="pointer-events-auto bg-gray-700"
+                className="pointer-events-auto w-[55px] bg-gray-700"
               >
                 다음
               </Button>
             ) : (
-              <div />
+              <div className="w-[55px]" />
             )}
           </div>
         </div>

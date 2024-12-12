@@ -29,7 +29,7 @@ const MessageModal = () => {
   return (
     <Dialog open={isOpen}>
       <DialogContent
-        className="no-scrollbar message rounded-lg"
+        className="no-scrollbar message rounded-lg md:w-1/2"
         style={{ backgroundColor: letterColor }}
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
@@ -38,14 +38,16 @@ const MessageModal = () => {
         </DialogClose>
 
         <div
-          className="text-center text-white"
+          className="text-2xl text-white"
           style={{
+            wordBreak: 'break-word',
+            lineHeight: '2rem',
             textShadow:
               '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black',
           }}
         >
           {message.split('\n').map((line, index) => (
-            <p key={index} className="text-2xl">
+            <p className="whitespace-pre-wrap" key={index}>
               {line}
             </p>
           ))}

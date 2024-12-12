@@ -126,7 +126,7 @@ const TitleForm = ({ userData }: { userData: User }) => {
           )}
         />
         <Button
-          className="w-full"
+          className="w-full border-none bg-green-400 hover:bg-green-500"
           variant={'outline'}
           type="submit"
           disabled={isLoading || submitting}

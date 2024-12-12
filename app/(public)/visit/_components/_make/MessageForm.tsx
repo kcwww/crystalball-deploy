@@ -147,8 +147,11 @@ const MessageForm = ({
           )}
         />
         <div className="flex w-full justify-center">
-          <Button className="w-4/5 md:w-1/3" variant={'outline'} type="submit">
-            Submit
+          <Button
+            className="w-4/5 border-none bg-green-400 text-black hover:bg-green-500 md:w-1/3"
+            type="submit"
+          >
+            전송하기
           </Button>
         </div>
       </form>

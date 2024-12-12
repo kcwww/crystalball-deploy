@@ -20,6 +20,7 @@ import clientComponentFetch from '@/shared/utils/fetch/clientComponentFetch';
 import { BACKEND_ROUTES } from '@/shared/constants/routes';
 import { use3DModel } from '@/app/(public)/visit/[userId]/store/modelStore';
 import { ERROR_MESSAGES } from '@/shared/constants/enum';
+import LoadingModal from './LoadingModal';
 
 const MessageSubmitModal = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,7 +54,6 @@ const MessageSubmitModal = () => {
         router.push(`/visit/${data.uuid}`);
         sessionStorage.setItem('messageIsDecorated', 'true');
         sessionStorage.setItem('visitToast', 'true');
-        router.refresh();
         resetModel();
         onClose();
       }
@@ -81,7 +81,7 @@ const MessageSubmitModal = () => {
             부적절한 내용은 제재될 수 있습니다.
           </DialogDescription>
         </DialogHeader>
-
+        <LoadingModal isOpen={isSubmitting} />
         <DialogFooter className="gap-4">
           <Button
             variant={'secondary'}

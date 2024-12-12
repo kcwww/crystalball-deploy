@@ -28,9 +28,13 @@ const ColorButton = ({ type }: { type: DecorationType }) => {
       <PopoverTrigger className="pointer-events-auto transform rounded-lg bg-white p-2 px-4 transition duration-200 hover:bg-gray-300">
         색상 변경
       </PopoverTrigger>
-      <PopoverContent className="pointer-events-auto flex items-center justify-center">
+      <PopoverContent className="pointer-events-auto flex max-h-[200px] items-center justify-center">
         <Chrome
           color={type === DECO_TYPE.MAIN ? modelColor : bottomColor}
+          showAlpha={false}
+          showColorPreview={false}
+          showEyeDropper={false}
+          showEditableInput={false}
           onChange={(color) => handleColorChange(color)}
         />
       </PopoverContent>

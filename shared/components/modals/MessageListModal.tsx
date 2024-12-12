@@ -92,7 +92,7 @@ const MessageListModal = () => {
                   fetchDeleteMessage={fetchDeleteMessage}
                 />
                 <div
-                  className="text-center text-2xl text-white"
+                  className="break-words text-2xl text-white"
                   style={{
                     paddingTop: '2rem',
                     paddingBottom: '2rem',
