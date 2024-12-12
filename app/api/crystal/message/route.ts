@@ -1,5 +1,3 @@
-import mongoose from 'mongoose';
-
 import { NextRequest, NextResponse } from 'next/server';
 
 import { auth } from '@/auth';
@@ -18,13 +16,8 @@ export const DELETE = async (req: NextRequest) => {
 
   await connectToMongoDB();
 
-  const sessionDB = await mongoose.startSession();
-  sessionDB.startTransaction();
-
   try {
     const { messageId, date } = await req.json();
-
-    // MongoDB에 연결
 
     // Message 삭제
     const message = await Message.findOneAndUpdate(
@@ -32,7 +25,7 @@ export const DELETE = async (req: NextRequest) => {
       {
         is_deleted: date,
       },
-      { new: true, session: sessionDB }
+      { new: true }
     );
     if (!message) throw new Error('Message not found');
 
@@ -44,25 +37,19 @@ export const DELETE = async (req: NextRequest) => {
           message_id: messageId,
         },
       },
-      { new: true, session: sessionDB }
+      { new: true }
     );
-
-    await sessionDB.commitTransaction();
 
     return NextResponse.json({
       message: 'Message deleted',
       ok: true,
     });
   } catch (error) {
-    await sessionDB.abortTransaction();
-
     console.error('Error deleting message : ', error);
     return NextResponse.json(
       { error: 'Failed to delete message ' + error },
       { status: 500 }
     );
-  } finally {
-    sessionDB.endSession();
   }
 };
 
