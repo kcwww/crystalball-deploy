@@ -11,6 +11,8 @@ export const ROUTES = {
 export const BACKEND_ROUTES = {
   NICKNAME: '/api/user/nickname',
   CRYSTAL: '/api/crystal',
+  VISIT_CRYSTAL: '/api/visit/crystal',
+  VISIT_MESSAGES: '/api/visit/messages',
   MESSAGE: '/api/crystal/message',
   MESSAGES: '/api/crystal/messages',
   ALL_MESSAGES: '/api/user/messages',

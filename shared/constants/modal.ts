@@ -55,6 +55,7 @@ const MODAL_TYPE = {
   FORM: 'Form',
   ALL_MESSAGE: 'AllMessage',
   PRIVATE: 'Private',
+  PRIVATE_INFO: 'PrivateInfo',
   MESSAGE_SUBMIT: 'MessageSubmit',
 } as const;
 

@@ -18,7 +18,9 @@ import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/shared/constants/routes';
 import { UserType } from '@/shared/types/user';
 import { Crystal } from '@/shared/types/crystal';
-import fetchCrystal from '@/app/(protected)/main/_utils/fetchCrystal';
+import { fetchVisitCrystal } from '@/app/(protected)/main/_utils/fetchCrystal';
+import ErrorPage from '@/app/not-found';
+import PrivateButton from '@/app/(public)/visit/_components/PrivateButton';
 
 const Visit = ({ userData }: { userData: UserType }) => {
   const router = useRouter();
@@ -26,7 +28,7 @@ const Visit = ({ userData }: { userData: UserType }) => {
 
   const { data, isLoading, isError } = useQuery<Crystal[]>({
     queryKey: ['crystal', userData._id],
-    queryFn: () => fetchCrystal(userData._id),
+    queryFn: () => fetchVisitCrystal(userData._id),
     gcTime: 0,
   });
 
@@ -51,8 +53,8 @@ const Visit = ({ userData }: { userData: UserType }) => {
     return true;
   }, [data, current]);
 
-  if (isLoading || isError) return null;
-  if (!data) return null;
+  if (isLoading) return null;
+  if (!data || isError) return <ErrorPage />;
 
   return (
     <>
@@ -61,6 +63,7 @@ const Visit = ({ userData }: { userData: UserType }) => {
         <div className="flex flex-col items-center gap-2">
           <UserHeader user={userData.username!} />
           <MessageCount count={data[current].message_id.length} />
+          <PrivateButton isPrivate={data[current].is_private} />
         </div>
         <ArrowButtons
           maxIndex={data.length - 1}

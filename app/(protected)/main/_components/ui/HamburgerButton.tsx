@@ -102,6 +102,12 @@ const HamburgerButton = ({ userData }: { userData: UserType }) => {
             </Button> */}
             <Button
               variant={'secondary'}
+              onClick={() => onOpen(MODAL_TYPE.INTRODUCE)}
+            >
+              서비스 소개 보기
+            </Button>
+            <Button
+              variant={'destructive'}
               onClick={() => signOut({ callbackUrl: ROUTES.LANDING })}
             >
               로그아웃
