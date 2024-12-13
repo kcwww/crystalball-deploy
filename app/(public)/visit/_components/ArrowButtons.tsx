@@ -28,7 +28,7 @@ const ArrowButtons = ({
         <button onClick={() => handleCrystal(false)}>
           <ArrowLeft
             size={'2rem'}
-            className="pointer-events-auto cursor-pointer rounded-full bg-green-200 p-1 text-primary transition-all duration-300 hover:bg-green-300 hover:text-white"
+            className="pointer-events-auto cursor-pointer rounded-full bg-green-200 p-1 text-primary opacity-60 transition-all duration-300 hover:bg-green-300 hover:text-white"
           />
         </button>
       ) : (
@@ -39,7 +39,7 @@ const ArrowButtons = ({
         <button onClick={() => handleCrystal(true)}>
           <ArrowRight
             size={'2rem'}
-            className="pointer-events-auto cursor-pointer rounded-full bg-green-200 p-1 text-primary transition-all duration-300 hover:bg-green-300 hover:text-white"
+            className="pointer-events-auto cursor-pointer rounded-full bg-green-200 p-1 text-primary opacity-60 transition-all duration-300 hover:bg-green-300 hover:text-white"
           />
         </button>
       ) : (
