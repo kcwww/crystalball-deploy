@@ -1,11 +1,27 @@
+import fetchMessages from '@/app/(protected)/main/_utils/fetchMessages';
 import Decoration from '@/app/(public)/visit/_components/Decoration';
 import { getDecoPosition } from '@/shared/components/canvas/utils/canvas';
+import { Crystal } from '@/shared/types/crystal';
 
 import { Message } from '@/shared/types/message';
+import { useQuery } from '@tanstack/react-query';
+import { memo } from 'react';
 
-const Decorations = ({ messages }: { messages: Message[] }) => {
-  const decos = messages.map((message, index) => (
-    <Decoration
+const MemoizedDecoration = memo(Decoration);
+
+const Decorations = ({ crystal }: { crystal: Crystal['_id'] }) => {
+  const { data, isLoading, isError } = useQuery<Message[]>({
+    queryKey: ['messages', crystal],
+    queryFn: () => fetchMessages(crystal),
+    gcTime: 0,
+    staleTime: 0,
+  });
+
+  if (isLoading || isError) return null;
+  if (!data) return null;
+
+  const decos = data.map((message, index) => (
+    <MemoizedDecoration
       key={index}
       name={message.decoration_name}
       scale={1}

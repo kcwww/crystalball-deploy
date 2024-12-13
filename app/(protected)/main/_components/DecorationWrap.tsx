@@ -1,22 +1,17 @@
-import { useEffect } from 'react';
+import { memo } from 'react';
 
 import Decoration from '@/app/(protected)/main/_components/Decoration';
 
 import type { Message } from '@/shared/types/message';
 import { getDecoPosition } from '@/shared/components/canvas/utils/canvas';
-import { useMessage } from '@/app/(protected)/main/_store/useMessage';
+
+const MemoizedDecoration = memo(Decoration);
 
 const DecorationWrap = ({ messages }: { messages: Message[] }) => {
-  const { messages: messageList, setMessages } = useMessage();
-
-  useEffect(() => {
-    setMessages(messages);
-  }, [messages, setMessages]);
-
   return (
     <>
-      {messageList.map((message, index) => (
-        <Decoration
+      {messages.map((message, index) => (
+        <MemoizedDecoration
           key={index}
           name={message.decoration_name}
           scale={1}

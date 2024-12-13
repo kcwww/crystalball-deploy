@@ -58,7 +58,7 @@ const Main = ({ userData }: { userData: UserType }) => {
           {current > 0 ? (
             <ArrowLeft
               onClick={() => setCurrent((prev) => prev - 1)}
-              className="pointer-events-auto transform cursor-pointer rounded-full p-1 transition duration-200 hover:bg-primary hover:text-white"
+              className="pointer-events-auto transform cursor-pointer rounded-full bg-green-300 p-1 transition duration-200 hover:bg-green-400 hover:bg-primary hover:text-white"
               size={'2rem'}
             />
           ) : (
@@ -67,7 +67,7 @@ const Main = ({ userData }: { userData: UserType }) => {
           {current < crystalCount! - 1 ? (
             <ArrowRight
               onClick={() => setCurrent((prev) => prev + 1)}
-              className="pointer-events-auto transform cursor-pointer rounded-full p-1 transition duration-200 hover:bg-primary hover:text-white"
+              className="pointer-events-auto transform cursor-pointer rounded-full bg-green-300 p-1 transition duration-200 hover:bg-green-400 hover:bg-primary hover:text-white"
               size={'2rem'}
             />
           ) : (

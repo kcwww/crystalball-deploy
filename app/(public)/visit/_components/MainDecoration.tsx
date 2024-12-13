@@ -8,8 +8,6 @@ import { Mesh, Group, Vector3 } from 'three';
 import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
 import { MAIN_DECORATION } from '@/shared/constants/3dModel';
 
-import { UserCrystal } from '@/shared/types/userData';
-
 const fallingModel = (
   modelRef: Group,
   speedRef: MutableRefObject<Vector3>,
@@ -36,11 +34,11 @@ const fallingModel = (
   }
 };
 
-const MainDecoration = ({ crystal }: { crystal: UserCrystal }) => {
+const MainDecoration = ({ name, color }: { name: string; color: string }) => {
   const path = Object.values(MAIN_DECORATION).find(
-    (deco) => deco.name === crystal.main_decoration_name
+    (deco) => deco.name === name
   )!.path;
-  const color = crystal.main_decoration_color;
+
   const deco = useGLTF(path).scene.clone() as Group;
   const speedRef = useRef<Vector3>(new Vector3(0, 0, 0));
   const isStoppedRef = useRef<boolean>(false);

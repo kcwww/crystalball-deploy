@@ -6,8 +6,6 @@ import { useGLTF } from '@react-three/drei';
 import { BOTTOM } from '@/shared/constants/3dModel';
 import { makeColorChangedMaterial } from '@/shared/components/3dModels/utils/model';
 
-import { UserCrystal } from '@/shared/types/userData';
-
 const makeCanvasTexture = ({
   width,
   height,
@@ -52,18 +50,23 @@ const makeCanvasTexture = ({
   return new CanvasTexture(canvas);
 };
 
-const Bottom = ({ crystal }: { crystal: UserCrystal }) => {
-  const path = Object.values(BOTTOM).find(
-    (deco) => deco.name === crystal.bottom_decoration_name
-  )!.path;
-  const color = crystal.bottom_decoration_color;
+const Bottom = ({
+  name,
+  color,
+  title,
+}: {
+  name: string;
+  color: string;
+  title: string;
+}) => {
+  const path = Object.values(BOTTOM).find((deco) => deco.name === name)!.path;
   const bottomModel = useGLTF(path).scene.clone();
 
   const nameTag = bottomModel.getObjectByName('nameTag') as Mesh | undefined;
 
   if (nameTag && nameTag.material instanceof MeshStandardMaterial) {
     const newTexture = makeCanvasTexture({
-      string: crystal.title,
+      string: title,
       width: 1024,
       height: 1024,
       positionY: 1024 / 8,

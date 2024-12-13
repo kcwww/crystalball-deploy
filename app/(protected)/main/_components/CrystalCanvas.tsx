@@ -1,10 +1,9 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, memo, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 import MainDecoration from '@/app/(protected)/main/_components/MainDecoration';
 import Bottom from '@/app/(protected)/main/_components/Bottom';
@@ -22,6 +21,14 @@ import { Crystal } from '@/shared/types/crystal';
 import { MAIN_ONBOARDING_STEPS } from '@/shared/constants/onBoading';
 
 const JoyRide = dynamic(() => import('react-joyride'), { ssr: false });
+
+const MemoizedGlass = memo(Glass);
+const MemoizedBase = memo(Base);
+const MemoizedGround = memo(Ground);
+const MemoizedEnvironments = memo(Environments);
+const MemoizedMainDecoration = memo(MainDecoration);
+const MemoizedDecorations = memo(Decorations);
+const MemoizedBottom = memo(Bottom);
 
 const CrystalCanvas = ({
   data,
@@ -53,6 +60,11 @@ const CrystalCanvas = ({
       setRun(false); // 투어 중단
     }
   };
+
+  const snowflakes = useMemo(
+    () => Array.from({ length: 100 }, (_, i) => <Snowflake key={i} />),
+    []
+  );
 
   return (
     <>
@@ -89,31 +101,21 @@ const CrystalCanvas = ({
             />
 
             <Raycaster />
-            <Glass />
-            {Array.from({ length: 100 }, (_, i) => (
-              <Snowflake key={i} />
-            ))}
-            <Decorations crystal={data[current]._id} />
-            <MainDecoration
+            <MemoizedGlass />
+            {snowflakes}
+            <MemoizedDecorations crystal={data[current]._id} />
+            <MemoizedMainDecoration
               name={data[current].main_decoration_name}
               color={data[current].main_decoration_color}
             />
-            <Base />
-            <Bottom
+            <MemoizedBase />
+            <MemoizedBottom
               name={data[current].bottom_decoration_name}
               color={data[current].bottom_decoration_color}
               title={data[current].title}
             />
-            <Environments />
-            <Ground />
-            <EffectComposer>
-              <Bloom
-                mipmapBlur={true}
-                luminanceThreshold={0.1}
-                luminanceSmoothing={0.9}
-                intensity={0.2}
-              />
-            </EffectComposer>
+            <MemoizedEnvironments />
+            <MemoizedGround />
           </Suspense>
         </Canvas>
       </section>
@@ -142,4 +144,4 @@ const CrystalCanvas = ({
   );
 };
 
-export default CrystalCanvas;
+export default memo(CrystalCanvas);

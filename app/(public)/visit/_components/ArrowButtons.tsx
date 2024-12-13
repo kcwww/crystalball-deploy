@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const ArrowButtons = ({
   maxIndex,
@@ -26,9 +26,9 @@ const ArrowButtons = ({
     <div className="flex w-full items-center justify-between">
       {current > 0 ? (
         <button onClick={() => handleCrystal(false)}>
-          <ChevronLeft
-            size={'3rem'}
-            className="pointer-events-auto cursor-pointer hover:text-blue-500"
+          <ArrowLeft
+            size={'2rem'}
+            className="pointer-events-auto cursor-pointer rounded-full bg-green-200 p-1 text-primary transition-all duration-300 hover:bg-green-300 hover:text-white"
           />
         </button>
       ) : (
@@ -37,9 +37,9 @@ const ArrowButtons = ({
 
       {current < maxIndex ? (
         <button onClick={() => handleCrystal(true)}>
-          <ChevronRight
-            size={'3rem'}
-            className="pointer-events-auto cursor-pointer hover:text-blue-500"
+          <ArrowRight
+            size={'2rem'}
+            className="pointer-events-auto cursor-pointer rounded-full bg-green-200 p-1 text-primary transition-all duration-300 hover:bg-green-300 hover:text-white"
           />
         </button>
       ) : (

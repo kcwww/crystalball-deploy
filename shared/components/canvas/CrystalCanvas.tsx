@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, memo, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { Canvas } from '@react-three/fiber';
-import { Bloom, EffectComposer } from '@react-three/postprocessing';
+
 import { OrbitControls } from '@react-three/drei';
 
 import MainDecoration from '@/shared/components/3dModels/MainDecoration';
@@ -21,6 +21,14 @@ import { LANDING_ONBOARDING_STEPS } from '@/shared/constants/onBoading';
 import Loading from './Loading';
 
 const JoyRide = dynamic(() => import('react-joyride'), { ssr: false });
+
+const MemoizedGlass = memo(Glass);
+const MemoizedBase = memo(Base);
+const MemoizedGround = memo(Ground);
+const MemoizedEnvironments = memo(Environments);
+const MemoizedMainDecoration = memo(MainDecoration);
+const MemoizedDecorations = memo(Decorations);
+const MemoizedBottom = memo(Bottom);
 
 const CrystalCanvas = () => {
   const [run, setRun] = useState(false);
@@ -46,6 +54,11 @@ const CrystalCanvas = () => {
   const loadingDone = () => {
     setIsLoading(true);
   };
+
+  const snowflakes = useMemo(
+    () => Array.from({ length: 100 }, (_, i) => <Snowflake key={i} />),
+    []
+  );
 
   return (
     <>
@@ -81,25 +94,14 @@ const CrystalCanvas = () => {
               shadow-camera-bottom={-40}
             />
             <Raycaster />
-            <Glass />
-            {Array.from({ length: 100 }, (_, i) => (
-              <Snowflake key={i} />
-            ))}
-            <Decorations />
-            <MainDecoration />
-            <Base />
-            <Bottom />
-            <Ground />
-            <Environments />
-
-            <EffectComposer>
-              <Bloom
-                mipmapBlur={true}
-                luminanceThreshold={0.1}
-                luminanceSmoothing={0.9}
-                intensity={0.2}
-              />
-            </EffectComposer>
+            <MemoizedGlass />
+            {snowflakes}
+            <MemoizedDecorations />
+            <MemoizedMainDecoration />
+            <MemoizedBase />
+            <MemoizedBottom />
+            <MemoizedGround />
+            <MemoizedEnvironments />
           </Suspense>
         </Canvas>
       </section>

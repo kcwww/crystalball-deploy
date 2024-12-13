@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 
 import {
@@ -25,12 +24,9 @@ import { BACKEND_ROUTES } from '@/shared/constants/routes';
 import { transKoreaTime } from '@/shared/utils/time/transKoreaTime';
 import { toast } from 'sonner';
 
-import { useMessage } from '@/app/(protected)/main/_store/useMessage';
-
 const MessageListModal = () => {
   const { isOpen, onClose, type, props } = useModal();
-  const { setMessages, messages } = useMessage();
-  const router = useRouter();
+
   const queryClient = useQueryClient();
 
   if (!isOpen || type !== MODAL_TYPE.ALL_MESSAGE) {
@@ -52,13 +48,19 @@ const MessageListModal = () => {
 
       if (response.ok) {
         toast.success('메세지가 삭제되었습니다.');
-        queryClient.invalidateQueries({ queryKey: ['crystal'] });
 
-        const newMessages = messages.filter(
-          (message) => message._id !== messageId
-        );
-        setMessages(newMessages);
-        router.refresh();
+        const crystalId = messageLists.find(
+          (message) => message._id === messageId
+        )?.crystal_id;
+        const userId = messageLists.find(
+          (message) => message._id === messageId
+        )?.user_id;
+        queryClient.invalidateQueries({
+          queryKey: ['messages', crystalId],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ['crystal', userId],
+        });
       }
     } catch (error) {
       console.error('Error deleting message : ', error);

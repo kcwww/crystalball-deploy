@@ -29,8 +29,8 @@ const House = ({
 
   const windowLight = house.getObjectByName('WindowsLight') as Mesh | undefined;
   if (windowLight && windowLight.material instanceof MeshStandardMaterial) {
-    windowLight.material.emissive.set('#ffffff');
-    windowLight.material.emissiveIntensity = 10;
+    windowLight.material.emissive.set('#fc8e00');
+    windowLight.material.emissiveIntensity = 1;
   }
 
   return <primitive object={house} />;

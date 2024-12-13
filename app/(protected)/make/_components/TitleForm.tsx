@@ -95,7 +95,6 @@ const TitleForm = ({ userData }: { userData: User }) => {
 
   return (
     <Form {...form}>
-      <div />
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="pointer-events-auto space-y-8"

@@ -54,7 +54,6 @@ const Decoration = ({
   }
 
   deco.children.forEach((child) => {
-    if (deco.name === 'miniSanta') console.log(child);
     if (child instanceof Mesh) {
       child.userData.message = message;
       child.userData.sender = sender;

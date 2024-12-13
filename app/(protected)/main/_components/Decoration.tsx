@@ -52,6 +52,7 @@ const Decoration = ({
   deco.name = name;
   deco.scale.set(scale, scale, scale);
   deco.position.set(position.x, position.y, position.z);
+
   if (!open) {
     DecoSet(deco);
   }

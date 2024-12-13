@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
 import { toast } from 'sonner';
@@ -12,14 +13,23 @@ import ArrowButtons from '@/app/(public)/visit/_components/ArrowButtons';
 import UISection from '@/shared/components/ui/UISection';
 import UserHeader from '@/shared/components/ui/UserHeader';
 import PreviousButton from '@/shared/components/ui/PreviousButton';
-import { UserData } from '@/shared/types/userData';
 
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/shared/constants/routes';
+import { UserType } from '@/shared/types/user';
+import { Crystal } from '@/shared/types/crystal';
+import fetchCrystal from '@/app/(protected)/main/_utils/fetchCrystal';
 
-const Visit = ({ userData }: { userData: UserData }) => {
+const Visit = ({ userData }: { userData: UserType }) => {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
+
+  const { data, isLoading, isError } = useQuery<Crystal[]>({
+    queryKey: ['crystal', userData._id],
+    queryFn: () => fetchCrystal(userData._id),
+    gcTime: 0,
+  });
+
   useEffect(() => {
     const isMaked = sessionStorage.getItem('visitToast');
 
@@ -30,7 +40,8 @@ const Visit = ({ userData }: { userData: UserData }) => {
   }, []);
 
   const checkMaxCount = useCallback(() => {
-    const currentCrystal = userData.crystals[current];
+    if (!data) return false;
+    const currentCrystal = data[current];
     const messageCounts = currentCrystal.message_id.length;
     const MAX_MEESAGE_COUNT = 30;
     if (messageCounts >= MAX_MEESAGE_COUNT) {
@@ -38,18 +49,21 @@ const Visit = ({ userData }: { userData: UserData }) => {
       return false;
     }
     return true;
-  }, [userData, current]);
+  }, [data, current]);
+
+  if (isLoading || isError) return null;
+  if (!data) return null;
 
   return (
     <>
       <PreviousButton />
       <UISection>
         <div className="flex flex-col items-center gap-2">
-          <UserHeader user={userData.user.username!} />
-          <MessageCount count={userData.crystals[current].message_id.length} />
+          <UserHeader user={userData.username!} />
+          <MessageCount count={data[current].message_id.length} />
         </div>
         <ArrowButtons
-          maxIndex={userData.crystals.length - 1}
+          maxIndex={data.length - 1}
           current={current}
           handleCurrent={setCurrent}
         />
@@ -60,13 +74,11 @@ const Visit = ({ userData }: { userData: UserData }) => {
             onClick={() => {
               if (checkMaxCount()) {
                 sessionStorage.removeItem('messageIsDecorated');
-                router.push(
-                  ROUTES.MESSAGE(userData.user.uuid, String(current))
-                );
+                router.push(ROUTES.MESSAGE(userData.uuid, String(current)));
               }
             }}
           >
-            {userData.user.username} 님의 수정구슬 꾸미고 메세지 남기기
+            {userData.username} 님의 수정구슬 꾸미고 메세지 남기기
           </Button>
           <Button className="pointer-events-auto w-full ">
             <Link href={ROUTES.LANDING} className="w-full" prefetch={true}>
@@ -75,7 +87,7 @@ const Visit = ({ userData }: { userData: UserData }) => {
           </Button>
         </div>
       </UISection>
-      <CrystalCanvas userData={userData} current={current} />
+      <CrystalCanvas userData={data[current]} />
     </>
   );
 };

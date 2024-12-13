@@ -12,7 +12,7 @@ import { CURRENT_SEASON } from '@/shared/constants/Date';
 const getUserData = async () => {
   const session = await auth();
 
-  if (!session) return null;
+  if (!session) redirect(ROUTES.LANDING);
   const user = session.user as sessionUser;
 
   try {
