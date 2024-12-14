@@ -78,6 +78,9 @@ export const POST = async (req: NextRequest) => {
     is_opend,
   } = (await req.json()) as MessageReq;
 
+  const ip = req.headers.get('x-forwarded-for') || req.ip || 'IP not available';
+  console.log(`Request received from IP: ${ip}`);
+
   await connectToMongoDB();
 
   try {
