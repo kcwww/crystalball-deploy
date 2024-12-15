@@ -28,7 +28,7 @@ const InitializeDecoration = ({
       deco.position.set(0, 1, 0);
     }
 
-    deco.rotation.set(0, Math.PI, 0);
+    deco.rotation.set(0, -Math.PI / 2, 0);
     deco.children.forEach((mesh) => (mesh.castShadow = false));
 
     // Deco 컴포넌트가 언마운트될 때 클린업을 위해 제거

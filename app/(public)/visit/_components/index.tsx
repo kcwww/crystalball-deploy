@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
@@ -83,10 +82,13 @@ const Visit = ({ userData }: { userData: UserType }) => {
           >
             {userData.username} 님의 수정구슬 꾸미고 메세지 남기기
           </Button>
-          <Button className="pointer-events-auto w-full ">
-            <Link href={ROUTES.LANDING} className="w-full" prefetch={true}>
-              나의 수정 구슬 만들러 가기
-            </Link>
+          <Button
+            className="pointer-events-auto w-full"
+            onClick={() => {
+              router.push(ROUTES.LANDING);
+            }}
+          >
+            나의 수정 구슬 만들러 가기
           </Button>
         </div>
       </UISection>

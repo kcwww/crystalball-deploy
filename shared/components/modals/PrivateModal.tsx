@@ -77,8 +77,7 @@ const PrivateModal = () => {
             현재 이 수정구슬의 메세지는 {from} 상태입니다.
           </DialogDescription>
           <div className="text-center text-white">
-            전환 버튼을 누르면 방문자들이 해당 수정구슬의 메세지를 {to} 상태로
-            변경합니다.
+            전환 버튼을 누르면 해당 수정구슬의 메세지를 {to} 상태로 변경합니다.
           </div>
           <div className="text-sm" style={{ color: 'gray' }}>
             언제든지 상태를 다시 변경할 수 있습니다.
