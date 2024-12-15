@@ -9,8 +9,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { toast } from 'sonner';
 
-import { sessionUser } from '@/shared/types/user';
-import { BACKEND_ROUTES, ROUTES } from '@/shared/constants/routes';
+import { UserType } from '@/shared/types/user';
+import { BACKEND_ROUTES } from '@/shared/constants/routes';
 import clientComponentFetch from '@/shared/utils/fetch/clientComponentFetch';
 
 import { Button } from '@/components/ui/button';
@@ -40,7 +40,7 @@ const formSchema = z.object({
     }),
 });
 
-const NicknameForm = ({ user }: { user: sessionUser }) => {
+const NicknameForm = ({ user }: { user: UserType }) => {
   const [check, setCheck] = useState(false);
   const [submit, setSubmit] = useState(false);
   const router = useRouter();
@@ -73,7 +73,6 @@ const NicknameForm = ({ user }: { user: sessionUser }) => {
         body: JSON.stringify(data),
       });
       if (response.ok) {
-        router.replace(ROUTES.MAKE);
         router.refresh();
       }
     } catch (error) {

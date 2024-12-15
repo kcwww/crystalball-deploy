@@ -4,10 +4,11 @@ import { auth, signOut } from '@/auth';
 import { ROUTES } from '@/shared/constants/routes';
 import User from '@/shared/database/mongodb/models/userModel';
 import { connectToMongoDB } from '@/shared/database/mongodb/config';
-import { sessionUser, User as UserType } from '@/shared/types/user';
+import { sessionUser, UserType } from '@/shared/types/user';
 import Make from '@/app/(protected)/make/_components';
 import { CURRENT_YEAR } from '@/shared/constants/Date';
 import { CURRENT_SEASON } from '@/shared/constants/Date';
+import Nickname from '@/app/(protected)/make/_components/Nickname';
 
 const getUserData = async () => {
   const session = await auth();
@@ -39,15 +40,12 @@ const getUserData = async () => {
 
 const MakePage = async () => {
   const data = (await getUserData()) as UserType;
-
   if (data === undefined || data === null) {
     await signOut();
     redirect(ROUTES.LANDING);
   }
-  if (data.username === null) redirect(ROUTES.NICKNAME);
   data._id = data._id.toString();
   const currentYearMap = data.crystal_id?.get(CURRENT_YEAR);
-
   const currentSeason = currentYearMap?.[CURRENT_SEASON]?.map((item) =>
     item.toString()
   );
@@ -56,6 +54,7 @@ const MakePage = async () => {
     [CURRENT_SEASON]: currentSeason,
   });
   data.crystal_id = newMap;
+  if (data.username === null) return <Nickname data={data} />;
 
   return <Make userData={data} />;
 };

@@ -51,7 +51,7 @@ const MainPage = async () => {
   const crystal = user?.crystal_id;
 
   if (!user) redirect(ROUTES.ERROR);
-  if (user.username === null) redirect(ROUTES.NICKNAME);
+  if (user.username === null) redirect(ROUTES.MAKE);
   else if (
     crystal === undefined ||
     crystal.get(CURRENT_YEAR)?.[CURRENT_SEASON] === undefined

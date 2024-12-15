@@ -1,4 +1,4 @@
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -17,7 +17,6 @@ import { MAX_CRYSTAL } from '@/shared/constants/enum';
 
 const MakeSection = ({ userData }: { userData: UserType }) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const STEP_MESSAGE = [
     '',
     '아래 버튼을 클릭해 장식을 선택해주세요.',
@@ -27,10 +26,7 @@ const MakeSection = ({ userData }: { userData: UserType }) => {
     '아래 입력창에 수정 구슬 이름을 입력해주세요.',
   ] as const;
 
-  const [step, setStep] = useState(() => {
-    const stepParam = searchParams.get('step');
-    return stepParam ? parseInt(stepParam) : STEP.MAIN_DECORATION;
-  });
+  const [step, setStep] = useState(1);
   const crystal = userData.crystal_id?.get(CURRENT_YEAR)?.[CURRENT_SEASON];
 
   useEffect(() => {
@@ -40,28 +36,12 @@ const MakeSection = ({ userData }: { userData: UserType }) => {
         router.replace(ROUTES.MAIN);
         return;
       }
-
-      const stepParam = searchParams.get('step');
-      const step = stepParam ? parseInt(stepParam) : STEP.MAIN_DECORATION;
-
-      if (isNaN(step) || step < STEP.MAIN_DECORATION || step > STEP.MAX) {
-        router.replace(ROUTES.MAKE);
-        return;
-      }
-
-      setStep(step);
     }
-  }, [searchParams, router]);
+  }, [router]);
 
   useEffect(() => {
     if (crystal && crystal.length === MAX_CRYSTAL) router.replace(ROUTES.MAIN);
   }, [router, crystal]);
-
-  const handleNext = () => {
-    const nextStep = step + 1;
-    router.push(`${ROUTES.MAKE}?step=${nextStep}`);
-    setStep(nextStep);
-  };
 
   return (
     <>
@@ -80,7 +60,7 @@ const MakeSection = ({ userData }: { userData: UserType }) => {
           <div className="flex w-full items-center justify-between gap-2 md:w-1/2">
             {step > 1 ? (
               <Button
-                onClick={() => router.back()}
+                onClick={() => setStep((prev) => prev - 1)}
                 className="pointer-events-auto w-[55px] bg-gray-700"
               >
                 이전
@@ -91,7 +71,7 @@ const MakeSection = ({ userData }: { userData: UserType }) => {
             <DecoDrawer step={step} userData={userData} />
             {step < STEP.MAX ? (
               <Button
-                onClick={() => handleNext()}
+                onClick={() => setStep((prev) => prev + 1)}
                 className="pointer-events-auto w-[55px] bg-gray-700"
               >
                 다음

@@ -1,5 +1,5 @@
 import { useGLTF } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+
 import { Group } from 'three';
 import { useEffect } from 'react';
 
@@ -20,11 +20,6 @@ const InitializeDecoration = ({ path }: { path: string }) => {
       // TODO: 필요 시 클린업 로직 추가
     };
   }, [deco]);
-
-  useFrame((_, delta) => {
-    deco.rotation.y += delta;
-    if (deco.rotation.y > Math.PI * 2) deco.rotation.y = 0;
-  });
 
   return <primitive object={deco} />;
 };

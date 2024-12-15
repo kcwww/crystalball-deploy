@@ -2,7 +2,7 @@ import { DECO_TYPE } from '@/shared/constants/3dModel';
 import { DecorationType } from '@/shared/types/model';
 
 import { useGLTF } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+
 import { Group } from 'three';
 import { useEffect } from 'react';
 
@@ -36,11 +36,6 @@ const InitializeDecoration = ({
       // TODO: 필요 시 클린업 로직 추가
     };
   }, [type, deco]);
-
-  useFrame((_, delta) => {
-    deco.rotation.y += delta;
-    if (deco.rotation.y > Math.PI * 2) deco.rotation.y = 0;
-  });
 
   return <primitive object={deco} />;
 };
