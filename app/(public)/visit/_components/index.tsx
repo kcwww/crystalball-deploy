@@ -21,6 +21,7 @@ import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/shared/constants/routes';
 import { UserType } from '@/shared/types/user';
 import { Crystal } from '@/shared/types/crystal';
+import { checkBrowser } from '@/shared/utils/browser/checkBrowser';
 
 const Visit = ({ userData }: { userData: UserType }) => {
   const router = useRouter();
@@ -96,7 +97,11 @@ const Visit = ({ userData }: { userData: UserType }) => {
           <Button
             className="pointer-events-auto w-full"
             onClick={() => {
-              router.push(ROUTES.LANDING);
+              if (checkBrowser()) {
+                router.push(ROUTES.LANDING);
+              } else {
+                router.replace(ROUTES.LANDING);
+              }
             }}
           >
             나의 수정 구슬 만들러 가기
