@@ -15,12 +15,10 @@ const VisitMake = ({
   userId,
   uuid,
   crystalId,
-  index,
 }: {
   userId: string;
   uuid: string;
   crystalId: string;
-  index: string;
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const { resetModel } = use3DModel();
@@ -37,7 +35,7 @@ const VisitMake = ({
 
   return (
     <Suspense fallback={Loading()}>
-      <Make userId={userId} uuid={uuid} crystalId={crystalId} index={index} />
+      <Make userId={userId} uuid={uuid} crystalId={crystalId} />
     </Suspense>
   );
 };

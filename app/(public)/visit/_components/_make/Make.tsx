@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 import { Progress } from '@/components/ui/progress';
@@ -18,15 +18,13 @@ const Make = ({
   userId,
   uuid,
   crystalId,
-  index,
 }: {
   userId: string;
   uuid: string;
   crystalId: string;
-  index: string;
 }) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+
   const STEP_MESSAGE = [
     '',
     '아래 장식 선택하기 버튼을 눌러 장식을 선택해주세요.',
@@ -35,10 +33,7 @@ const Make = ({
     '아래 창에 메세지와 보내는 이를 입력해 메세지를 작성해주세요.',
   ] as const;
 
-  const [step, setStep] = useState(() => {
-    const stepParam = searchParams.get('messageStep');
-    return stepParam ? parseInt(stepParam) : STEP.MESSAGE_DECORATION;
-  });
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -47,25 +42,19 @@ const Make = ({
         router.replace(ROUTES.VISIT_USER(uuid));
         return;
       }
-
-      const stepParam = searchParams.get('step');
-      const step = stepParam ? parseInt(stepParam) : STEP.MESSAGE_DECORATION;
-
-      if (isNaN(step) || step < STEP.MESSAGE_DECORATION || step > STEP.MAX) {
-        router.replace(
-          `${ROUTES.VISIT_USER(uuid)}/${index}?step=${STEP.MESSAGE_DECORATION}`
-        );
-        return;
-      }
-
-      setStep(step);
     }
-  }, [searchParams, router, userId, uuid, index]);
+  }, [router, uuid]);
 
   const handleNext = () => {
     const nextStep = step + 1;
-    router.push(`${ROUTES.VISIT_USER(uuid)}/${index}?step=${nextStep}`);
+
     setStep(nextStep);
+  };
+
+  const handlePrev = () => {
+    const prevStep = step - 1;
+
+    setStep(prevStep);
   };
 
   return (
@@ -86,7 +75,7 @@ const Make = ({
           <div className="flex w-full justify-between md:w-1/2">
             {step > 1 ? (
               <Button
-                onClick={() => router.back()}
+                onClick={() => handlePrev()}
                 className="pointer-events-auto w-[55px] bg-gray-700"
               >
                 이전

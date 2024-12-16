@@ -49,7 +49,6 @@ const VisitMakePage = async ({
       userId={id.toString()}
       uuid={params.userId}
       crystalId={crystalId}
-      index={params.crystalIndex}
     />
   );
 };
