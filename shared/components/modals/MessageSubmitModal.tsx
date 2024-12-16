@@ -51,11 +51,11 @@ const MessageSubmitModal = () => {
       });
 
       if (response.ok) {
-        router.push(`/visit/${data.uuid}`);
         sessionStorage.setItem('messageIsDecorated', 'true');
         sessionStorage.setItem('visitToast', 'true');
         resetModel();
         onClose();
+        router.refresh();
       }
     } catch (error: any) {
       console.error(error);

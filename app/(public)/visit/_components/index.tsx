@@ -8,6 +8,10 @@ import { toast } from 'sonner';
 import CrystalCanvas from '@/app/(public)/visit/_components/CrystalCanvas';
 import MessageCount from '@/app/(public)/visit/_components/MessageCount';
 import ArrowButtons from '@/app/(public)/visit/_components/ArrowButtons';
+import ErrorPage from '@/app/not-found';
+import PrivateButton from '@/app/(public)/visit/_components/PrivateButton';
+import VisitMake from '@/app/(public)/visit/[userId]/_components/index';
+import { fetchVisitCrystal } from '@/app/(protected)/main/_utils/fetchCrystal';
 
 import UISection from '@/shared/components/ui/UISection';
 import UserHeader from '@/shared/components/ui/UserHeader';
@@ -17,13 +21,11 @@ import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/shared/constants/routes';
 import { UserType } from '@/shared/types/user';
 import { Crystal } from '@/shared/types/crystal';
-import { fetchVisitCrystal } from '@/app/(protected)/main/_utils/fetchCrystal';
-import ErrorPage from '@/app/not-found';
-import PrivateButton from '@/app/(public)/visit/_components/PrivateButton';
 
 const Visit = ({ userData }: { userData: UserType }) => {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
+  const [make, setMake] = useState(false);
 
   const { data, isLoading, isError } = useQuery<Crystal[]>({
     queryKey: ['crystal', userData._id],
@@ -55,6 +57,15 @@ const Visit = ({ userData }: { userData: UserType }) => {
   if (isLoading) return null;
   if (!data || isError) return <ErrorPage />;
 
+  if (make)
+    return (
+      <VisitMake
+        userId={userData._id}
+        uuid={userData.uuid}
+        crystalId={data[current]._id}
+      />
+    );
+
   return (
     <>
       <PreviousButton />
@@ -76,7 +87,7 @@ const Visit = ({ userData }: { userData: UserType }) => {
             onClick={() => {
               if (checkMaxCount()) {
                 sessionStorage.removeItem('messageIsDecorated');
-                router.push(ROUTES.MESSAGE(userData.uuid, String(current)));
+                setMake(true);
               }
             }}
           >
