@@ -17,6 +17,7 @@ export const connectToMongoDB = async () => {
     return cachedConnection;
   } catch (error) {
     console.error('Error connecting to database', error);
-    throw error;
+    // throw error; // Prevent application crash
+    return null;
   }
 };
